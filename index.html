@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AZ-305の2026年4月17日版シラバスに準拠した、長文シナリオ中心の65問・1000点満点オリジナル模擬試験アプリ">
-  <title>AZ-305 Exam Lab - Long Scenario Edition</title>
+  <meta name="description" content="AZ-305の2026年4月17日版シラバスに準拠した、本番強化型の65問・1000点満点オリジナル模擬試験アプリ">
+  <title>AZ-305 Exam Lab - Expert Edition</title>
   <style>
 
 :root {
@@ -645,7 +645,7 @@ footer {
     <section id="start-screen" class="screen start-screen">
       <div class="hero">
         <div class="hero-copy">
-          <span class="eyebrow">Microsoft Learn準拠・2026年4月17日版・長文シナリオ版</span>
+          <span class="eyebrow">Microsoft Learn準拠・2026年4月17日版・本番強化版</span>
           <h1>設計判断を問う、<br><em>本番相当</em>の65問。</h1>
           <p>本番を意識した長文シナリオから、必要な要件・制約・トレードオフを読み取り、最適なAzureアーキテクチャを選ぶ模擬試験です。各問題には背景、現在の環境、複数の技術要件を記載し、選択後すぐに正誤と全選択肢の解説を表示します。</p>
           <div class="hero-actions">
@@ -857,2239 +857,2308 @@ window.AZ305_QUESTIONS = [
     "domain": "ID・ガバナンス・監視",
     "objective": "ログのルーティング",
     "type": "multi",
-    "difficulty": "標準",
-    "prompt": "診断設定を構成する必要があります。分析用と外部SIEM転送用の送信先として、どの2つを選択すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "Contoso は 40 個の Azure サブスクリプションを運用しています。各リソースの診断ログは、中央 SOC が KQL で 90 日間検索できる必要があります。同じログを既存の Splunk 環境へ 5 分以内にストリーミングし、さらに規制対象ログだけを 7 年間、低コストで保持する必要があります。アプリケーション コードは変更できません。",
+    "prompt": "Azure Monitor の診断設定で構成すべき送信先を3つ選んでください。",
     "options": [
       {
         "text": "Log Analytics ワークスペース",
-        "why": "Azure Monitor Logsに集約し、KQLで検索・分析できます。"
+        "why": "KQL 分析と対話型検索の送信先になります。"
       },
       {
         "text": "Azure Event Hubs",
-        "why": "ストリーミングで外部SIEMやパートナー ソリューションへ転送できます。"
+        "why": "外部 SIEM へ低遅延でストリーミングできます。"
       },
       {
-        "text": "Azure Storage アカウントのみ",
-        "why": "長期保管には適しますが、単独ではKQL分析とリアルタイム転送の両方を満たしません。"
+        "text": "Azure Storage アカウント",
+        "why": "長期・低コストのアーカイブ先として利用できます。"
       },
       {
         "text": "Application Insights",
-        "why": "主にアプリケーション テレメトリ向けで、診断設定の汎用転送先としてこの要件を満たす選択ではありません。"
+        "why": "アプリケーション テレメトリ向けであり、全リソースの診断ログを外部 SIEM と長期保管へ同時配送する送信先の組み合わせにはなりません。"
+      },
+      {
+        "text": "Azure Data Explorer クラスター",
+        "why": "高度分析には使えますが、この要件では診断設定の標準送信先3種で満たせ、追加運用コストが増えます。"
       }
     ],
     "answer": [
       0,
-      1
+      1,
+      2
     ],
-    "explanation": "診断設定では、分析用にLog Analytics、外部システムへのストリーミング用にEvent Hubsを併用できます。",
+    "explanation": "Log Analytics、Event Hubs、Storage を併用すると、分析・外部転送・長期保管をそれぞれ最適な送信先で満たせます。",
     "sourceKeys": [
       "monitor"
     ],
-    "selectCount": 2,
-    "scenario": "【背景】Contosoは、6つの管理グループ配下に28個のAzureサブスクリプションを持っています。各事業部は独自にリソースを展開していますが、セキュリティ運用は中央SOCが担当します。\n【要件】\n• Azureリソースのプラットフォーム ログを、サブスクリプションをまたいでKQL分析できること\n• 同一ログを既存の外部SIEMへ数分以内に転送できること\n• 各アプリケーションのコード変更を必要としないこと\n• 長期アーカイブは今回の必須要件ではないこと"
+    "selectCount": 3
   },
   {
     "id": 2,
     "domain": "ID・ガバナンス・監視",
     "objective": "監視ソリューション",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "監視要件を満たすアラート ルールを設計する必要があります。どの種類のアラートを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "Fabrikam は 600 台の Azure VM を運用しています。CPU 使用率だけでなく、各 VM の過去 14 日間の通常値から大きく外れた急上昇を検出したいと考えています。固定しきい値は VM ごとに調整したくありません。通知は既存のアクション グループへ送り、できる限り少ない運用作業で実装します。",
+    "prompt": "推奨すべきアラート設計はどれですか。",
     "options": [
       {
-        "text": "Azure Monitor メトリック アラート",
-        "why": "プラットフォーム メトリックを短い間隔で評価でき、低遅延のしきい値監視に適します。"
+        "text": "Azure Monitor メトリック アラートで動的しきい値を使用する",
+        "why": "履歴パターンを学習し、リソースごとの通常値からの逸脱を検出できます。"
       },
       {
-        "text": "ログ検索アラート",
-        "why": "複雑なKQL条件には適しますが、単純なCPUしきい値ならメトリック アラートの方が直接的です。"
+        "text": "ログ検索アラートで各 VM 固有の固定 CPU しきい値を KQL に記述する",
+        "why": "実現は可能ですが、VM ごとの調整と保守が必要で、動的な通常値判定の要件に最適ではありません。"
       },
       {
-        "text": "Activity Log アラート",
-        "why": "コントロール プレーン操作を監視するもので、CPU使用率は対象ではありません。"
+        "text": "Activity Log アラートを作成する",
+        "why": "CPU はデータ プレーンのメトリックであり、Activity Log の管理操作イベントではありません。"
       },
       {
-        "text": "Service Health アラート",
-        "why": "Azureサービス障害やメンテナンス通知向けです。"
+        "text": "Service Health アラートで VM の CPU イベントを監視する",
+        "why": "Service Health は Azure 側のサービス障害や計画メンテナンス向けです。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "CPU使用率のような時系列メトリックのしきい値監視には、Azure Monitorメトリック アラートが最適です。",
+    "explanation": "変動する通常値を基準に異常を検知し、固定値管理を減らすにはメトリック アラートの動的しきい値が適します。",
     "sourceKeys": [
       "monitor"
-    ],
-    "scenario": "【背景】Fabrikamは、東日本リージョンで300台のAzure仮想マシンを運用しています。監視チームは、夜間に発生するCPU飽和を早期検出し、オンコール担当者へ通知する仕組みを設計しています。\n【要件】\n• CPU使用率が90%を超えた状態が5分継続した場合に通知すること\n• 可能な限り評価遅延を小さくすること\n• 複雑なログ クエリやゲストOS内のイベント分析は不要であること\n• 通知先は既存のアクション グループを使用すること"
+    ]
   },
   {
     "id": 3,
     "domain": "ID・ガバナンス・監視",
     "objective": "アプリケーション監視",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "エンドツーエンドの要求を相関付けて調査できるようにする必要があります。どの機能を推奨すべきですか。",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "Northwind の注文処理は、Azure Front Door、App Service、API Management、Azure Functions、Service Bus、Azure SQL Database で構成されています。同期 HTTP 呼び出しと非同期メッセージの両方をまたいで、1 件の注文が遅延した場所を追跡したいと考えています。個人情報を含む要求本文は収集してはいけません。",
+    "prompt": "可観測性設計として選ぶべきものを2つ選んでください。",
     "options": [
       {
-        "text": "Application Insights の分散トレース",
-        "why": "相関IDを使って複数コンポーネントにまたがる要求と依存関係を追跡できます。"
+        "text": "各アプリケーション コンポーネントをワークスペースベースの Application Insights に接続する",
+        "why": "要求、依存関係、例外、分散トレースを共通の分析基盤へ送れます。"
       },
       {
-        "text": "Azure Advisor",
-        "why": "構成上の推奨事項を提供しますが、要求単位の分散トレースは行いません。"
+        "text": "W3C Trace Context を維持し、メッセージ プロパティにも相関情報を伝播する",
+        "why": "同期・非同期境界をまたいだトレース相関に必要です。"
       },
       {
-        "text": "Azure Resource Graph",
-        "why": "リソース構成を横断検索するためのサービスです。"
+        "text": "すべての要求本文をカスタム イベントとして記録する",
+        "why": "個人情報を収集しない要件に反します。"
       },
       {
-        "text": "Network Watcher のIPフロー検証",
-        "why": "NSGによる許可・拒否の確認向けで、アプリケーション トレースではありません。"
+        "text": "Network Watcher の接続モニターだけを使用する",
+        "why": "ネットワーク到達性は確認できますが、注文単位のアプリケーション トレースは提供しません。"
       }
     ],
     "answer": [
-      0
+      0,
+      1
     ],
-    "explanation": "アプリケーションのエンドツーエンド可観測性にはApplication Insightsの分散トレースが適します。",
+    "explanation": "Application Insights と標準化された相関コンテキストを組み合わせることで、サービス境界をまたぐ処理を追跡できます。",
     "sourceKeys": [
       "monitor"
     ],
-    "scenario": "【背景】Northwindは、App Service上のWebフロントエンド、Azure Functions、API Management、Azure SQL Databaseで構成される注文APIを運用しています。ユーザーから、処理が遅い要求だけを特定したいという依頼がありました。\n【要件】\n• 1回のHTTP要求を複数サービスにまたがって追跡できること\n• 各コンポーネントの依存関係、処理時間、失敗箇所を確認できること\n• ネットワーク構成情報ではなく、アプリケーション要求単位で分析できること\n• 開発チームが同じポータルから調査できること"
+    "selectCount": 2
   },
   {
     "id": 4,
     "domain": "ID・ガバナンス・監視",
     "objective": "Log Analytics設計",
     "type": "single",
-    "difficulty": "難",
-    "prompt": "データ所在地と中央調査の両方を満たすログ アーキテクチャを設計する必要があります。どの設計を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "Contoso は EU、日本、米国でサービスを提供します。各地域のログは地域内に保存する必要があります。通常時は地域運用者だけが自地域のログを閲覧し、重大インシデント時のみ中央 SOC が3地域を横断して KQL 検索します。ログを一地域へ複製することは禁止されています。",
+    "prompt": "要件を満たす Log Analytics アーキテクチャはどれですか。",
     "options": [
       {
-        "text": "各リージョンにLog Analyticsワークスペースを配置し、クロスワークスペース クエリを使用する",
-        "why": "データ所在地を守りながら、必要時に複数ワークスペースを横断してKQL検索できます。"
+        "text": "各地域にワークスペースを配置し、Azure Lighthouse または適切な RBAC とクロスワークスペース クエリを使用する",
+        "why": "データ所在地を維持しながら、許可された SOC が複数ワークスペースを横断検索できます。"
       },
       {
-        "text": "すべてのログを米国の1つのワークスペースに集約する",
-        "why": "一元化はできますが、指定されたデータ所在地要件を満たしません。"
+        "text": "米国の単一ワークスペースへ全地域のログを集約し、テーブル RBAC で分離する",
+        "why": "アクセス分離はできますが、地域内保存の要件に反します。"
       },
       {
-        "text": "各VMのローカル ディスクだけにログを保存する",
-        "why": "中央分析や耐久性、検索性を満たしません。"
+        "text": "各地域の Storage アカウントへだけ保存し、中央 SOC は Storage Explorer で検索する",
+        "why": "長期保管はできますが、KQL による横断調査を満たしません。"
       },
       {
-        "text": "Activity Logだけを使用する",
-        "why": "ゲストOSやアプリケーション ログを十分に収集できません。"
+        "text": "各地域のワークスペースから中央ワークスペースへ毎時エクスポートする",
+        "why": "中央への複製禁止に反します。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "ワークスペースを所在地ごとに分け、Azure Monitor Logsのクロスワークスペース クエリで統合表示するのが適切です。",
+    "explanation": "地域ごとのワークスペースとクロスワークスペース クエリなら、データを移動せずに中央調査を実現できます。",
     "sourceKeys": [
       "monitor"
-    ],
-    "scenario": "【背景】ContosoはEUと日本で金融サービスを提供しており、各地域に独立した運用チームがあります。監査部門はログの保存場所について厳格な要件を定めています。\n【要件】\n• EUで生成されたログはEU内に保存すること\n• 日本で生成されたログは日本国内に保存すること\n• 通常運用では地域ごとにアクセスを分離すること\n• 重大インシデント時には中央SOCが両地域のログをKQLで横断検索できること\n• 1つの地域へ全ログを転送してはならないこと"
+    ]
   },
   {
     "id": 5,
     "domain": "ID・ガバナンス・監視",
     "objective": "マネージドID",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "App ServiceからKey Vaultへアクセスする認証方式を選定する必要があります。どの方式を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "同じデプロイ スロット構成を持つ 12 個の App Service アプリが、共通の Key Vault と Storage アカウントへアクセスします。アプリは頻繁に再作成されますが、アクセス許可の再割り当ては避けたいと考えています。各アプリには同じ Azure RBAC 権限を付与します。資格情報は保存できません。",
+    "prompt": "推奨すべき ID 設計はどれですか。",
     "options": [
       {
-        "text": "App Serviceのシステム割り当てマネージドID",
-        "why": "Azureが資格情報のライフサイクルを管理し、シークレットをアプリに保存せずに認証できます。"
+        "text": "1つのユーザー割り当てマネージド ID を作成し、各 App Service に関連付ける",
+        "why": "ID のライフサイクルをアプリから分離でき、複数リソースで同じ RBAC 割り当てを再利用できます。"
       },
       {
-        "text": "ストレージ アカウント キー",
-        "why": "Key Vaultへの認証には使用できず、長期キー管理の問題もあります。"
+        "text": "各 App Service のシステム割り当てマネージド ID を使用する",
+        "why": "資格情報不要ですが、アプリ再作成で ID が変わり、12個分の権限管理が必要です。"
       },
       {
-        "text": "開発者個人のMicrosoft Entraアカウント",
-        "why": "本番ワークロードの非対話認証として不適切です。"
+        "text": "1つのアプリ登録とクライアント シークレットを全アプリで共有する",
+        "why": "資格情報の保管とローテーションが必要です。"
       },
       {
-        "text": "アプリ設定にクライアント シークレットを平文保存",
-        "why": "資格情報を保存しないという要件に反します。"
+        "text": "Key Vault のアクセス キーを App Service の設定へ保存する",
+        "why": "Key Vault にアクセス キーという認証方式はなく、秘密の保管要件にも反します。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "Azure上のワークロードからAzureリソースへアクセスする場合、マネージドIDが第一候補です。",
+    "explanation": "複数リソースで同一権限を共有し、アプリ再作成から ID を独立させる場合はユーザー割り当てマネージド ID が最適です。",
     "sourceKeys": [
       "auth"
-    ],
-    "scenario": "【背景】Adventure Worksは、App Serviceで実行される社内APIからAzure Key Vaultに保存されたデータベース接続情報を取得します。アプリは複数環境へ自動展開され、運用チームは資格情報のローテーション作業を減らしたいと考えています。\n【要件】\n• クライアント シークレットや証明書をコード、設定ファイル、パイプライン変数へ保存しないこと\n• App ServiceのIDに対してKey Vaultの読み取り権限だけを付与すること\n• 資格情報の期限管理を不要にすること\n• Azure内で完結する認証方式を採用すること"
+    ]
   },
   {
     "id": 6,
     "domain": "ID・ガバナンス・監視",
-    "objective": "サービス プリンシパル",
+    "objective": "ワークロードIDフェデレーション",
     "type": "single",
-    "difficulty": "難",
-    "prompt": "GitHub ActionsからAzureへ安全に認証する必要があります。どの構成を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "GitHub Actions から Bicep を使って本番サブスクリプションへデプロイします。セキュリティ部門は、長期シークレットを禁止し、main ブランチの production 環境から実行されたジョブだけを信頼するよう要求しています。既存の Microsoft Entra アプリ登録を使用します。",
+    "prompt": "推奨すべき認証構成はどれですか。",
     "options": [
       {
-        "text": "Microsoft Entraアプリ登録にフェデレーション資格情報を構成する",
-        "why": "OIDCによるワークロードIDフェデレーションで、保存済みシークレットなしに短期トークンを取得できます。"
+        "text": "アプリ登録に GitHub OIDC のサブジェクトを制限したフェデレーション資格情報を追加する",
+        "why": "指定したリポジトリ、ブランチまたは環境からの OIDC トークンだけを短期 Azure トークンへ交換できます。"
       },
       {
-        "text": "クライアント シークレットをGitHubリポジトリにコミットする",
-        "why": "重大なセキュリティ リスクです。"
+        "text": "有効期限2年のクライアント シークレットを GitHub Environments に保存する",
+        "why": "環境保護はできますが、長期シークレット禁止に反します。"
       },
       {
-        "text": "Azureサブスクリプションの所有者のパスワードをGitHub Secretsに保存する",
-        "why": "個人資格情報を自動化に使用すべきではありません。"
+        "text": "GitHub の自己ホステッド ランナーへ Azure CLI のキャッシュ済みユーザー トークンを保存する",
+        "why": "ユーザー資格情報の再利用は安全なワークロード認証ではありません。"
       },
       {
-        "text": "ストレージSASだけを使用する",
-        "why": "Azure Resource Managerへのデプロイ認証には使えません。"
+        "text": "サブスクリプションの発行プロファイルをリポジトリ シークレットへ保存する",
+        "why": "Bicep の汎用 Azure Resource Manager 認証には適さず、秘密保管も必要です。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "Azure外部のCI/CDでは、サービス プリンシパルとOIDCフェデレーションを組み合わせることでシークレットレス認証を実現できます。",
+    "explanation": "GitHub OIDC と Microsoft Entra のフェデレーション資格情報により、条件を限定したシークレットレス認証を実現できます。",
     "sourceKeys": [
       "auth"
-    ],
-    "scenario": "【背景】FabrikamはGitHub Actionsを使用して、複数サブスクリプションへBicepテンプレートを展開します。現在はサービス プリンシパルのクライアント シークレットをGitHub Secretsに保存しており、監査で改善を求められました。\n【要件】\n• 長期間有効なシークレットをGitHubへ保存しないこと\n• GitHub Actionsの実行時だけ短期トークンを取得すること\n• 特定のリポジトリ、ブランチ、環境からの実行だけを信頼すること\n• 既存のMicrosoft Entraアプリ登録を利用できること"
+    ]
   },
   {
     "id": 7,
     "domain": "ID・ガバナンス・監視",
-    "objective": "B2Bコラボレーション",
+    "objective": "外部IDライフサイクル",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "外部ユーザーとのコラボレーション方式を選定する必要があります。どのMicrosoft Entra機能を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "買収後も2つの Microsoft Entra テナントを3年間維持します。両テナントは同じ企業グループに属し、元テナントの従業員を対象テナントへ自動作成・更新・削除し、対象テナント内の業務アプリへ継続的にアクセスさせます。招待メールや個別スクリプトは避けます。",
+    "prompt": "推奨すべき機能はどれですか。",
     "options": [
       {
-        "text": "Microsoft Entra B2Bコラボレーション",
-        "why": "外部ユーザーをゲストとして招待し、ホーム テナントの資格情報を利用できます。"
+        "text": "Microsoft Entra のクロステナント同期",
+        "why": "B2B ユーザーの作成、更新、削除を一方向に自動化し、同一組織の複数テナント運用に適します。"
       },
       {
-        "text": "Microsoft Entra Domain Services",
-        "why": "マネージド ドメイン機能であり、外部ユーザー招待のための機能ではありません。"
+        "text": "Microsoft Entra B2B の手動一括招待",
+        "why": "外部アクセスは可能ですが、継続的な更新・削除の自動化要件に最適ではありません。"
       },
       {
-        "text": "Azure RBACだけ",
-        "why": "認可は行えますが、外部IDの招待と認証の仕組みは提供しません。"
+        "text": "B2B direct connect",
+        "why": "主に Teams 共有チャネル向けで、対象テナントに一般アプリ用ユーザーを同期しません。"
       },
       {
-        "text": "Azure Bastion",
-        "why": "VMへの安全な管理接続を提供するサービスです。"
+        "text": "Microsoft Entra External ID の外部テナント",
+        "why": "消費者・顧客向け CIAM を構築するサービスで、社内複数テナントの従業員同期用途ではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "組織間コラボレーションにはMicrosoft Entra B2Bが適します。",
+    "explanation": "同一企業グループの複数テナント間でユーザー ライフサイクルを自動化する要件にはクロステナント同期が合います。",
     "sourceKeys": [
       "auth"
-    ],
-    "scenario": "【背景】Contosoは共同開発プロジェクトのため、取引先3社の従業員をMicrosoft Teams、SharePoint、Azure上の業務アプリへ招待します。取引先のユーザー数は頻繁に増減します。\n【要件】\n• 外部ユーザーにContoso専用の新しいパスワードを配布しないこと\n• 外部ユーザーが所属企業の既存資格情報でサインインできること\n• Contosoテナント側でアクセス権を管理できること\n• プロジェクト終了後にアクセスを取り消せること"
+    ]
   },
   {
     "id": 8,
     "domain": "ID・ガバナンス・監視",
     "objective": "顧客ID",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "顧客向けID基盤を選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "一般消費者向けモバイル アプリを新規開発します。数百万人がメール、Google、Apple の ID でセルフサインアップします。従業員テナントとはユーザー、ポリシー、ブランド、管理責任を分離し、カスタム属性をトークンへ含める必要があります。",
+    "prompt": "新規設計で推奨すべき ID 基盤はどれですか。",
     "options": [
       {
-        "text": "Microsoft Entra External IDの外部テナント",
-        "why": "顧客IDとアクセス管理を従業員テナントから分離して提供できます。"
+        "text": "Microsoft Entra External ID の外部テナント",
+        "why": "顧客向け CIAM として、セルフサービス登録、外部 IdP、ブランド設定、従業員テナントからの分離を提供します。"
       },
       {
-        "text": "Microsoft Entra B2Bコラボレーション",
-        "why": "主に組織間のゲスト コラボレーション向けです。"
-      },
-      {
-        "text": "Azure RBAC",
-        "why": "Azureリソースの認可機能であり、顧客サインアップ基盤ではありません。"
+        "text": "従業員テナントの B2B コラボレーション",
+        "why": "取引先コラボレーション向けで、大規模な消費者セルフサインアップの標準設計ではありません。"
       },
       {
         "text": "Microsoft Entra Domain Services",
-        "why": "LDAP/Kerberos/NTLM互換のマネージド ドメインを提供します。"
+        "why": "マネージド ドメイン参加や LDAP/Kerberos 用で、顧客 CIAM ではありません。"
+      },
+      {
+        "text": "Azure RBAC とカスタム ロール",
+        "why": "Azure リソースの認可であり、顧客認証基盤ではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "消費者向けCIAMにはMicrosoft Entra External IDの外部テナントを使用します。",
+    "explanation": "顧客 ID を従業員 ID から分離する新規 CIAM は Microsoft Entra External ID の外部テナントで設計します。",
     "sourceKeys": [
       "auth"
-    ],
-    "scenario": "【背景】Northwindは一般消費者向けのECサイトを新規開発します。利用者は数百万人になる可能性があり、企業内従業員のIDとは運用主体もセキュリティ ポリシーも異なります。\n【要件】\n• メールアドレスまたは一般的なソーシャルIDでサインアップできること\n• ブランドに合わせたサインイン画面を提供できること\n• 顧客IDを従業員ディレクトリから分離すること\n• 大規模な外部ユーザーを対象としたセルフサービス登録を提供すること"
+    ]
   },
   {
     "id": 9,
     "domain": "ID・ガバナンス・監視",
     "objective": "条件付きアクセス",
     "type": "multi",
-    "difficulty": "標準",
-    "prompt": "条件付きアクセス ポリシーを構成する必要があります。要件を満たすために選択すべき制御を2つ選んでください。",
+    "difficulty": "本番強化",
+    "scenario": "特権管理者が Azure 管理ポータルへアクセスする際、フィッシング耐性のある認証と Intune 準拠デバイスを必須にします。緊急アクセス用アカウントはロックアウトを避けるため対象外とし、最初は影響を評価してから強制します。",
+    "prompt": "構成に含めるべきものを3つ選んでください。",
     "options": [
       {
-        "text": "Microsoft Entra条件付きアクセス ポリシー",
-        "why": "ユーザー、場所、クラウドアプリ、リスクなどの条件に基づきアクセス制御を適用します。"
+        "text": "対象クラウド アプリに Microsoft Azure Management を指定する",
+        "why": "Azure ポータルや Azure 管理 API へのアクセスを対象化できます。"
       },
       {
-        "text": "MFAと準拠デバイスをGrant controlsで要求する",
-        "why": "条件付きアクセスの許可制御として両方を要求できます。"
+        "text": "Grant controls でフィッシング耐性 MFA の認証強度と準拠デバイスを要求する",
+        "why": "要求された認証品質とデバイス状態を同時に強制できます。"
       },
       {
-        "text": "Azure Policyのdeny効果",
-        "why": "Azureリソース構成を制御するもので、ユーザーのサインイン条件は制御しません。"
+        "text": "緊急アクセス用アカウントを除外し、最初は Report-only で検証する",
+        "why": "ロックアウト対策と事前影響評価の推奨設計です。"
       },
       {
-        "text": "NSGの受信規則",
-        "why": "ネットワーク フローを制御しますが、MFAやデバイス準拠状態は評価できません。"
+        "text": "Azure Policy の deny 効果で準拠デバイスだけを許可する",
+        "why": "Azure Policy はサインイン条件を評価しません。"
+      },
+      {
+        "text": "NSG で管理者のユーザー オブジェクト ID を許可する",
+        "why": "NSG はユーザー ID や認証強度を評価しません。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "Azure Management を対象に認証強度と準拠デバイスを要求し、緊急アカウント除外と Report-only 検証を組み合わせます。",
+    "sourceKeys": [
+      "auth"
+    ],
+    "selectCount": 3
+  },
+  {
+    "id": 10,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "特権アクセス",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "20 人の運用担当者は、障害時だけ Azure サブスクリプションの Owner を最大2時間必要とします。申請時に MFA、理由、承認を要求し、四半期ごとに対象者が引き続き必要か所有者が確認します。永続的な Owner は廃止します。",
+    "prompt": "使用すべき Microsoft Entra ID Governance の機能を2つ選んでください。",
+    "options": [
+      {
+        "text": "Privileged Identity Management",
+        "why": "Eligible 割り当て、時間制限、有効化時 MFA、理由、承認を構成できます。"
+      },
+      {
+        "text": "アクセス レビュー",
+        "why": "四半期ごとに割り当ての継続必要性を確認し、不要な対象者を除去できます。"
+      },
+      {
+        "text": "条件付きアクセスだけ",
+        "why": "MFA は要求できますが、JIT ロール有効化や時間制限、承認を提供しません。"
+      },
+      {
+        "text": "Azure Resource Lock",
+        "why": "リソース変更を保護しますが、特権ロールのライフサイクル管理ではありません。"
       }
     ],
     "answer": [
       0,
       1
     ],
-    "explanation": "条件付きアクセスで対象を管理者とAzure管理に絞り、Grant controlsでMFAと準拠デバイスを要求します。",
+    "explanation": "JIT 特権には PIM、定期的な必要性確認にはアクセス レビューを使用します。",
     "sourceKeys": [
       "auth"
     ],
-    "selectCount": 2,
-    "scenario": "【背景】Contosoのクラウド管理者は、社内ネットワークと管理端末からAzureポータルを使用します。最近、管理者アカウントを狙ったフィッシングが発生したため、社外からの管理操作を強化します。\n【要件】\n• 対象は管理者ロールを持つユーザーであること\n• 信頼済み社内ネットワーク外からAzure管理ポータルへアクセスする場合に適用すること\n• 多要素認証を要求すること\n• Microsoft Intuneで準拠と評価されたデバイスだけを許可すること\n• 通常の一般ユーザーへの影響を最小化すること"
-  },
-  {
-    "id": 10,
-    "domain": "ID・ガバナンス・監視",
-    "objective": "Identity Protection",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "リスク ベースの自動修復を構成する必要があります。どの設計を推奨すべきですか。",
-    "options": [
-      {
-        "text": "Microsoft Entra ID Protectionとリスクベースの条件付きアクセス",
-        "why": "ユーザー リスクやサインイン リスクを評価し、MFAや安全なパスワード変更を要求できます。"
-      },
-      {
-        "text": "Azure Firewall Premium",
-        "why": "ネットワーク脅威対策であり、ユーザー リスク修復は行いません。"
-      },
-      {
-        "text": "Azure Policyのaudit効果",
-        "why": "リソース準拠状況の監査向けです。"
-      },
-      {
-        "text": "Defender for Storage",
-        "why": "ストレージ脅威検出向けです。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "IDリスクの検出と自動修復にはMicrosoft Entra ID Protectionと条件付きアクセスを組み合わせます。",
-    "sourceKeys": [
-      "auth"
-    ],
-    "scenario": "【背景】FabrikamはMicrosoft Entra ID Protectionを導入し、漏えい資格情報や異常なサインインを検出しています。ヘルプデスクがすべての事象を手動対応すると運用負荷が高くなるため、自動修復を検討しています。\n【要件】\n• ユーザー リスクが高い場合にだけ制御を適用すること\n• 正当なユーザー自身が安全な方法でアカウントを回復できること\n• パスワード漏えいが疑われる場合はパスワード変更を要求すること\n• リスクが低い通常サインインには追加操作を求めないこと"
+    "selectCount": 2
   },
   {
     "id": 11,
     "domain": "ID・ガバナンス・監視",
-    "objective": "Privileged Identity Management",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "特権ロールの常時割り当てを廃止する必要があります。どの機能を推奨すべきですか。",
+    "objective": "Key Vault設計",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "App Service が Key Vault のシークレットを読み取ります。Key Vault のパブリック ネットワーク アクセスは禁止し、アプリにはシークレット読み取り以外の権限を与えません。複数 Key Vault の権限管理は Azure RBAC に統一し、資格情報を保存しない設計とします。",
+    "prompt": "必要な構成を3つ選んでください。",
     "options": [
       {
-        "text": "Microsoft Entra Privileged Identity Management",
-        "why": "特権ロールのJust-In-Time有効化、承認、MFA、時間制限、監査を提供します。"
+        "text": "App Service にマネージド ID を割り当てる",
+        "why": "資格情報なしで Microsoft Entra 認証を使用できます。"
       },
       {
-        "text": "アクセス レビュー",
-        "why": "定期的なアクセスの再確認には適しますが、JIT有効化の中心機能ではありません。"
+        "text": "Key Vault に Private Endpoint を作成し、Private DNS を構成する",
+        "why": "パブリック アクセスを無効にした Key Vault へプライベート接続できます。"
       },
       {
-        "text": "Azure Resource Locks",
-        "why": "リソースの削除・変更を防止します。"
+        "text": "Key Vault Secrets User など必要最小限のデータ プレーン RBAC ロールを割り当てる",
+        "why": "シークレット値の読み取りだけを許可できます。"
       },
       {
-        "text": "管理グループ",
-        "why": "サブスクリプションの階層管理に使用します。"
+        "text": "App Service の送信 IP を Key Vault ファイアウォールへ登録する",
+        "why": "パブリック ネットワーク禁止の要件と一致しません。"
+      },
+      {
+        "text": "Key Vault Contributor を割り当てる",
+        "why": "管理プレーン権限が過剰で、シークレット読み取りの最小権限にもなりません。"
       }
     ],
     "answer": [
-      0
+      0,
+      1,
+      2
     ],
-    "explanation": "特権ロールを必要時だけ有効化するにはPIMを使用します。",
+    "explanation": "マネージド ID、Private Endpoint、最小権限の Key Vault データ プレーン RBAC を組み合わせます。",
     "sourceKeys": [
       "auth"
     ],
-    "scenario": "【背景】Contosoでは、8人のクラウド管理者が障害対応時にGlobal Administrator権限を必要とします。現在は全員に永続的なロールが割り当てられており、内部監査で過剰権限と指摘されました。\n【要件】\n• 通常時は管理者権限を無効にしておくこと\n• 利用申請を承認者が承認した後だけ有効化できること\n• 有効期間は1時間に制限すること\n• 有効化時にMFAと理由入力を要求すること\n• ロールの利用履歴を監査できること"
+    "selectCount": 3
   },
   {
     "id": 12,
     "domain": "ID・ガバナンス・監視",
-    "objective": "アクセス レビュー",
+    "objective": "オンプレミス認可",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "外部ゲストの不要なアクセスを定期的に除去する必要があります。どの機能を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "社内データセンターの IIS で動作する従来型 Web アプリを、インターネット経由で在宅勤務者へ公開します。アプリ自体は変更できません。受信ポートを社内ファイアウォールで開放せず、Microsoft Entra の事前認証、条件付きアクセス、MFA を適用します。",
+    "prompt": "推奨すべきソリューションはどれですか。",
     "options": [
       {
-        "text": "Microsoft Entraアクセス レビュー",
-        "why": "グループ、アプリ、ロールへのアクセスを定期レビューし、結果を自動適用できます。"
+        "text": "Microsoft Entra アプリケーション プロキシ",
+        "why": "オンプレミス コネクタから外向き接続し、Entra 事前認証と条件付きアクセスを適用して内部 Web アプリを公開できます。"
       },
       {
-        "text": "Azure Monitorアラート",
-        "why": "監視通知向けで、アクセス権の定期承認フローは提供しません。"
+        "text": "Azure VPN Gateway の Point-to-Site VPN",
+        "why": "ネットワーク接続は提供しますが、対象 Web アプリ単位の Entra 事前認証を直接提供しません。"
       },
       {
-        "text": "Resource Graphクエリ",
-        "why": "リソース インベントリ検索向けです。"
+        "text": "Azure Front Door とパブリック オリジン",
+        "why": "オンプレミス側の受信公開が必要になり、Entra アプリ プロキシの要件に劣ります。"
       },
       {
-        "text": "Azure Backupポリシー",
-        "why": "データ保護用です。"
+        "text": "Microsoft Entra Domain Services",
+        "why": "LDAP/Kerberos ドメイン機能であり、外部公開プロキシではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "ゲストや特権アクセスの定期的な棚卸しにはアクセス レビューが適します。",
+    "explanation": "受信ポートを開けずに既存 Web アプリへ Entra 事前認証を追加するにはアプリケーション プロキシが適します。",
     "sourceKeys": [
       "auth"
-    ],
-    "scenario": "【背景】Fabrikamは複数の共同プロジェクトで外部ゲストをMicrosoft Entraグループへ追加しています。プロジェクト終了後もアクセスが残り、所有者が定期的に確認していないことが問題になっています。\n【要件】\n• 四半期ごとにグループ所有者へ確認を依頼すること\n• 所有者が外部ユーザーの継続アクセスを承認または拒否できること\n• 応答がない、または拒否されたアクセスを自動的に削除すること\n• 個別のスクリプトを保守しないこと"
+    ]
   },
   {
     "id": 13,
     "domain": "ID・ガバナンス・監視",
-    "objective": "Azure RBAC",
+    "objective": "管理グループ設計",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "最小権限を満たすRBAC割り当てを設計する必要があります。どのスコープでどのロールを割り当てるべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "企業には Europe、Japan、US の規制境界があり、各地域に本番・非本番サブスクリプションがあります。データ所在地ポリシーは地域ごとに異なりますが、セキュリティ基準と許可 SKU は全社共通です。課金とクォータもワークロード間で分離します。",
+    "prompt": "最も適切な階層設計はどれですか。",
     "options": [
       {
-        "text": "対象リソース グループのスコープでVirtual Machine Contributorを割り当てる",
-        "why": "必要な範囲だけにVM管理権限を付与できます。"
+        "text": "ルート配下に全社共通管理グループを置き、その下を地域、さらに本番・非本番またはワークロード用サブスクリプションへ分ける",
+        "why": "共通統制と地域固有統制を継承させつつ、サブスクリプション境界で課金・クォータ・権限を分離できます。"
       },
       {
-        "text": "サブスクリプションのスコープでOwnerを割り当てる",
-        "why": "権限とスコープが過剰です。"
+        "text": "1つのサブスクリプション内で地域ごとにリソース グループを作る",
+        "why": "課金・クォータ・サブスクリプション境界の分離を満たしません。"
       },
       {
-        "text": "管理グループのスコープでContributorを割り当てる",
-        "why": "配下の多数のサブスクリプションへ権限が継承されます。"
+        "text": "リージョン名タグだけで Policy と RBAC を継承する",
+        "why": "タグは管理グループのような階層継承境界ではありません。"
       },
       {
-        "text": "対象VMにReaderを割り当てる",
-        "why": "閲覧のみで管理操作はできません。"
+        "text": "各リソースへ全ポリシーを個別割り当てする",
+        "why": "継承と反復可能性がなく運用負荷が高くなります。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "RBACは必要なロールを最小の有効スコープに割り当てます。",
+    "explanation": "管理グループで共通・地域統制を階層化し、サブスクリプションを運用・課金・クォータ境界として使います。",
     "sourceKeys": [
-      "auth",
       "governance"
-    ],
-    "scenario": "【背景】Northwindには、Prod-AppとDev-Appという2つのリソース グループがあります。開発チームはDev-App内の仮想マシンを起動、停止、再構成する必要がありますが、本番環境やネットワーク リソースを変更してはいけません。\n【要件】\n• 開発チームへ必要な操作だけを許可すること\n• 権限のスコープをDev-Appリソース グループに限定すること\n• サブスクリプション全体へ権限を付与しないこと\n• 個々のVMへ同じ割り当てを繰り返さないこと"
+    ]
   },
   {
     "id": 14,
     "domain": "ID・ガバナンス・監視",
-    "objective": "管理グループ",
+    "objective": "Azure Policy効果",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "ガバナンス階層を設計する必要があります。どのAzureリソース階層を使用すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "すべての既存および新規ストレージ アカウントに、CostCenter タグがない場合は親リソース グループの CostCenter 値を自動設定します。既存リソースも修復タスクで更新し、デプロイ自体は拒否しません。",
+    "prompt": "カスタム Azure Policy で主に使用すべき効果はどれですか。",
     "options": [
       {
-        "text": "管理グループを部門またはポリシー境界に合わせ、配下にサブスクリプションを配置する",
-        "why": "管理グループに割り当てたPolicyとRBACを配下へ継承できます。"
+        "text": "modify",
+        "why": "リソースの要求または既存リソースを修復してタグを追加・更新する用途に適します。"
       },
       {
-        "text": "すべてのリソースを1つのリソース グループへ移す",
-        "why": "リソース グループはサブスクリプションをまたぐ階層ではありません。"
+        "text": "deployIfNotExists",
+        "why": "関連リソースの展開には適しますが、既存リソース自身のタグ プロパティ変更は modify がより直接的です。"
       },
       {
-        "text": "タグだけでRBACを継承する",
-        "why": "タグはRBAC継承境界ではありません。"
+        "text": "deny",
+        "why": "非準拠デプロイを拒否し、自動補完要件を満たしません。"
       },
       {
-        "text": "各VMに個別ポリシーを設定する",
-        "why": "運用負荷が高く、一貫性も低下します。"
+        "text": "auditIfNotExists",
+        "why": "監査はできますがタグを自動変更しません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "大規模なサブスクリプション統制には管理グループ階層を使用します。",
+    "explanation": "タグの追加・継承・修正には modify 効果と修復タスクを使用します。",
     "sourceKeys": [
       "governance"
-    ],
-    "scenario": "【背景】Contosoは買収によりAzureサブスクリプションが100個まで増えました。サブスクリプションは財務、人事、製造、研究の各部門に分かれており、中央ITは共通統制を適用します。\n【要件】\n• 部門単位でポリシーとRBACを継承できること\n• 全社共通の制御を最上位から適用できること\n• サブスクリプションを階層的に整理できること\n• 個々のサブスクリプションへの重複割り当てを最小化すること"
+    ]
   },
   {
     "id": 15,
     "domain": "ID・ガバナンス・監視",
-    "objective": "Azure Policy",
+    "objective": "Azure Policy効果",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "新規リソースの展開を確実に拒否するPolicyを構成する必要があります。どの効果を使用すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "既存および新規の Key Vault に、指定 Log Analytics ワークスペースへ監査ログを送る診断設定を必須化します。診断設定は Key Vault 本体とは別の子リソースで、存在しない場合に自動作成し、既存リソースも修復します。",
+    "prompt": "主に使用すべき Policy 効果はどれですか。",
     "options": [
       {
-        "text": "deny",
-        "why": "準拠しない新規作成や更新を拒否できます。"
+        "text": "deployIfNotExists",
+        "why": "関連する診断設定がない場合にテンプレートを展開し、修復タスクで既存リソースも是正できます。"
+      },
+      {
+        "text": "modify",
+        "why": "本体プロパティやタグ変更には適しますが、関連する診断設定リソースの展開は deployIfNotExists が一般的です。"
+      },
+      {
+        "text": "denyAction",
+        "why": "特定アクションを拒否する効果で、診断設定を作成しません。"
       },
       {
         "text": "audit",
-        "why": "非準拠を記録しますが、作成は拒否しません。"
-      },
-      {
-        "text": "append",
-        "why": "要求へフィールドを追加する効果で、単純な拒否要件には適しません。"
-      },
-      {
-        "text": "disabled",
-        "why": "ポリシー評価を無効にします。"
+        "why": "非準拠を検出するだけで自動修復しません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "非準拠リソースの作成を防止するにはdeny効果を使用します。",
+    "explanation": "関連リソースである診断設定を不足時に展開するには deployIfNotExists を使用します。",
     "sourceKeys": [
       "governance"
-    ],
-    "scenario": "【背景】Fabrikamはデータ主権とサポート体制の都合から、AzureリソースをJapan East、Japan West、Australia Eastの3リージョンだけに展開する方針です。既存リソースはそのままにし、今後の新規展開を制御します。\n【要件】\n• 許可リスト外のリージョンへの新規作成をデプロイ時に失敗させること\n• 警告だけではなく、確実に作成を阻止すること\n• ARM、Bicep、ポータルのいずれから展開しても同じ制御を適用すること\n• 各チームのテンプレート修正に依存しないこと"
+    ]
   },
   {
     "id": 16,
     "domain": "ID・ガバナンス・監視",
-    "objective": "Azure Policyによる修復",
+    "objective": "Policy除外設計",
     "type": "single",
-    "difficulty": "難",
-    "prompt": "既存および新規Key Vaultを自動的に準拠状態へ修復する必要があります。どのPolicy効果を使用すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "全社イニシアティブでパブリック IP 作成を禁止しています。セキュリティ承認済みの踏み台サブスクリプションだけ、6か月間例外とし、例外理由と有効期限を記録します。イニシアティブ割り当て自体は変更せず、その他のスコープには引き続き適用します。",
+    "prompt": "推奨すべき構成はどれですか。",
     "options": [
       {
-        "text": "deployIfNotExists",
-        "why": "関連構成が存在しない場合にARM/Bicep相当のデプロイを実行し、修復タスクで既存リソースにも適用できます。"
+        "text": "対象スコープに Azure Policy exemption を作成する",
+        "why": "割り当てを維持したまま、理由、カテゴリ、有効期限を持つ明示的な例外を管理できます。"
       },
       {
-        "text": "deny",
-        "why": "作成を拒否できますが、診断設定を自動作成しません。"
+        "text": "イニシアティブからパブリック IP 定義を削除する",
+        "why": "全社の他スコープにも影響します。"
       },
       {
-        "text": "audit",
-        "why": "不足を検出するだけで、自動構成しません。"
+        "text": "踏み台サブスクリプションへ Owner を付与する",
+        "why": "RBAC は Policy の deny を回避しません。"
       },
       {
-        "text": "manual",
-        "why": "Azure Policyの効果ではありません。"
+        "text": "対象リソースに CanNotDelete ロックを付ける",
+        "why": "ロックは Policy 例外ではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "不足する関連リソースや設定を自動展開するにはdeployIfNotExistsを使います。",
+    "explanation": "期限付き・監査可能な例外は Azure Policy exemption で表現します。",
     "sourceKeys": [
-      "governance",
-      "monitor"
-    ],
-    "scenario": "【背景】ContosoはすべてのKey Vault監査ログを中央SOCへ送信する標準を定めました。数百個の既存Key Vaultには診断設定がなく、今後も各チームが新しいKey Vaultを作成します。\n【要件】\n• 既存リソースと新規リソースの両方を対象にすること\n• 診断設定を自動的に作成し、指定したLog Analyticsワークスペースへ送信すること\n• 非準拠リソースを修復タスクで是正できること\n• 各リソース所有者による手作業を不要にすること"
+      "governance"
+    ]
   },
   {
     "id": 17,
     "domain": "ID・ガバナンス・監視",
     "objective": "コンプライアンス",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "ISO 27001関連のPolicyを一括管理する必要があります。何を作成すべきですか。",
-    "options": [
-      {
-        "text": "Azure Policyイニシアティブ",
-        "why": "複数のポリシー定義をグループ化し、一括割り当てとコンプライアンス評価ができます。"
-      },
-      {
-        "text": "リソース ロック",
-        "why": "削除または変更を防ぐための機能です。"
-      },
-      {
-        "text": "NSG",
-        "why": "ネットワーク トラフィック制御用です。"
-      },
-      {
-        "text": "可用性セット",
-        "why": "VMの障害ドメイン分散用です。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "複数ポリシーを規制標準ごとにまとめるにはイニシアティブを使用します。",
-    "sourceKeys": [
-      "governance"
-    ],
-    "scenario": "【背景】NorthwindはISO 27001認証の取得を計画しています。セキュリティ部門は、暗号化、ログ、ネットワーク公開、ID管理に関する多数のAzure Policy定義をまとめて管理したいと考えています。\n【要件】\n• 関連する複数のPolicy定義を1つのまとまりとして割り当てること\n• 組織固有のパラメーターを一括設定できること\n• 準拠状況を規格単位で集計できること\n• 個々のPolicyを別々に割り当てる運用を避けること"
-  },
-  {
-    "id": 18,
-    "domain": "ID・ガバナンス・監視",
-    "objective": "ランディング ゾーン",
     "type": "multi",
-    "difficulty": "難",
-    "prompt": "拡張可能なAzureランディング ゾーンを設計する必要があります。要件を満たす推奨事項を2つ選んでください。",
+    "difficulty": "本番強化",
+    "scenario": "組織は ISO 27001 と社内基準の両方を Azure 全体へ適用します。関連する多数の Policy 定義を1単位で割り当て、規格単位で準拠状況を確認し、セキュリティ チームはクラウド セキュリティ態勢と推奨事項も同じ運用プロセスで確認します。",
+    "prompt": "推奨すべきものを2つ選んでください。",
     "options": [
       {
-        "text": "事業部またはワークロード境界ごとにサブスクリプションを分離する",
-        "why": "課金、クォータ、アクセス、ライフサイクルの境界を分離できます。"
+        "text": "Azure Policy イニシアティブ",
+        "why": "複数 Policy 定義を規格や目的ごとにまとめて割り当て、集計できます。"
       },
       {
-        "text": "上位の管理グループへAzure Policyイニシアティブを割り当てる",
-        "why": "全社基準を配下のサブスクリプションへ一貫して継承できます。"
+        "text": "Microsoft Defender for Cloud の規制コンプライアンス ダッシュボード",
+        "why": "標準ごとの準拠状態、評価、セキュリティ推奨事項を可視化できます。"
       },
       {
-        "text": "全社の全リソースを1つのリソース グループへ配置する",
-        "why": "責任分界や課金境界、スケールに適しません。"
+        "text": "Azure Resource Locks",
+        "why": "誤変更防止であり、規格のポリシー集合や準拠ダッシュボードではありません。"
       },
       {
-        "text": "各チームが任意のリージョンと診断設定を手動で選ぶ",
-        "why": "ガバナンスの一貫性と監査性を満たしません。"
+        "text": "Azure Monitor Workbooks だけ",
+        "why": "任意可視化はできますが、Policy 定義の割り当てと規制コンプライアンス評価を置き換えません。"
       }
     ],
     "answer": [
       0,
       1
     ],
-    "explanation": "Azureランディング ゾーンでは、サブスクリプションをスケール単位・責任境界として分け、管理グループ上のポリシーで共通統制を適用します。",
+    "explanation": "統制のまとまりは Policy イニシアティブ、継続的なセキュリティ態勢と規制評価は Defender for Cloud を利用します。",
     "sourceKeys": [
-      "governance",
-      "study"
+      "governance"
     ],
-    "selectCount": 2,
-    "scenario": "【背景】Contosoは4つの事業部を持ち、各事業部には本番・非本番の複数ワークロードがあります。各事業部は独立した予算と運用責任を持ちますが、中央ITは全社のセキュリティ基準を維持します。\n【要件】\n• 許可リージョン、診断ログ、ネットワーク セキュリティ基準を全社で統一すること\n• 事業部ごとにサブスクリプションとコスト責任を分離すること\n• 事業部の運用チームへ必要な権限を委任すること\n• 将来の事業部追加に対応できる反復可能な基盤を採用すること\n• 個別ワークロードごとの手動統制を最小化すること"
+    "selectCount": 2
+  },
+  {
+    "id": 18,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "ランディングゾーン",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "新しい Azure 基盤では、接続、ID、管理を中央プラットフォーム チームが担当し、各事業部は独立したアプリケーション サブスクリプションを迅速に払い出します。全社共通の Azure Firewall、ExpressRoute、DNS、ログ基盤を共有し、アプリ チームにプラットフォーム変更権限は与えません。",
+    "prompt": "Azure ランディング ゾーン設計として選ぶべきものを2つ選んでください。",
+    "options": [
+      {
+        "text": "接続、管理、IDなどのプラットフォーム ランディング ゾーンを専用サブスクリプションに分離する",
+        "why": "共有サービスの所有権、権限、コスト、ライフサイクルをアプリから分離できます。"
+      },
+      {
+        "text": "アプリケーション ランディング ゾーンを事業部またはワークロード単位のサブスクリプションとして払い出す",
+        "why": "反復可能なガバナンスの下でチームへ委任できます。"
+      },
+      {
+        "text": "すべての共有サービスとアプリを1つのサブスクリプション、1つのリソース グループへ配置する",
+        "why": "権限・クォータ・課金・変更境界が混在します。"
+      },
+      {
+        "text": "各アプリ チームへルート管理グループの Owner を付与する",
+        "why": "最小権限と中央統制に反します。"
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "プラットフォームとアプリケーションのランディング ゾーンを分離すると、中央共有基盤と委任されたワークロードを両立できます。",
+    "sourceKeys": [
+      "governance"
+    ],
+    "selectCount": 2
   },
   {
     "id": 19,
     "domain": "データ ストレージ",
-    "objective": "リレーショナル データ",
+    "objective": "リレーショナルデータ",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "互換性と運用負荷の要件を満たすデータベース サービスを選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "オンプレミス SQL Server の 18 個のデータベースを Azure へ移行します。SQL Server Agent、Service Broker、データベース メール、クロスデータベース クエリ、インスタンス レベルの照合順序を使用しています。OS 管理は廃止し、アプリ変更と移行リスクを最小化します。",
+    "prompt": "推奨すべき移行先はどれですか。",
     "options": [
       {
         "text": "Azure SQL Managed Instance",
-        "why": "SQL Serverとの高い互換性とインスタンス レベル機能をPaaSとして提供します。"
+        "why": "高い SQL Server インスタンス互換性と PaaS 運用を両立し、記載機能の多くをサポートします。"
       },
       {
-        "text": "Azure SQL Databaseの単一データベース",
-        "why": "PaaSですが、インスタンス レベル互換性の要件にはManaged Instanceの方が適します。"
+        "text": "Azure SQL Database の単一データベース",
+        "why": "PaaS ですが、インスタンス レベル機能や一部クロスデータベース依存の移行変更が増えます。"
       },
       {
         "text": "SQL Server on Azure Virtual Machines",
-        "why": "互換性は高いもののOS管理が必要で、PaaS要件に反します。"
+        "why": "互換性は高いものの OS と SQL の管理を廃止する要件に劣ります。"
       },
       {
-        "text": "Azure Cosmos DB",
-        "why": "NoSQLサービスであり、SQL Serverの移行先として互換ではありません。"
+        "text": "Azure Database for PostgreSQL",
+        "why": "エンジン変更が必要でアプリ変更最小化に反します。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "SQL Serverのインスタンス レベル機能を維持しつつPaaS化する場合はAzure SQL Managed Instanceが有力です。",
+    "explanation": "インスタンス機能を維持しながら OS 管理をなくす要件では Azure SQL Managed Instance が最適です。",
     "sourceKeys": [
       "relational"
-    ],
-    "scenario": "【背景】Fabrikamは、オンプレミスで稼働する販売管理システムのSQL ServerをAzureへ移行します。アプリケーションの変更は最小限にしたい一方、Windows ServerとSQL Serverのパッチ管理からは解放されたいと考えています。\n【現在の利用機能】\n• SQL Server Agentジョブ\n• クロスデータベース クエリ\n• インスタンス レベルの照合順序とログイン\n• 一般的なSQL Serverネイティブ機能\n【要件】PaaSを利用し、高いSQL Server互換性を維持すること"
+    ]
   },
   {
     "id": 20,
     "domain": "データ ストレージ",
-    "objective": "リレーショナル データ",
+    "objective": "リレーショナルデータ",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "移行先のSQL実行環境を選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "ベンダー製 ERP は SQL Server の FILESTREAM、ファイル システム上の共有 DLL、サーバー OS にインストールするバックアップ エージェント、sysadmin 権限を要求します。ベンダーはアプリ変更を認めず、Azure でも同じ構成だけをサポートします。",
+    "prompt": "推奨すべきデータベース ホスティングはどれですか。",
     "options": [
       {
         "text": "SQL Server on Azure Virtual Machines",
-        "why": "OSとSQL Serverインスタンスを完全に制御でき、既存エージェントや拡張機能を維持できます。"
-      },
-      {
-        "text": "Azure SQL Database",
-        "why": "OSアクセスや任意のサーバー拡張は提供しません。"
+        "why": "OS、ファイル システム、SQL インスタンスへ完全な管理アクセスを提供し、ベンダー依存を維持できます。"
       },
       {
         "text": "Azure SQL Managed Instance",
-        "why": "高い互換性はありますが、基盤OSへの完全アクセスはできません。"
+        "why": "高互換 PaaS ですが OS エージェントやファイル システム DLL の管理はできません。"
       },
       {
-        "text": "Azure Database for PostgreSQL",
-        "why": "データベース エンジンが異なります。"
+        "text": "Azure SQL Database Hyperscale",
+        "why": "大容量には強いものの、OS レベル依存と sysadmin 要件を満たしません。"
+      },
+      {
+        "text": "Azure Arc-enabled SQL Managed Instance",
+        "why": "ハイブリッド管理用途ですが、この Azure 移行先として単純に OS 完全制御を提供する選択ではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "OSレベルの依存関係がある場合はIaaSのSQL Server on Azure Virtual Machinesが適します。",
+    "explanation": "OS と SQL Server への完全制御が必須なら SQL Server on Azure VM が必要です。",
     "sourceKeys": [
       "relational"
-    ],
-    "scenario": "【背景】Contosoは、ベンダー提供の基幹パッケージをAzureへ移行します。パッケージはSQL Serverにインストールされる独自バックアップ エージェントと拡張ストアド プロシージャに依存します。\n【要件】\n• Windows OSへ管理者としてアクセスできること\n• SQL Serverインスタンスとファイル システムを完全に制御できること\n• ベンダーが指定するエージェントをインストールできること\n• アプリケーション変更を行わずに移行すること\n• PaaS化より互換性を優先すること"
+    ]
   },
   {
     "id": 21,
     "domain": "データ ストレージ",
     "objective": "コンピューティング層",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "開発用データベースのコンピューティング層を選定する必要があります。どの層を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "開発者ごとに Azure SQL Database を作成します。平日でも数時間アクセスがないことがあり、夜間と週末は完全に停止します。初回接続時の再開遅延は許容できます。データは常に保持し、アイドル時のコンピューティング課金を最小化します。",
+    "prompt": "推奨すべき構成はどれですか。",
     "options": [
       {
-        "text": "サーバーレス コンピューティング層",
-        "why": "自動スケールと自動一時停止により、断続的なワークロードのコストを抑えられます。"
+        "text": "General Purpose のサーバーレス コンピューティング層で自動一時停止を構成する",
+        "why": "負荷に応じて自動スケールし、アイドル時に一時停止してコンピューティング コストを削減できます。"
       },
       {
-        "text": "プロビジョニング済み Business Critical",
-        "why": "高性能ですが、アイドル時もプロビジョニング済みリソースのコストがかかります。"
+        "text": "Business Critical のプロビジョニング済みコンピューティング",
+        "why": "低遅延と高可用性には優れますが、停止期間もプロビジョニング課金が続きます。"
       },
       {
-        "text": "Hyperscaleのみ",
-        "why": "大規模DB向けのスケール特性が中心で、要件の主眼はアイドル時コストです。"
+        "text": "Hyperscale の名前付きレプリカを使用する",
+        "why": "読み取りスケール用途で、アイドル時コスト最小化の中心解ではありません。"
       },
       {
-        "text": "SQL Server on Azure VMの予約インスタンス",
-        "why": "VMは停止管理が必要で、PaaSの自動一時停止要件に最適ではありません。"
+        "text": "SQL Managed Instance の予約容量を購入する",
+        "why": "継続利用時のコスト最適化であり、自動一時停止要件を満たしません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "断続的で予測しにくい単一DBにはAzure SQL Databaseサーバーレスが適します。",
+    "explanation": "断続的な単一 DB と再開遅延許容なら、サーバーレスの自動一時停止が最も費用効率的です。",
     "sourceKeys": [
       "relational"
-    ],
-    "scenario": "【背景】Northwindは開発者ごとにAzure SQL Databaseを用意しています。データベースは平日の10時から18時の間でも断続的に使用され、夜間と週末はほぼアクセスされません。\n【要件】\n• アクティブ時の負荷に応じてコンピューティングを自動調整すること\n• 一定時間アイドルになったらコンピューティングを一時停止すること\n• 一時停止中のコンピューティング課金を抑えること\n• データは保持し、アクセス再開時に自動復帰すること\n• 本番の常時低遅延要件はないこと"
+    ]
   },
   {
     "id": 22,
     "domain": "データ ストレージ",
-    "objective": "データベース スケーラビリティ",
+    "objective": "データベーススケーラビリティ",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "顧客別データベースのコストとピーク性能を最適化する必要があります。どの構成を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "SaaS は顧客ごとに独立した Azure SQL Database を持ちます。500 DB の平均使用率は低い一方、顧客ごとのピーク時刻は異なります。顧客分離を維持し、各 DB に最大 vCore を常時割り当てず、プール全体の予算内でピークを吸収します。",
+    "prompt": "推奨すべき構成はどれですか。",
     "options": [
       {
-        "text": "エラスティック プール",
-        "why": "複数データベースが共有リソースを利用し、変動する使用量を平準化できます。"
+        "text": "vCore ベースのエラスティック プール",
+        "why": "多数の独立 DB が共有コンピューティングを利用し、異なるピークを統計的に吸収できます。"
       },
       {
-        "text": "各データベースに最大サイズの専用Business Criticalを割り当てる",
-        "why": "ピークが重ならないため過剰プロビジョニングになりやすいです。"
+        "text": "全顧客を1つのデータベースへ統合する",
+        "why": "共有効率は上がりますが、顧客ごとの DB 分離要件を変更します。"
       },
       {
-        "text": "すべての顧客データをBlob Storageへ移す",
-        "why": "トランザクション型リレーショナル要件を満たしません。"
+        "text": "各 DB を個別のサーバーレスにする",
+        "why": "アイドル停止には有効ですが、500 DB 全体の共有予算とピーク吸収にはエラスティック プールがより直接的です。"
       },
       {
-        "text": "可用性セット",
-        "why": "VMの可用性機能であり、SQL Databaseのリソース共有ではありません。"
+        "text": "各 DB に最大サイズの Business Critical を割り当てる",
+        "why": "コスト最小化に反します。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "多数のDBで使用量のピークがずれるSaaSシナリオにはエラスティック プールが適します。",
+    "explanation": "独立 DB を保ったまま変動負荷を共有する典型的な選択がエラスティック プールです。",
     "sourceKeys": [
       "relational"
-    ],
-    "scenario": "【背景】ContosoはSaaSアプリを提供しており、顧客ごとに独立したAzure SQL Databaseを使用します。顧客数は数百で、各顧客の利用ピークは営業時間や月次処理によって異なります。\n【要件】\n• データベース間でコンピューティング リソースを共有すること\n• 一部の顧客の一時的なピークを吸収すること\n• 各データベースへ最大性能を個別プロビジョニングするコストを避けること\n• 顧客単位のデータ分離を維持すること"
+    ]
   },
   {
     "id": 23,
     "domain": "データ ストレージ",
     "objective": "大規模データベース",
     "type": "single",
-    "difficulty": "難",
-    "prompt": "大容量データベース向けのサービス層を選定する必要があります。どの層を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "Azure SQL Database は現在 8 TB で、3年以内に 40 TB へ増加します。ストレージをコンピューティングから独立して拡張し、バックアップ ファイルのサイズに依存しない高速復元と、分析用の複数読み取りレプリカを必要とします。",
+    "prompt": "推奨すべきサービス層はどれですか。",
     "options": [
       {
         "text": "Hyperscale",
-        "why": "大規模データベース向けにストレージとコンピューティングを分離し、読み取りスケールと高速バックアップを提供します。"
+        "why": "分散ストレージ、迅速なバックアップ/復元、読み取りスケール レプリカ、大容量拡張に適します。"
       },
       {
-        "text": "Basic",
-        "why": "小規模で低負荷のワークロード向けです。"
+        "text": "General Purpose serverless",
+        "why": "断続負荷には適しますが、40 TB と複数読み取りレプリカの主要要件に最適ではありません。"
       },
       {
-        "text": "General Purpose serverlessのみ",
-        "why": "断続的負荷には適しますが、数十TBと複数読み取りレプリカの要件にはHyperscaleが適します。"
+        "text": "Business Critical",
+        "why": "低遅延とローカル SSD に強い一方、要求された大容量拡張モデルでは Hyperscale が適します。"
       },
       {
-        "text": "Azure Table Storage",
-        "why": "リレーショナルDBではありません。"
+        "text": "エラスティック プールの Basic",
+        "why": "容量・性能要件を満たしません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "大規模Azure SQL DatabaseにはHyperscaleが適します。",
+    "explanation": "数十 TB、ストレージ独立拡張、高速復元、複数読み取りレプリカには Hyperscale が適します。",
     "sourceKeys": [
       "relational"
-    ],
-    "scenario": "【背景】Fabrikamは、数十TBまで成長する時系列取引データをAzure SQL Databaseへ統合します。読み取り分析とトランザクション処理を同時に実行し、データ量は継続的に増加します。\n【要件】\n• ストレージ容量をコンピューティングと独立して拡張できること\n• 大容量データベースのバックアップと復元を高速化すること\n• 読み取り専用ワークロードを複数レプリカへ分散できること\n• アプリケーションからは単一の論理データベースとして利用できること"
+    ]
   },
   {
     "id": 24,
     "domain": "データ ストレージ",
-    "objective": "半構造化データ",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "グローバルなJSONデータ ストアを選定する必要があります。どのサービスを推奨すべきですか。",
+    "objective": "Cosmos DB設計",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "世界中のモバイル アプリから JSON ドキュメントを読み書きします。利用者に近い複数リージョンで書き込みを受け付け、通常時は低遅延を優先します。ただし同一ユーザーのセッション内では、自分が直前に書いた値を必ず読み取れる必要があります。",
+    "prompt": "Azure Cosmos DB で選択すべき構成を2つ選んでください。",
     "options": [
       {
-        "text": "Azure Cosmos DB",
-        "why": "グローバル分散、複数リージョン書き込み、低遅延、JSONドキュメント向けAPIを提供します。"
+        "text": "複数書き込みリージョンを有効にする",
+        "why": "各リージョンでローカル書き込みを受け付け、グローバルな書き込み遅延を下げられます。"
       },
       {
-        "text": "Azure Files",
-        "why": "共有ファイル システム向けです。"
+        "text": "セッション整合性を使用する",
+        "why": "クライアント セッション内の read-your-writes を保証しつつ、強い整合性より低遅延・高可用性を得られます。"
       },
       {
-        "text": "Azure SQL Databaseのみ",
-        "why": "JSONを扱えますが、グローバル分散NoSQLの要件にはCosmos DBがより適します。"
+        "text": "強い整合性を必須にする",
+        "why": "より強い保証ですが、要件以上であり、複数リージョンでの遅延・可用性トレードオフが大きくなります。"
       },
       {
-        "text": "Azure Queue Storage",
-        "why": "メッセージ キューであり、ドキュメントDBではありません。"
+        "text": "単一書き込みリージョンに固定する",
+        "why": "世界各地でローカル書き込みを受ける要件を満たしません。"
       }
     ],
     "answer": [
-      0
+      0,
+      1
     ],
-    "explanation": "グローバル分散された半構造化JSONデータにはAzure Cosmos DBが適します。",
+    "explanation": "マルチリージョン書き込みとセッション整合性で、低遅延とセッション内 read-your-writes を両立します。",
     "sourceKeys": [
-      "relational",
       "nonrelational"
     ],
-    "scenario": "【背景】Northwindは、世界30地域のモバイル利用者向けに製品カタログとユーザー設定をJSONドキュメントとして保存します。ピーク時には書き込みと読み取りが同時に大量発生します。\n【要件】\n• 複数Azureリージョンで低遅延の読み書きを提供すること\n• JSONのプロパティを自動的にインデックス化すること\n• スキーマ変更を柔軟に受け入れること\n• グローバル分散と可用性をマネージドで提供すること\n• リレーショナル結合は主要要件ではないこと"
+    "selectCount": 2
   },
   {
     "id": 25,
     "domain": "データ ストレージ",
     "objective": "Cosmos DBパーティション",
     "type": "single",
-    "difficulty": "難",
-    "prompt": "コンテナーのパーティション キーを選定する必要があります。どのプロパティを使用すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "注文コンテナーは customerId、orderId、orderDate、country を持ちます。主要クエリは「1顧客の最近90日間の注文」です。顧客数は数百万で負荷は概ね均等ですが、一部大口顧客は非常に多くの注文を持ちます。クロスパーティション クエリを減らし、将来の大口顧客にも対応します。",
+    "prompt": "最も適切なパーティション設計はどれですか。",
     "options": [
       {
-        "text": "customerId",
-        "why": "高いカーディナリティがあり、アクセス パターンと一致して負荷を分散しやすいです。"
+        "text": "customerId を第1レベル、orderId または時系列バケットを後続レベルにした階層型パーティション キーを検討する",
+        "why": "顧客単位のルーティングを維持しつつ、大口顧客の論理パーティション集中を分散できます。"
       },
       {
-        "text": "注文状態（Pending/Completed）",
-        "why": "値の種類が少なく、ホット パーティションを生みやすいです。"
+        "text": "country だけをパーティション キーにする",
+        "why": "国数が少なくホット パーティションになりやすく、顧客クエリもクロス パーティション化します。"
       },
       {
-        "text": "作成年の4桁",
-        "why": "カーディナリティが低く、最新年へ書き込みが集中しやすいです。"
+        "text": "orderDate の日付だけをパーティション キーにする",
+        "why": "日ごとの書き込み集中が起き、顧客履歴クエリが多パーティションになります。"
       },
       {
-        "text": "固定文字列 'orders'",
-        "why": "全データが同一論理パーティションへ集中します。"
+        "text": "固定値 orders をパーティション キーにする",
+        "why": "全データが同一論理パーティションに集中します。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "Cosmos DBのパーティション キーは、高カーディナリティで負荷を均等化し、主要クエリに合うものを選びます。",
+    "explanation": "顧客クエリの局所性を維持しつつ大口顧客を分散するには、customerId を先頭にした階層型キーが有力です。",
     "sourceKeys": [
-      "relational"
-    ],
-    "scenario": "【背景】ContosoのAzure Cosmos DBコンテナーには、数百万顧客の注文ドキュメントが保存されます。各注文にはcustomerId、orderId、orderDate、regionが含まれ、トラフィックは顧客間でほぼ均等です。\n【アクセス パターン】\n• 最も多いクエリは、1人の顧客の注文履歴取得\n• 1人の顧客の注文を同じ論理パーティションで処理したい\n• 特定の日付やリージョンへ負荷が集中する設計を避けたい\n• 将来の顧客数増加に合わせて水平スケールしたい"
+      "nonrelational"
+    ]
   },
   {
     "id": 26,
     "domain": "データ ストレージ",
-    "objective": "データ レイク",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "データ レイクのストレージ構成を選定する必要があります。どの構成を推奨すべきですか。",
+    "objective": "データレイク",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "分析用データ レイクへ、オンプレミスの Hadoop ジョブとクラウド分析エンジンの両方からアクセスします。ディレクトリ単位の ACL、アトミックなディレクトリ操作、高スループット分析が必要です。外部取引先は SFTP で限定ディレクトリへファイルを配置します。",
+    "prompt": "ストレージ設計として選択すべきものを2つ選んでください。",
     "options": [
       {
-        "text": "階層型名前空間を有効にしたAzure Data Lake Storage Gen2",
-        "why": "ディレクトリ セマンティクス、ACL、分析ワークロード向け最適化を提供します。"
+        "text": "階層型名前空間を有効にした StorageV2 アカウントを使用する",
+        "why": "ADLS Gen2 のディレクトリ セマンティクス、ACL、分析最適化を提供します。"
       },
       {
-        "text": "階層型名前空間を無効にしたBlob Storageのみ",
-        "why": "オブジェクト ストレージとしては使えますが、要求されたディレクトリ操作とACLに最適ではありません。"
+        "text": "必要なネットワークとローカル ユーザー制御の下で SFTP を有効にする",
+        "why": "取引先の SFTP 取り込み要件を同じデータ レイクで満たせます。"
       },
       {
-        "text": "Azure Queue Storage",
-        "why": "メッセージング用途です。"
+        "text": "階層型名前空間を無効にして Blob の仮想フォルダーだけを使用する",
+        "why": "POSIX 風 ACL とアトミック ディレクトリ操作の要件に劣ります。"
       },
       {
-        "text": "Azure Managed Disks",
-        "why": "VMのブロック ストレージで、共有データ レイク向けではありません。"
+        "text": "Azure Files の SMB 共有を分析データ レイクとして使用する",
+        "why": "SMB 共有には適しますが、ADLS Gen2 の大規模分析セマンティクスとは異なります。"
       }
     ],
     "answer": [
-      0
+      0,
+      1
     ],
-    "explanation": "分析用データ レイクにはADLS Gen2の階層型名前空間を使用します。",
+    "explanation": "ADLS Gen2 の階層型名前空間と SFTP を組み合わせて、分析と外部ファイル受け入れを実現します。",
     "sourceKeys": [
-      "nonrelational",
-      "integration"
+      "nonrelational"
     ],
-    "scenario": "【背景】Fabrikamはデータ レイクへ、センサー、Webログ、画像メタデータを毎日取り込みます。データ エンジニアはApache Sparkを使用し、年月日やデータ ソースごとのディレクトリ階層で数十億ファイルを管理します。\n【要件】\n• 階層名前空間を使用できること\n• ディレクトリ単位の原子的な名前変更や移動を行えること\n• POSIXに近いアクセス制御リストを使用できること\n• 大規模分析エンジンから効率的にアクセスできること\n• オブジェクト ストレージの耐久性を維持すること"
+    "selectCount": 2
   },
   {
     "id": 27,
     "domain": "データ ストレージ",
-    "objective": "ストレージ コスト最適化",
+    "objective": "Blob階層化",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "運用作業を増やさずにストレージ コストを最適化する必要があります。どの方法を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "監視映像はアップロード後30日間は頻繁に再生され、31～180日は月1回程度、181日以降は監査時だけ参照されます。監査要求時は最大15時間の復元待ちが許容され、7年保持します。手動運用を避け、ストレージ料金を最小化します。",
+    "prompt": "推奨すべき設計はどれですか。",
     "options": [
       {
-        "text": "Blobライフサイクル管理でCool、ColdまたはArchiveへ自動移行する",
-        "why": "最終アクセスや作成日などの条件でアクセス層を自動変更できます。"
+        "text": "ライフサイクル管理で Hot から Cool、さらに Archive へ移行する",
+        "why": "アクセス頻度と許容復元時間に合わせて自動階層化し、長期コストを削減できます。"
       },
       {
-        "text": "すべてをHot層に固定する",
-        "why": "アクセス性能は高いものの長期保管コストが高くなります。"
+        "text": "30日後にすべて Cold 層へ移し、Archive は使用しない",
+        "why": "復元待ちを許容できる長期データで Archive を使わないため、7年保管コストが高くなります。"
       },
       {
-        "text": "毎月手動でコピーして元Blobを削除する",
-        "why": "運用負荷と誤操作リスクが高まります。"
+        "text": "最初から Archive 層へ直接保存する",
+        "why": "最初の30日の頻繁な再生に不適切です。"
       },
       {
-        "text": "すべてをPremium Block Blobへ移す",
-        "why": "高性能向けで、長期低アクセスのコスト最適化には不向きです。"
+        "text": "Premium Block Blob に固定する",
+        "why": "低遅延には優れますが、長期保管コスト最小化に反します。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "アクセス パターンが時間とともに変わるBlobにはライフサイクル管理を使用します。",
+    "explanation": "アクセス パターンに応じた Hot→Cool→Archive の自動移行が最適です。",
     "sourceKeys": [
       "nonrelational"
-    ],
-    "scenario": "【背景】Northwindは契約書のスキャン画像をAzure Blob Storageに保存します。アップロード後30日間は顧客サポートが頻繁に参照しますが、その後は監査時を除いてほとんど使用されません。\n【要件】\n• データを7年間保持すること\n• 最初の30日間は低遅延で読み取れること\n• その後はアクセス頻度に応じてストレージ コストを下げること\n• 数百万Blobを手作業で移動しないこと\n• 保持期間中のデータ削除要件は別途管理されること"
+    ]
   },
   {
     "id": 28,
     "domain": "データ ストレージ",
     "objective": "データ冗長性",
     "type": "single",
-    "difficulty": "難",
-    "prompt": "可用性と読み取り要件を満たす冗長化オプションを選定する必要があります。どのオプションを使用すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "ストレージ アカウントは、リージョン内のゾーン障害に耐え、リージョン全体の障害時にも Microsoft によるフェールオーバー前からセカンダリのデータを読み取れる必要があります。コストは要件を満たす範囲で抑えます。",
+    "prompt": "選択すべき冗長性はどれですか。",
     "options": [
       {
         "text": "RA-GZRS",
-        "why": "プライマリでゾーン冗長、セカンダリ リージョンへ地理レプリケーションし、読み取りアクセスも提供します。"
+        "why": "プライマリでゾーン冗長、別リージョンへ地理冗長し、セカンダリ読み取りも提供します。"
       },
       {
-        "text": "LRS",
-        "why": "単一データセンター内の冗長性のみです。"
+        "text": "GZRS",
+        "why": "ゾーンと地理冗長はありますが、通常時のセカンダリ読み取りエンドポイントを提供しません。"
+      },
+      {
+        "text": "RA-GRS",
+        "why": "セカンダリ読み取りはありますが、プライマリ リージョン内はゾーン冗長ではありません。"
       },
       {
         "text": "ZRS",
-        "why": "リージョン内のゾーン障害には対応しますが、セカンダリ リージョンはありません。"
-      },
-      {
-        "text": "GRS",
-        "why": "セカンダリ リージョンはありますが、プライマリのゾーン冗長要件を満たしません。"
+        "why": "ゾーン障害には耐えますが、リージョン全体の複製とセカンダリ読み取りがありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "ゾーン耐障害性と読み取り可能な地理冗長の両方にはRA-GZRSを使用します。",
+    "explanation": "ゾーン冗長、地理冗長、セカンダリ読み取りの3要件を満たすのは RA-GZRS です。",
     "sourceKeys": [
       "nonrelational"
-    ],
-    "scenario": "【背景】Contosoは顧客文書をAzure Storageへ保存します。サービスは東日本リージョンで稼働し、通常時の読み取りはプライマリ リージョンから行います。\n【要件】\n• プライマリ リージョン内の1つの可用性ゾーン障害に耐えること\n• プライマリ リージョン全体が停止した場合にも別リージョンへデータを複製しておくこと\n• フェールオーバー前でもアプリケーションがセカンダリ コピーを読み取れること\n• アプリケーション側で独自レプリケーションを実装しないこと"
+    ]
   },
   {
     "id": 29,
     "domain": "データ ストレージ",
     "objective": "不変ストレージ",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "監査ログにWORM保護を適用する必要があります。どの機能を推奨すべきですか。",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "金融取引ログは、各 Blob の作成から7年間、管理者を含め誰も変更・削除できない必要があります。訴訟対象になった一部データは保持期限を越えても削除不可にし、Blob の新しいバージョンにも自動的に保持を適用します。",
+    "prompt": "構成すべきものを2つ選んでください。",
     "options": [
       {
-        "text": "Blob Storageの不変ポリシー（時間ベース保持または訴訟ホールド）",
-        "why": "WORM保護により保持期間中の変更・削除を防止できます。"
+        "text": "バージョン レベルの時間ベース不変ポリシー",
+        "why": "各オブジェクト バージョンへ WORM 保持期間を適用できます。"
       },
       {
-        "text": "BlobのSoft Deleteのみ",
-        "why": "誤削除から復旧できますが、削除操作自体を禁止するWORMではありません。"
+        "text": "訴訟ホールド",
+        "why": "法的案件のタグに基づき、期限に依存せず対象データを保持できます。"
       },
       {
-        "text": "ReadOnlyリソース ロックのみ",
-        "why": "管理プレーン操作には効きますが、データ プレーンのBlob変更を完全には防ぎません。"
+        "text": "Blob Soft Delete",
+        "why": "誤削除復旧には有効ですが、保持期間中の変更・削除を WORM として禁止しません。"
       },
       {
-        "text": "Azure RBACのReaderのみ",
-        "why": "特定ユーザーの権限は制限できますが、全管理者を含む不変性を保証しません。"
+        "text": "ストレージ アカウントの ReadOnly リソース ロック",
+        "why": "管理プレーン変更を制限しますが、Blob データ操作の WORM 保護ではありません。"
       }
     ],
     "answer": [
-      0
+      0,
+      1
     ],
-    "explanation": "規制対応のWORM要件にはBlob不変ストレージを使用します。",
+    "explanation": "通常の7年 WORM は時間ベース不変性、期限を超える法的保持は訴訟ホールドで対応します。",
     "sourceKeys": [
       "nonrelational"
     ],
-    "scenario": "【背景】Fabrikamは規制対象の金融取引ログをBlock Blobとして保存します。監査規則により、ログは作成後7年間、変更も削除も許可されません。\n【要件】\n• ストレージ アカウント管理者であっても保持期間中に削除できないこと\n• 誤操作や悪意ある変更から保護すること\n• WORM要件を満たすこと\n• 保持期間満了後は通常のライフサイクル管理へ移行できること\n• アプリケーションの独自署名だけに依存しないこと"
+    "selectCount": 2
   },
   {
     "id": 30,
     "domain": "データ ストレージ",
-    "objective": "ファイル ストレージ",
+    "objective": "Azure Files",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "既存アプリの変更を最小限にしてファイル共有を移行する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "Windows ベースの VDI から共有ファイルへ SMB 3.x でアクセスします。ピーク時の低遅延と高 IOPS が必要で、ユーザーは既存のオンプレミス Active Directory Domain Services 資格情報を使います。クラウド側でファイル サーバー VM は管理しません。",
+    "prompt": "推奨すべきストレージはどれですか。",
     "options": [
       {
-        "text": "Azure Files",
-        "why": "SMB/NFSのマネージド ファイル共有を提供し、リフトアンドシフトに適します。"
+        "text": "Premium Azure Files と AD DS 認証",
+        "why": "マネージド SMB 共有、高性能 SSD、既存 AD DS ベース認証を提供できます。"
       },
       {
-        "text": "Azure Blob Storage",
-        "why": "オブジェクト ストレージであり、通常のSMB共有の直接代替ではありません。"
+        "text": "Standard Azure Blob Storage と Microsoft Entra ID",
+        "why": "Blob は一般的な SMB ファイル共有ではありません。"
       },
       {
-        "text": "Azure Queue Storage",
-        "why": "メッセージング用途です。"
+        "text": "Azure NetApp Files の NFS ボリューム",
+        "why": "高性能ですが、Windows SMB と既存 AD DS 要件に対し Premium Azure Files がより直接的で通常は低運用です。"
       },
       {
-        "text": "Azure Managed Disks",
-        "why": "単一または共有ディスクのブロック ストレージで、一般的なマネージドSMB共有とは異なります。"
+        "text": "Azure Managed Disk を複数 VDI に直接接続する",
+        "why": "共有ファイル サービスと SMB 名前空間を提供しません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "SMBベースの共有ファイルをマネージド化するにはAzure Filesが適します。",
+    "explanation": "Windows SMB、高 IOPS、既存 AD DS 認証、ファイル サーバー管理不要には Premium Azure Files が適します。",
     "sourceKeys": [
       "nonrelational"
-    ],
-    "scenario": "【背景】NorthwindはオンプレミスのWindows Server上に複数のSMBファイル共有を持ち、古い業務アプリがUNCパスを使用してファイルへアクセスします。アプリケーションの改修予算は限られています。\n【要件】\n• SMBプロトコルを維持すること\n• マネージドなクラウド ファイル共有へ移行すること\n• Windowsクライアントから既存に近い方法でマウントできること\n• ファイル サーバーVMのパッチ管理を避けること\n• コード変更を最小限にすること"
+    ]
   },
   {
     "id": 31,
     "domain": "データ ストレージ",
     "objective": "データ統合",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "データ統合とオーケストレーションのサービスを選定する必要があります。どのサービスを推奨すべきですか。",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "Azure Data Factory から、オンプレミス SQL Server とプライベート エンドポイントのみを持つ Azure SQL Database の間で夜間コピーを行います。オンプレミス側から Azure への受信ポートは開けません。クラウド接続もパブリック インターネット経由にしません。",
+    "prompt": "必要な統合ランタイム構成を2つ選んでください。",
     "options": [
       {
-        "text": "Azure Data Factory",
-        "why": "多数のコネクタ、パイプライン オーケストレーション、スケジュール、セルフホステッド統合ランタイムを提供します。"
+        "text": "オンプレミス ネットワークにセルフホステッド統合ランタイムを配置する",
+        "why": "外向き接続でオンプレミス データ ソースへアクセスできます。"
       },
       {
-        "text": "Azure Event Grid",
-        "why": "イベント通知向けで、複雑な夜間ETLパイプラインの中心サービスではありません。"
+        "text": "マネージド仮想ネットワーク統合ランタイムとマネージド Private Endpoint を使用する",
+        "why": "ADF からプライベート エンドポイントの Azure SQL へプライベート接続できます。"
       },
       {
-        "text": "Azure DNS",
-        "why": "名前解決サービスです。"
+        "text": "Azure 統合ランタイムのパブリック IP を SQL ファイアウォールへ許可する",
+        "why": "パブリック経由禁止に反します。"
       },
       {
-        "text": "Azure Front Door",
-        "why": "グローバル アプリケーション配信サービスです。"
+        "text": "Data Factory をオンプレミス ドメインへ参加させる",
+        "why": "マネージド サービスを直接ドメイン参加させる設計ではありません。"
       }
     ],
     "answer": [
-      0
+      0,
+      1
     ],
-    "explanation": "バッチ型のデータ統合とオーケストレーションにはAzure Data Factoryを使用します。",
+    "explanation": "オンプレミスにはセルフホステッド IR、Azure PaaS のプライベート接続にはマネージド VNet IR を使います。",
     "sourceKeys": [
       "integration"
     ],
-    "scenario": "【背景】Contosoは、オンプレミスSQL Server、Salesforce、Azure Blob Storageからデータを収集し、Azure上の分析基盤へロードします。処理は夜間バッチで、前段の処理が成功した場合だけ後段を実行します。\n【要件】\n• 複数のクラウドおよびオンプレミス データ ソースへ接続できること\n• コピー、変換、依存関係、再試行をパイプラインとして定義できること\n• スケジュールおよびイベントで実行できること\n• オンプレミス接続用の統合ランタイムを使用できること\n• 独自オーケストレーターの開発を避けること"
+    "selectCount": 2
   },
   {
     "id": 32,
     "domain": "データ ストレージ",
     "objective": "ストリーム分析",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "リアルタイム分析パイプラインを設計する必要があります。どのサービスを推奨すべきですか。",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "200万台の IoT デバイスから毎秒数百万イベントを取り込みます。到着後10秒以内にウィンドウ集計して Power BI へ表示し、未加工イベントは将来の機械学習用にデータ レイクへ保存します。送信者ごとの順序を可能な限り維持します。",
+    "prompt": "主要コンポーネントとして選択すべきものを3つ選んでください。",
     "options": [
       {
+        "text": "Azure Event Hubs",
+        "why": "高スループットのイベント取り込みとパーティション内順序を提供します。"
+      },
+      {
         "text": "Azure Stream Analytics",
-        "why": "時間ウィンドウを使ったストリーム クエリと複数出力先をマネージドで提供します。"
+        "why": "ストリーミング ウィンドウ集計と複数出力を低運用で実装できます。"
+      },
+      {
+        "text": "Azure Data Lake Storage Gen2",
+        "why": "未加工イベントの長期分析用保存先になります。"
+      },
+      {
+        "text": "Azure Service Bus キュー",
+        "why": "業務メッセージには適しますが、数百万イベント/秒のテレメトリ取り込みの中心には Event Hubs が適します。"
       },
       {
         "text": "Azure Data Box",
-        "why": "オフライン データ転送用です。"
-      },
-      {
-        "text": "Azure Backup",
-        "why": "バックアップ サービスです。"
-      },
-      {
-        "text": "Azure Files Sync",
-        "why": "ファイル共有同期用です。"
+        "why": "オフライン データ移行用でリアルタイム パイプラインではありません。"
       }
     ],
     "answer": [
-      0
+      0,
+      1,
+      2
     ],
-    "explanation": "リアルタイムのウィンドウ集計にはAzure Stream Analyticsが適します。",
+    "explanation": "Event Hubs で取り込み、Stream Analytics でリアルタイム集計し、ADLS Gen2 へ未加工データを保持します。",
     "sourceKeys": [
       "integration"
     ],
-    "scenario": "【背景】Fabrikamの製造工場には数十万台のIoTセンサーがあり、温度と振動のイベントをクラウドへ送信します。イベント量は毎秒数十万件に達します。\n【要件】\n• ストリームを継続的に処理すること\n• 5分間の移動平均としきい値判定を実行すること\n• 異常結果を数秒から数十秒以内に出力すること\n• 結果をPower BIへ送信すること\n• バッチ処理の完了を待たないこと\n• インフラ管理を最小化すること"
+    "selectCount": 3
   },
   {
     "id": 33,
     "domain": "データ ストレージ",
     "objective": "分析アーキテクチャ",
     "type": "multi",
-    "difficulty": "標準",
-    "prompt": "要件Aと要件Bに最適なサービスを1つずつ選択してください。選ぶべきサービスを2つ選んでください。",
+    "difficulty": "本番強化",
+    "scenario": "分析チームには2つの要件があります。\n要件A: 大量の半構造化データに対し、ノートブック、Apache Spark、MLflow を使ってデータ サイエンスと機械学習を共同実施する。\n要件B: SQL アナリストが専用 SQL プールとサーバーレス SQL を使い、統合データ ウェアハウスとデータ レイクを分析する。",
+    "prompt": "要件Aと要件Bに最適なサービスを2つ選んでください。",
     "options": [
       {
-        "text": "Azure Databricks",
-        "why": "Apache Sparkベースの共同ノートブック、データ エンジニアリング、MLワークロードに適します。"
+        "text": "要件A: Azure Databricks",
+        "why": "Spark ベースの共同分析、ノートブック、機械学習ライフサイクルに適します。"
       },
       {
-        "text": "Azure Synapse Analytics",
-        "why": "SQL、Spark、データ統合を含む統合分析環境を提供します。"
+        "text": "要件B: Azure Synapse Analytics",
+        "why": "SQL データ ウェアハウスとデータ レイク分析を統合できます。"
       },
       {
-        "text": "Azure Bastion",
-        "why": "VM管理接続用です。"
+        "text": "要件A: Azure Data Factory",
+        "why": "オーケストレーション中心で、MLflow を含むデータ サイエンス共同環境ではありません。"
       },
       {
-        "text": "Azure Policy",
-        "why": "ガバナンス用です。"
+        "text": "要件B: Azure Cosmos DB",
+        "why": "運用 NoSQL データベースで、専用 SQL プールの DWH 要件を満たしません。"
       }
     ],
     "answer": [
       0,
       1
     ],
-    "explanation": "Spark中心の高度なデータ処理にはAzure Databricks、統合SQL分析にはAzure Synapse Analyticsが適します。",
+    "explanation": "Spark/ML ワークスペースには Databricks、統合 SQL DWH/レイク分析には Synapse が適します。",
     "sourceKeys": [
       "integration"
     ],
-    "selectCount": 2,
-    "scenario": "【背景】Fabrikamはデータ レイクを中心に、データ サイエンスとエンタープライズBIを同じクラウド基盤へ統合します。生データはAzure Data Lake Storageに保存され、複数チームが利用します。\n【要件A】データ サイエンティストは大規模なApache Spark処理、共同ノートブック、機械学習ライブラリを必要とします。\n【要件B】BIチームはデータ統合、SQLベースのDWH分析、サーバーレスおよび専用SQL処理を統合された環境で利用します。\n【制約】両チームに同一サービスを強制せず、各要件に最適なマネージド サービスを選択します。"
+    "selectCount": 2
   },
   {
     "id": 34,
     "domain": "事業継続性",
     "objective": "RPOとRTO",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "合意した目標値をRPOとRTOへ対応付ける必要があります。正しい組み合わせはどれですか。",
+    "difficulty": "本番強化",
+    "scenario": "基幹システムでは、災害発生前のデータ損失は最大5分まで許容されます。災害発生後、注文受付を60分以内に再開する必要があります。通常時の月間可用性目標は99.95%です。",
+    "prompt": "正しい対応付けはどれですか。",
     "options": [
       {
-        "text": "RPOは15分、RTOは2時間",
-        "why": "RPOは許容データ損失の時間、RTOは許容停止時間です。"
+        "text": "RPO は5分、RTO は60分、99.95%は可用性目標",
+        "why": "RPO は許容データ損失時間、RTO は復旧までの許容停止時間です。"
       },
       {
-        "text": "RPOは2時間、RTOは15分",
-        "why": "RPOとRTOが逆です。"
+        "text": "RTO は5分、RPO は60分、99.95%は MTTR",
+        "why": "RPO と RTO が逆です。"
       },
       {
-        "text": "SLAは15分、RPOは2時間",
-        "why": "SLAは可用性の契約指標で、この2値の直接表現ではありません。"
+        "text": "RPO は99.95%、RTO は5分、SLA は60分",
+        "why": "RPO は割合ではなく時間で表すデータ損失目標です。"
       },
       {
-        "text": "MTTRは15分、MTBFは2時間",
-        "why": "障害修復・障害間隔の指標で、要件の用語とは異なります。"
+        "text": "RPO は5分、MTBF は60分、RTO は99.95%",
+        "why": "RTO と可用性率の概念が混在しています。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "RPOはどこまで過去のデータへ戻ることを許容するか、RTOは復旧までに許容する時間です。",
+    "explanation": "5分のデータ損失許容が RPO、60分の復旧時間が RTO、99.95%は可用性目標です。",
     "sourceKeys": [
       "continuity"
-    ],
-    "scenario": "【背景】Northwindは、注文システムの災害復旧要件を事業部門と合意しています。災害発生時には直近の一部データが失われる可能性を受け入れますが、停止時間には上限があります。\n【合意内容】\n• 災害直前から最大15分前までのデータ損失を許容する\n• 災害発生から2時間以内にサービスを再開する\n• 通常時の可用性SLAとは別にDR目標として文書化する\n【質問】この2つの値をRPOとRTOへ正しく対応付ける必要があります。"
+    ]
   },
   {
     "id": 35,
     "domain": "事業継続性",
-    "objective": "高可用性",
+    "objective": "VM高可用性",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "VMの配置方式を選定する必要があります。どの配置を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "東日本リージョン内で2台の SQL Server VM に Always On 可用性グループを構成します。単一データセンター障害にも耐える必要があります。VM 間レイテンシはできるだけ低く保ちますが、ゾーン障害耐性を優先します。リージョン障害は別の DR 設計で扱います。",
+    "prompt": "VM の配置として推奨すべきものはどれですか。",
     "options": [
       {
-        "text": "異なる可用性ゾーンにVMを配置する",
-        "why": "物理的に分離されたデータセンター群へ分散し、ゾーン障害に耐えられます。"
+        "text": "同一リージョンの異なる可用性ゾーンへ配置する",
+        "why": "データセンター レベルの障害ドメインを分離できます。"
       },
       {
-        "text": "同じ可用性セットの同じ障害ドメインに配置する",
-        "why": "同一障害ドメインでは障害分離になりません。"
+        "text": "同一可用性セットの異なる障害ドメインへ配置する",
+        "why": "ラック障害には強いですが、データセンター全体の障害耐性は可用性ゾーンより弱いです。"
       },
       {
-        "text": "同じVMのOSディスクを2つ作成する",
-        "why": "コンピューティング障害の分離にはなりません。"
+        "text": "同じ近接通信配置グループの同一ゾーンへ配置する",
+        "why": "低遅延には有利ですが、ゾーン障害に同時影響を受けます。"
       },
       {
-        "text": "同じリージョンの同じゾーンに配置する",
-        "why": "ゾーン全体の障害に耐えられません。"
+        "text": "同一ホスト グループの専用ホストへ配置する",
+        "why": "物理分離の要件を満たす保証にはなりません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "リージョン内のデータセンター障害対策には可用性ゾーンを使用します。",
+    "explanation": "データセンター障害に耐えるには異なる可用性ゾーンへ配置します。",
     "sourceKeys": [
       "continuity"
-    ],
-    "scenario": "【背景】Contosoは単一Azureリージョン内で2台の仮想マシンを使用して重要なWebアプリを実行します。1つのデータセンター規模の障害が発生しても、少なくとも1台を利用可能にしたいと考えています。\n【要件】\n• 物理的に分離されたデータセンターへVMを配置すること\n• リージョン内障害への耐性を高めること\n• 2台を同じラックや同じデータセンターに配置しないこと\n• 別リージョンへのDRは別の設計で対応すること"
+    ]
   },
   {
     "id": 36,
     "domain": "事業継続性",
-    "objective": "コンピューティングの高可用性",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "Web層のコンピューティング構成を設計する必要があります。どの構成を推奨すべきですか。",
+    "objective": "コンピューティング高可用性",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "ステートレス Web 層を Azure VM で実行します。ゾーン障害時もサービスを継続し、通常時は負荷に応じて自動スケールします。受信はリージョン内の TCP 443 で、正常なインスタンスだけへ分散します。",
+    "prompt": "選択すべき構成を2つ選んでください。",
     "options": [
       {
-        "text": "ゾーン冗長のVirtual Machine Scale SetsとStandard Load Balancer",
-        "why": "VM数を自動調整し、複数ゾーンへ分散してトラフィックを配布できます。"
+        "text": "複数可用性ゾーンにまたがる Virtual Machine Scale Sets",
+        "why": "ゾーン分散と自動スケールを提供します。"
       },
       {
-        "text": "単一VMとBasic Load Balancer",
-        "why": "単一障害点が残り、自動スケール要件も満たしません。"
+        "text": "ゾーン冗長 Standard Load Balancer と正常性プローブ",
+        "why": "リージョン内 L4 分散と正常インスタンス判定を提供します。"
       },
       {
-        "text": "Azure Backupのみ",
-        "why": "復旧には役立ちますが、稼働中の高可用性や自動スケールは提供しません。"
+        "text": "単一 VM と Basic Load Balancer",
+        "why": "ゾーン障害耐性と自動スケールを満たしません。"
       },
       {
-        "text": "Resource Lock",
-        "why": "誤削除防止用で、可用性は向上しません。"
+        "text": "Azure Backup の1時間ごとのバックアップ",
+        "why": "復旧には役立ちますが、通常のゾーン障害中に継続提供する高可用性ではありません。"
       }
     ],
     "answer": [
-      0
+      0,
+      1
     ],
-    "explanation": "VMベースのスケールアウトとゾーン冗長にはVM Scale SetsとStandard Load Balancerを組み合わせます。",
+    "explanation": "ゾーン分散 VMSS と Standard Load Balancer を組み合わせて、スケールとリージョン内 HA を実現します。",
     "sourceKeys": [
-      "continuity",
-      "compute"
+      "continuity"
     ],
-    "scenario": "【背景】FabrikamのWebフロントエンドは季節キャンペーンでアクセス量が10倍に増加します。アプリはステートレスで、同一リージョン内の複数可用性ゾーンを使用できます。\n【要件】\n• 需要に応じてVMインスタンス数を自動増減すること\n• 同一構成のVMを一括管理すること\n• インスタンスを複数の可用性ゾーンへ分散すること\n• ロード バランサーと統合できること\n• 個別VMを手動作成しないこと"
+    "selectCount": 2
   },
   {
     "id": 37,
     "domain": "事業継続性",
-    "objective": "ディザスター リカバリー",
+    "objective": "VMのDR",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "リージョン間DRを実装するサービスを選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "VMware 上の 120 台の Windows/Linux VM を Azure へ DR します。継続レプリケーション、アプリ整合性復旧ポイント、ネットワーク マッピング、計画/テスト フェールオーバー、復旧計画による起動順序制御が必要です。",
+    "prompt": "推奨すべきサービスはどれですか。",
     "options": [
       {
         "text": "Azure Site Recovery",
-        "why": "VMのレプリケーション、復旧計画、テスト フェールオーバー、フェールオーバーを提供します。"
+        "why": "VM の継続レプリケーション、フェールオーバー、テスト、復旧計画を提供します。"
       },
       {
-        "text": "Azure Backupのみ",
-        "why": "ポイントインタイム復旧には適しますが、継続レプリケーションとオーケストレーションされたフェールオーバーの中心ではありません。"
+        "text": "Azure Backup",
+        "why": "バックアップと復元には適しますが、オーケストレーションされた低 RTO フェールオーバーの中心サービスではありません。"
       },
       {
-        "text": "Azure Advisor",
-        "why": "推奨事項サービスです。"
+        "text": "Azure Migrate",
+        "why": "移行評価・移行には適しますが、継続的 DR 運用のサービスではありません。"
       },
       {
-        "text": "Azure Cost Management",
-        "why": "コスト管理サービスです。"
+        "text": "Azure Update Manager",
+        "why": "パッチ管理用です。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "VMのリージョン間DRにはAzure Site Recoveryを使用します。",
+    "explanation": "継続レプリケーションとオーケストレーションされたフェールオーバーには Azure Site Recovery を使用します。",
     "sourceKeys": [
       "backup"
-    ],
-    "scenario": "【背景】Northwindは東日本リージョンのAzure VMで基幹アプリを運用しています。リージョン災害時には西日本リージョンへ切り替え、Web層、アプリ層、依存VMを定義した順序で起動する必要があります。\n【要件】\n• VMディスクの変更を継続的に別リージョンへ複製すること\n• テスト フェールオーバーを本番影響なしで実施できること\n• 復旧計画で起動順序とスクリプトを定義できること\n• 災害時に計画的または非計画フェールオーバーを実行できること"
+    ]
   },
   {
     "id": 38,
     "domain": "事業継続性",
-    "objective": "バックアップ",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "バックアップと長期保持を実装する必要があります。どのサービスを推奨すべきですか。",
+    "objective": "バックアップ設計",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "Azure VM のバックアップを、ランサムウェアや悪意ある管理者による削除から保護します。バックアップ削除時にも一定期間回復でき、重要操作には追加承認を要求し、バックアップ保管庫へのネットワーク アクセスも制限します。",
+    "prompt": "強化策として選ぶべきものを3つ選んでください。",
     "options": [
       {
-        "text": "Azure Backup",
-        "why": "ポリシーベースのバックアップ、長期保持、復旧ポイント、論理削除などを提供します。"
+        "text": "バックアップの論理的な削除と拡張保護を有効にする",
+        "why": "削除後の保持と回復可能性を高めます。"
       },
       {
-        "text": "Azure Site Recoveryのみ",
-        "why": "災害時のレプリカ切り替えが主目的で、長期バックアップ保持の代替ではありません。"
+        "text": "マルチユーザー承認を使用する",
+        "why": "重要な保護操作に Resource Guard を介した別管理者の承認を要求できます。"
       },
       {
-        "text": "Availability Zones",
-        "why": "稼働時の高可用性を向上しますが、過去時点への復元はできません。"
+        "text": "Azure Backup の Private Endpoint を使用する",
+        "why": "保管庫との通信をプライベート ネットワークへ制限できます。"
       },
       {
-        "text": "Azure Front Door",
-        "why": "グローバルHTTP配信サービスです。"
+        "text": "VM の OS ディスクへ CanNotDelete ロックだけを設定する",
+        "why": "バックアップ保管庫内の復旧ポイント削除保護を置き換えません。"
+      },
+      {
+        "text": "バックアップ管理者全員をサブスクリプション Owner にする",
+        "why": "権限過剰で攻撃面を増やします。"
       }
     ],
     "answer": [
-      0
+      0,
+      1,
+      2
     ],
-    "explanation": "長期保持とポイントインタイム復元にはAzure Backupが適します。",
+    "explanation": "論理削除、マルチユーザー承認、Private Endpoint を組み合わせてバックアップの耐改ざん性とネットワーク保護を高めます。",
     "sourceKeys": [
       "backup"
     ],
-    "scenario": "【背景】Contosoはランサムウェア、管理者の誤操作、アプリ障害に備えてAzure VMのバックアップ方針を見直しています。日次の復旧ポイントに加え、長期監査用の月次復旧ポイントが必要です。\n【要件】\n• Azure VMをエージェント管理を最小限にして保護すること\n• 日次バックアップを自動実行すること\n• 月次復旧ポイントを7年間保持すること\n• Recovery Servicesコンテナーでポリシーと復元を集中管理すること\n• 別リージョンへの常時稼働レプリカは必須ではないこと"
+    "selectCount": 3
   },
   {
     "id": 39,
     "domain": "事業継続性",
-    "objective": "Azure SQLの事業継続性",
+    "objective": "Azure SQL事業継続性",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "複数データベースのリージョン フェールオーバーを設計する必要があります。どの機能を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "同じ論理サーバー上の6個の Azure SQL Database が1つの業務アプリを構成します。別リージョンへ複製し、障害時は6 DB を同じタイミングでフェールオーバーさせます。アプリの接続文字列を変更せず、読み取り専用接続先も提供します。",
+    "prompt": "推奨すべき機能はどれですか。",
     "options": [
       {
-        "text": "自動フェールオーバー グループ",
-        "why": "複数データベースをグループ化し、読み書き・読み取りリスナーとフェールオーバー ポリシーを提供します。"
+        "text": "フェールオーバー グループ",
+        "why": "複数 DB をグループ化し、読み書き/読み取り専用リスナーとグループ フェールオーバーを提供します。"
       },
       {
-        "text": "エラスティック プールのみ",
-        "why": "リソース共有用で、リージョン間DRやリスナーは提供しません。"
+        "text": "各 DB のアクティブ geo レプリケーションだけ",
+        "why": "個別 DB のレプリカには適しますが、統一リスナーと複数 DB のグループ管理はフェールオーバー グループが優れます。"
       },
       {
-        "text": "Point-in-time restoreのみ",
-        "why": "過去時点への復元であり、待機リージョンへの自動フェールオーバーではありません。"
+        "text": "ポイントインタイム リストア",
+        "why": "バックアップから別 DB を作る復旧で、継続レプリケーションや同一接続先を提供しません。"
       },
       {
-        "text": "可用性セット",
-        "why": "IaaS VM向けの可用性機能です。"
+        "text": "エラスティック プール",
+        "why": "コンピューティング共有であり、リージョン DR 機能ではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "複数Azure SQL Databaseを一体としてリージョン間フェールオーバーするには自動フェールオーバー グループを使用します。",
+    "explanation": "複数 DB の一括フェールオーバーと安定した接続エンドポイントにはフェールオーバー グループが適します。",
     "sourceKeys": [
-      "relational",
-      "continuity"
-    ],
-    "scenario": "【背景】Fabrikamは1つの論理Azure SQLサーバー上で、注文、在庫、顧客の3つのAzure SQL Databaseを運用しています。リージョン障害時には3データベースを整合した運用単位として別リージョンへ切り替えたいと考えています。\n【要件】\n• 複数データベースをグループ単位でフェールオーバーすること\n• アプリケーション接続文字列の変更を避けること\n• 読み書き用の安定したリスナー名を使用すること\n• セカンダリ リージョンを事前構成すること\n• 手動DNS更新を避けること"
+      "backup"
+    ]
   },
   {
     "id": 40,
     "domain": "事業継続性",
-    "objective": "Azure SQLの可用性",
+    "objective": "Azure SQL可用性",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "読み取り可能なリージョン レプリカを柔軟に構成する必要があります。どの機能を推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "単一の Azure SQL Database について、プライマリ以外に世界3地域の読み取り可能レプリカを配置し、各レプリカを個別に昇格できる柔軟性が必要です。グループ リスナーや複数 DB の一括フェールオーバーは不要です。",
+    "prompt": "推奨すべき機能はどれですか。",
     "options": [
       {
         "text": "アクティブ geo レプリケーション",
-        "why": "単一データベースの読み取り可能セカンダリを複数リージョンに作成し、手動フェールオーバーできます。"
+        "why": "単一 DB に最大複数の読み取り可能セカンダリを作成し、個別フェールオーバーを制御できます。"
       },
       {
-        "text": "エラスティック ジョブ",
-        "why": "多数DBへのジョブ実行機能です。"
+        "text": "フェールオーバー グループ",
+        "why": "複数 DB と安定リスナーには有効ですが、この要件では個別レプリカを柔軟に管理する active geo-replication が直接的です。"
+      },
+      {
+        "text": "Long-term retention",
+        "why": "長期バックアップ保持であり、読み取りレプリカではありません。"
       },
       {
         "text": "SQL Data Sync",
-        "why": "データ同期用途ですが、完全なDRフェールオーバー機能の代替ではありません。"
-      },
-      {
-        "text": "Transparent Data Encryption",
-        "why": "保存時暗号化機能です。"
+        "why": "データ同期用途で、完全な HA/DR レプリカと自動整合性の代替ではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "単一DBの読み取り可能な地理セカンダリにはアクティブgeoレプリケーションが適します。",
+    "explanation": "単一 DB の複数読み取り可能 geo セカンダリを個別管理するにはアクティブ geo レプリケーションを使用します。",
     "sourceKeys": [
-      "relational",
-      "continuity"
-    ],
-    "scenario": "【背景】Contosoは単一のAzure SQL Databaseを世界各地の参照アプリから利用します。別リージョンに読み取り可能なコピーを複数構成し、災害時の昇格タイミングはアプリ運用チームが個別に制御します。\n【要件】\n• 1つのプライマリから複数リージョンへ非同期レプリカを構成できること\n• セカンダリを読み取りワークロードに使用できること\n• グループ単位の自動フェールオーバーは必須ではないこと\n• 必要に応じて任意のセカンダリを昇格できること"
+      "backup"
+    ]
   },
   {
     "id": 41,
     "domain": "事業継続性",
-    "objective": "Blobのリージョン間保護",
-    "type": "single",
-    "difficulty": "難",
-    "prompt": "指定したBlobだけを別アカウントへ複製する必要があります。どの機能を推奨すべきですか。",
+    "objective": "Cosmos DB可用性",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "Azure Cosmos DB のグローバル アプリは、リージョン障害時にも書き込みを継続し、単一リージョンの停止で手動操作を必要としない設計とします。整合性はセッションで十分です。各主要市場の近くで読み書きします。",
+    "prompt": "選択すべき構成を2つ選んでください。",
     "options": [
       {
-        "text": "Blobオブジェクト レプリケーション",
-        "why": "ソースと宛先のアカウント間でポリシーに基づきBlock Blobを非同期レプリケーションできます。"
+        "text": "複数書き込みリージョンを構成する",
+        "why": "単一書き込みリージョン障害による書き込み停止を避け、各地域で書き込みできます。"
       },
       {
-        "text": "LRS",
-        "why": "同一データセンター内の冗長化のみです。"
+        "text": "サービス管理のフェールオーバーを有効にし、優先リージョンを設計する",
+        "why": "リージョン障害時の自動的な継続性を高めます。"
       },
       {
-        "text": "Azure File Sync",
-        "why": "Azure FilesとWindows Serverの同期用です。"
+        "text": "単一リージョンにゾーン冗長だけを構成する",
+        "why": "ゾーン障害には強いですが、リージョン全体の停止要件を満たしません。"
       },
       {
-        "text": "Managed Diskスナップショット",
-        "why": "VMディスク向けで、Blobコンテナーの継続複製ではありません。"
+        "text": "強い整合性へ変更する",
+        "why": "可用性と低遅延の要件に対し不要な制約を増やします。"
       }
     ],
     "answer": [
-      0
+      0,
+      1
     ],
-    "explanation": "独立アカウント間で選択的にBlobを複製するにはオブジェクト レプリケーションを使用します。",
+    "explanation": "複数書き込みリージョンと自動フェールオーバー設計でリージョン障害時も書き込みを継続します。",
     "sourceKeys": [
-      "nonrelational",
-      "backup"
+      "continuity"
     ],
-    "scenario": "【背景】Northwindは、東日本と西日本に独立した汎用v2ストレージ アカウントを用意しています。特定コンテナー内のBlock Blobだけを、通常時から別リージョン側で参照できる状態にします。\n【要件】\n• 2つの独立したストレージ アカウント間で複製すること\n• 対象コンテナーとBlobを選択できること\n• 非同期で継続的にコピーすること\n• セカンダリ側のBlobを通常時から読み取れること\n• ストレージ アカウント全体のフェールオーバーに依存しないこと"
+    "selectCount": 2
   },
   {
     "id": 42,
     "domain": "事業継続性",
-    "objective": "誤削除対策",
-    "type": "multi",
-    "difficulty": "標準",
-    "prompt": "論理的な削除と上書きからBlobを保護する必要があります。選択すべき機能を2つ選んでください。",
+    "objective": "Blobリージョン保護",
+    "type": "single",
+    "difficulty": "本番強化",
+    "scenario": "1つの Storage アカウント内の archive コンテナーだけを、別サブスクリプションの別リージョンにあるアカウントへ非同期複製します。他のコンテナーは複製しません。プライマリの Blob 作成・更新・削除をオブジェクト単位で反映します。",
+    "prompt": "推奨すべき機能はどれですか。",
     "options": [
       {
-        "text": "BlobのSoft Delete",
-        "why": "削除されたBlobやスナップショットを保持期間内に復元できます。"
+        "text": "Blob オブジェクト レプリケーション",
+        "why": "コンテナーとプレフィックス単位でブロック Blob を別アカウントへ非同期複製できます。"
       },
       {
-        "text": "Blobのバージョン管理",
-        "why": "上書きや変更前のバージョンを保持して復元できます。"
+        "text": "GZRS",
+        "why": "アカウント全体のプラットフォーム冗長化であり、指定コンテナーだけを任意の別アカウントへ複製する機能ではありません。"
       },
       {
-        "text": "LRSからZRSへの変更のみ",
-        "why": "インフラ障害耐性は向上しますが、論理削除・上書きからの復元を直接提供しません。"
+        "text": "Azure Data Factory の毎日コピー",
+        "why": "実装可能ですが、オブジェクト変更の継続レプリケーションとして管理負荷が高くなります。"
       },
       {
-        "text": "NSGフローログ",
-        "why": "ネットワーク監視用です。"
+        "text": "Azure File Sync",
+        "why": "Azure Files と Windows Server の同期用です。"
       }
     ],
     "answer": [
-      0,
-      1
+      0
     ],
-    "explanation": "論理的な削除と上書きの両方に備えるにはSoft Deleteとバージョン管理を併用します。",
+    "explanation": "特定コンテナーを別アカウントへ継続複製するには Blob オブジェクト レプリケーションが適します。",
     "sourceKeys": [
-      "nonrelational",
       "backup"
-    ],
-    "selectCount": 2,
-    "scenario": "【背景】FabrikamのユーザーはAzure Blob Storage上の設計ファイルを頻繁に更新します。誤ってBlobを削除したり、誤った内容で上書きしたりする事故が発生しています。\n【要件】\n• 削除されたBlobを保持期間内に復元できること\n• 上書き前の内容を複数世代保持できること\n• アプリケーションが独自バックアップ ファイルを作成しないこと\n• ユーザー操作ミスから迅速に回復できること\n• リージョン災害対策ではなく論理的なデータ保護を目的とすること"
+    ]
   },
   {
     "id": 43,
     "domain": "事業継続性",
-    "objective": "Azure Filesのバックアップ",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "Azure Filesのバックアップ方式を選定する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure Backup for Azure Files",
-        "why": "Azure Filesのスナップショットをポリシーで管理し、共有または個別ファイルを復元できます。"
-      },
-      {
-        "text": "Azure Site Recovery",
-        "why": "主にVMやサーバーのDR向けです。"
-      },
-      {
-        "text": "Azure Load Balancer",
-        "why": "トラフィック分散用です。"
-      },
-      {
-        "text": "Azure DNS Private Resolver",
-        "why": "ハイブリッドDNS解決用です。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "Azure Filesのポリシーベース保護ときめ細かな復元にはAzure Backupを使用します。",
-    "sourceKeys": [
-      "backup"
-    ],
-    "scenario": "【背景】Contosoは部門共有データをAzure Filesに移行します。共有には数百万ファイルがあり、ユーザーによる誤削除とランサムウェアに備える必要があります。\n【要件】\n• バックアップ ポリシーに基づいて定期保護すること\n• 共有全体または選択した個別ファイルを復元できること\n• 復旧ポイントを中央で管理すること\n• ユーザーがスナップショットを直接管理しなくてよいこと\n• Azure Filesに対応したマネージド バックアップを使用すること"
-  },
-  {
-    "id": 44,
-    "domain": "事業継続性",
-    "objective": "多層アプリのBCDR",
+    "objective": "Blob誤削除対策",
     "type": "multi",
-    "difficulty": "難",
-    "prompt": "リージョン内高可用性とリージョン間DRを組み合わせる必要があります。推奨事項を2つ選んでください。",
+    "difficulty": "本番強化",
+    "scenario": "開発チームが Blob を誤削除・誤上書きする事故に備えます。削除された Blob を14日以内に復元し、上書き前の内容にも戻せる必要があります。一方、規制上の WORM 保持は不要です。",
+    "prompt": "有効にすべき機能を2つ選んでください。",
     "options": [
       {
-        "text": "各リージョン内でVMを複数の可用性ゾーンへ分散する",
-        "why": "日常的なハードウェアやデータセンター障害に対する高可用性を提供します。"
+        "text": "Blob Soft Delete",
+        "why": "削除された Blob とスナップショットを保持期間内に復元できます。"
       },
       {
-        "text": "Azure Site RecoveryでVMを西日本へレプリケートする",
-        "why": "リージョン災害時のDRとオーケストレーションされた復旧を提供します。"
+        "text": "Blob バージョン管理",
+        "why": "更新や上書き時に以前のバージョンを保持できます。"
       },
       {
-        "text": "すべてのVMを東日本の同一ゾーンへ配置する",
-        "why": "ゾーン障害に弱くなります。"
+        "text": "時間ベース不変ポリシー",
+        "why": "WORM 要件がなく、通常の修正・削除運用を制約しすぎます。"
       },
       {
-        "text": "日次の構成エクスポートだけを保存する",
-        "why": "OS、データ、VM全体の復旧要件を満たしません。"
+        "text": "RA-GRS",
+        "why": "物理的なリージョン障害耐性であり、論理的な削除・上書きは複製されます。"
       }
     ],
     "answer": [
       0,
       1
     ],
-    "explanation": "HAとDRは別レイヤーです。リージョン内は可用性ゾーン、リージョン間はSite Recoveryなどを組み合わせます。",
+    "explanation": "削除には Soft Delete、上書きにはバージョン管理を組み合わせます。",
+    "sourceKeys": [
+      "backup"
+    ],
+    "selectCount": 2
+  },
+  {
+    "id": 44,
+    "domain": "事業継続性",
+    "objective": "多層アプリBCDR",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "東日本の3層アプリを西日本へ DR します。Web 層は VMSS、データ層は Azure SQL Database、公開エンドポイントは HTTPS です。通常時は東日本を優先し、リージョン障害時は DNS 変更をアプリ側で行わず西日本へ切り替えます。各リージョン内のゾーン障害にも耐えます。",
+    "prompt": "アーキテクチャに含めるべきものを3つ選んでください。",
+    "options": [
+      {
+        "text": "各リージョンで Web 層を複数可用性ゾーンへ分散する",
+        "why": "リージョン内のデータセンター障害に耐えます。"
+      },
+      {
+        "text": "Azure SQL Database のフェールオーバー グループを構成する",
+        "why": "データを別リージョンへ複製し、安定したリスナーで切り替えできます。"
+      },
+      {
+        "text": "Azure Front Door の正常性プローブと優先順位ルーティングを使用する",
+        "why": "グローバル HTTPS エンドポイントから正常リージョンへ自動ルーティングできます。"
+      },
+      {
+        "text": "日次 VM バックアップだけを西日本へコピーする",
+        "why": "低 RTO のリージョン切り替えや常時稼働セカンダリ Web 層を提供しません。"
+      },
+      {
+        "text": "両リージョンの VM を同一可用性セットへ配置する",
+        "why": "可用性セットはリージョンをまたぎません。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "ゾーン分散、SQL フェールオーバー グループ、Front Door のグローバル切り替えを組み合わせます。",
     "sourceKeys": [
       "continuity",
       "backup"
     ],
-    "selectCount": 2,
-    "scenario": "【背景】Northwindの注文システムは24時間稼働し、東日本リージョンにVMベースのWeb層とアプリ層があります。データ層には別途レプリケーションが構成されています。\n【復旧目標】\n• 1つのデータセンター障害ではサービス停止を避ける\n• リージョン全体の災害では2時間以内に西日本へ復旧する\n• 通常時の負荷分散とDRの両方を設計する\n• Web層とアプリ層の依存順序を維持して復旧する\n【制約】常時アクティブな第2リージョンを運用するコストは避けます。"
+    "selectCount": 3
   },
   {
     "id": 45,
     "domain": "インフラストラクチャ",
-    "objective": "App Service",
+    "objective": "コンピューティング選定",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "Web APIのホスティング サービスを選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": ".NET 8 の REST API をホストします。Windows/Linux のどちらでもよく、カスタム コンテナーは不要です。組み込みの TLS、カスタム ドメイン、自動スケール、デプロイ スロット、VNet 統合を使い、OS とランタイムのパッチ管理を避けます。",
+    "prompt": "推奨すべきサービスはどれですか。",
     "options": [
       {
         "text": "Azure App Service",
-        "why": "Webアプリ/API向けPaaSで、自動スケール、TLS、カスタム ドメイン、スロットを提供します。"
+        "why": "Web/API 向け PaaS として、デプロイ スロット、スケール、TLS、VNet 統合を低運用で提供します。"
+      },
+      {
+        "text": "Azure Container Apps",
+        "why": "コンテナー化とイベント駆動スケールには強いですが、コンテナー不要でデプロイ スロット要件なら App Service が直接的です。"
+      },
+      {
+        "text": "Azure Functions Premium",
+        "why": "関数実行には適しますが、一般的な常時 Web API とスロット中心の要件には App Service が適します。"
       },
       {
         "text": "Azure Virtual Machines",
-        "why": "実行できますが、OS管理が必要でPaaS要件に最適ではありません。"
-      },
-      {
-        "text": "Azure Batch",
-        "why": "バッチ ジョブ向けです。"
-      },
-      {
-        "text": "Azure Data Factory",
-        "why": "データ統合サービスです。"
+        "why": "柔軟性は高いものの OS/ランタイム パッチ管理を避ける要件に反します。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "一般的なWebアプリ/APIのPaaSホスティングにはAzure App Serviceが適します。",
+    "explanation": "標準的な Web API、スロット、PaaS 運用には App Service が最適です。",
     "sourceKeys": [
       "compute"
-    ],
-    "scenario": "【背景】Adventure Worksは、ステートレスな.NET 8 Web APIをAzureへ移行します。開発チームはコンテナーやOSの管理より、アプリケーション開発とリリースに集中したいと考えています。\n【要件】\n• PaaSとしてHTTP APIをホストすること\n• CPUまたはHTTP負荷に基づく自動スケールを使用すること\n• カスタム ドメインとマネージドTLSを利用すること\n• 本番前検証用のデプロイ スロットを使用すること\n• WindowsまたはLinuxのホスティングを選択できること"
+    ]
   },
   {
     "id": 46,
     "domain": "インフラストラクチャ",
     "objective": "Azure Functions",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "画像変換処理のコンピューティング サービスを選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "Blob が追加されるたびに画像を変換します。通常は1時間に数件ですが、キャンペーン時は数分間に数万件発生します。アイドル時コストを抑え、自動スケールし、1処理は最大3分です。VNet 内の Storage へ接続する必要はありません。",
+    "prompt": "推奨すべきコンピューティングはどれですか。",
     "options": [
       {
-        "text": "Azure Functions",
-        "why": "イベント駆動で実行され、従量課金や自動スケールにより断続的処理に適します。"
+        "text": "Azure Functions の従量課金または Flex Consumption プラン",
+        "why": "イベント駆動でゼロ近くまでスケールし、短時間のバースト処理に適します。"
       },
       {
-        "text": "常時稼働の専用VM",
-        "why": "アイドル時にもコストと管理負荷が発生します。"
+        "text": "常時2ノードの AKS クラスター",
+        "why": "実現可能ですが、アイドル時も基盤運用とコストが発生します。"
       },
       {
-        "text": "Azure SQL Managed Instance",
-        "why": "データベース サービスです。"
+        "text": "Azure Batch の固定プール",
+        "why": "大規模バッチには適しますが、単純な Blob イベント駆動短時間処理では Functions が低運用です。"
       },
       {
-        "text": "ExpressRoute",
-        "why": "専用ネットワーク接続です。"
+        "text": "App Service の常時稼働専用プラン",
+        "why": "イベント駆動の大幅なアイドル期間に対して費用効率が劣ります。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "短時間のイベント駆動コードにはAzure Functionsが適します。",
+    "explanation": "短いイベント駆動バーストとアイドル時コスト最小化には Functions の消費ベース プランが適します。",
     "sourceKeys": [
       "compute"
-    ],
-    "scenario": "【背景】Contosoのメディア サービスでは、Blob Storageへ画像がアップロードされたときだけサムネイル生成処理を実行します。平常時はイベントが少なく、キャンペーン時に一時的な大量アップロードがあります。\n【要件】\n• Blob作成イベントでコードを自動起動すること\n• アイドル時のコンピューティング コストを最小化すること\n• イベント量に応じて自動的にスケールすること\n• サーバーや常時稼働プロセスを管理しないこと\n• 短時間のイベント駆動コードに適したサービスを使用すること"
+    ]
   },
   {
     "id": 47,
     "domain": "インフラストラクチャ",
     "objective": "Logic Apps",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "業務ワークフローの実装サービスを選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "受注時に SAP、Salesforce、Office 365、オンプレミス SQL Server を連携する長時間ワークフローを実装します。実行状態を保持し、失敗時の再試行と人手承認を組み込みます。ワークフローは VNet 内で実行し、複数フローで接続を共有します。",
+    "prompt": "推奨すべきサービスとホスティングはどれですか。",
     "options": [
       {
-        "text": "Azure Logic Apps",
-        "why": "多数のマネージド コネクタと視覚的ワークフローを提供します。"
+        "text": "Azure Logic Apps Standard",
+        "why": "ステートフル ワークフロー、組み込み/マネージド コネクタ、VNet 統合、単一テナント実行に適します。"
       },
       {
-        "text": "Azure Kubernetes Service",
-        "why": "コンテナー オーケストレーションであり、SaaSコネクタ中心のローコード フローには過剰です。"
+        "text": "Azure Functions Consumption だけ",
+        "why": "コードで実装できますが、豊富な業務コネクタ、人手承認、長時間状態管理を自作する必要があります。"
       },
       {
-        "text": "Azure Managed Disks",
-        "why": "ブロック ストレージです。"
+        "text": "Azure Data Factory",
+        "why": "データ移動と ETL には適しますが、業務トランザクション承認ワークフローの中心ではありません。"
       },
       {
-        "text": "Azure DNS",
-        "why": "名前解決サービスです。"
+        "text": "Azure Service Bus Premium だけ",
+        "why": "メッセージングは提供しますが、ワークフロー オーケストレーションや SaaS コネクタを提供しません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "コネクタを使った統合ワークフローにはLogic Appsが適します。",
+    "explanation": "VNet、状態保持、業務コネクタ、人手承認を含む統合フローには Logic Apps Standard が適します。",
     "sourceKeys": [
       "compute"
-    ],
-    "scenario": "【背景】Fabrikamは、購買申請を受信して上司へ承認メールを送り、承認後にSalesforceを更新し、Service Busへメッセージを送信する業務フローを構築します。\n【要件】\n• Microsoft 365、Salesforce、Service Busの標準コネクタを使用すること\n• 条件分岐、再試行、承認待ちを視覚的に定義すること\n• 開発コード量を最小化すること\n• 実行履歴と失敗を運用担当者が確認できること\n• 長時間待機するワークフローを扱えること"
+    ]
   },
   {
     "id": 48,
     "domain": "インフラストラクチャ",
-    "objective": "Azure Container Instances",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "短時間コンテナーの実行基盤を選定する必要があります。どのサービスを推奨すべきですか。",
+    "objective": "Container Apps",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "複数のマイクロサービスをコンテナーで実行します。HTTP トラフィックと Service Bus キュー長に応じてゼロから自動スケールし、リビジョンごとに10%/90%のトラフィック分割を行います。Kubernetes API やノード管理は不要です。",
+    "prompt": "推奨設計として選ぶべきものを2つ選んでください。",
     "options": [
       {
-        "text": "Azure Container Instances",
-        "why": "単一または少数コンテナーをサーバー管理なしで素早く実行できます。"
+        "text": "Azure Container Apps を使用する",
+        "why": "サーバーレス コンテナー、KEDA ベース スケール、リビジョン、トラフィック分割を提供します。"
       },
       {
-        "text": "Azure Kubernetes Service",
-        "why": "高度なオーケストレーションが必要な場合に適しますが、この要件には過剰です。"
+        "text": "HTTP と Service Bus のスケール ルールを構成する",
+        "why": "要求とキュー長の両方に応じてスケールできます。"
       },
       {
-        "text": "Azure Virtual Desktop",
-        "why": "デスクトップ仮想化サービスです。"
+        "text": "AKS を使用し、Ingress、KEDA、ノード プールをすべて自己管理する",
+        "why": "実現可能ですが Kubernetes 管理不要の要件に反します。"
       },
       {
-        "text": "Azure Synapse Analytics",
-        "why": "分析サービスです。"
+        "text": "Azure Container Instances の単一コンテナー グループを使用する",
+        "why": "短時間・単純実行には適しますが、リビジョン分割と高度な自動スケールを提供しません。"
       }
     ],
     "answer": [
-      0
+      0,
+      1
     ],
-    "explanation": "オーケストレーション不要の短時間コンテナーにはACIが適します。",
+    "explanation": "Container Apps と適切な KEDA スケール ルールで、ゼロスケールと段階リリースを低運用で実現します。",
     "sourceKeys": [
       "compute"
     ],
-    "scenario": "【背景】Northwindは、1日数回だけ実行されるデータ変換ツールをLinuxコンテナーとしてパッケージ化しました。各実行は約10分で終了し、実行間に常時稼働させる必要はありません。\n【要件】\n• 単一コンテナーを数秒から短時間で起動すること\n• 実行したCPUとメモリ時間に応じて課金すること\n• KubernetesクラスターやVMを管理しないこと\n• 永続的なオーケストレーション機能は不要であること\n• ジョブごとに独立して起動できること"
+    "selectCount": 2
   },
   {
     "id": 49,
     "domain": "インフラストラクチャ",
-    "objective": "Azure Kubernetes Service",
+    "objective": "AKS",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "コンテナー オーケストレーション基盤を選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "コンテナー基盤では、DaemonSet、カスタム Admission Controller、サービス メッシュ、Windows と Linux の複数ノード プール、GPU ノード、Kubernetes API を使う運用ツールが必要です。プラットフォーム チームは Kubernetes を管理できます。",
+    "prompt": "推奨すべきサービスはどれですか。",
     "options": [
       {
         "text": "Azure Kubernetes Service",
-        "why": "マネージドKubernetesとして高度なオーケストレーションとエコシステム互換性を提供します。"
+        "why": "Kubernetes API と高度なクラスター/ノード/アドオン制御を提供し、記載要件を満たします。"
       },
       {
-        "text": "Azure Container Instancesのみ",
-        "why": "単純なコンテナー実行には適しますが、大規模なオーケストレーション要件を満たしません。"
+        "text": "Azure Container Apps",
+        "why": "低運用ですが、Kubernetes API、DaemonSet、カスタム Admission Controller の直接制御は提供しません。"
       },
       {
-        "text": "Azure Functions",
-        "why": "関数単位のサーバーレス実行で、Kubernetes API互換性はありません。"
+        "text": "Azure Container Instances",
+        "why": "オーケストレーション機能と複数ノード プール管理を提供しません。"
       },
       {
-        "text": "Azure Filesのみ",
-        "why": "ストレージ サービスです。"
+        "text": "Azure App Service for Containers",
+        "why": "Web アプリ コンテナー向けで、Kubernetes クラスター拡張要件を満たしません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "Kubernetesの高度な制御が必要なマイクロサービス基盤にはAKSを使用します。",
+    "explanation": "Kubernetes ネイティブ機能とノード レベル制御が必要なら AKS を選びます。",
     "sourceKeys": [
       "compute"
-    ],
-    "scenario": "【背景】Contosoは数十のマイクロサービスをコンテナー化し、複数チームが共通プラットフォーム上で開発します。サービス間通信とリリース制御に高度な要件があります。\n【要件】\n• Kubernetes APIと既存Helmチャートを利用すること\n• ローリング更新、サービス検出、Ingressを制御すること\n• シークレット ストアと統合すること\n• ネットワーク ポリシーを細かく設定すること\n• ノード プールとスケジューリングを管理できること\n• コントロール プレーンの管理負荷はAzureへ委ねること"
+    ]
   },
   {
     "id": 50,
     "domain": "インフラストラクチャ",
-    "objective": "Azure Container Apps",
+    "objective": "Azure Container Instances",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "サーバーレスに近いコンテナー実行基盤を選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "CI パイプラインの統合テストで、1回15分だけ Linux コンテナーを実行します。同時実行数は毎回異なり、テスト終了後は環境を完全に削除します。永続オーケストレーター、受信 HTTP、ゼロスケール規則は不要です。",
+    "prompt": "最小運用で推奨すべきサービスはどれですか。",
     "options": [
       {
-        "text": "Azure Container Apps",
-        "why": "Kubernetesの管理を抽象化し、KEDAベースのイベント スケールやリビジョンを提供します。"
-      },
-      {
-        "text": "Azure Kubernetes Service",
-        "why": "実現できますが、Kubernetesを直接管理しないという要件にはContainer Appsの方が合います。"
-      },
-      {
         "text": "Azure Container Instances",
-        "why": "ゼロスケールやアプリ単位のリビジョン、継続的なサービス運用には機能が限定的です。"
+        "why": "クラスター管理なしでコンテナーをオンデマンド起動し、秒単位課金で短時間ジョブに適します。"
       },
       {
-        "text": "Azure Batch",
-        "why": "並列バッチ処理向けです。"
+        "text": "AKS の専用ノード プール",
+        "why": "短時間テストのためにクラスターとノードを維持する運用が過剰です。"
+      },
+      {
+        "text": "Azure Container Apps の常設アプリ",
+        "why": "ジョブ機能もありますが、単純な使い捨てコンテナー実行では ACI が直接的です。"
+      },
+      {
+        "text": "App Service のデプロイ スロット",
+        "why": "Web アプリのリリース検証向けで、任意コンテナーの使い捨て実行基盤ではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "サーバーレス コンテナーとイベント駆動スケールにはAzure Container Appsが適します。",
+    "explanation": "単純な短時間・使い捨てコンテナーには ACI が最小運用です。",
     "sourceKeys": [
       "compute"
-    ],
-    "scenario": "【背景】FabrikamはHTTP APIとService Busキューを処理するバックグラウンド ワーカーをコンテナーとして実行します。プラットフォーム チームはKubernetes APIを直接操作したくありません。\n【要件】\n• HTTPトラフィックまたはキュー長に応じて自動スケールすること\n• 未使用時にインスタンス数を0まで縮小できること\n• リビジョンを使用して段階的にトラフィックを移行できること\n• コンテナー イメージをそのまま展開できること\n• Kubernetesクラスターのノード管理を不要にすること"
+    ]
   },
   {
     "id": 51,
     "domain": "インフラストラクチャ",
     "objective": "Azure Batch",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "大規模並列バッチ処理のサービスを選定する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "毎晩、20万個の独立した科学計算タスクを CPU/GPU VM へ分散します。ジョブごとに VM プールを自動作成・縮小し、失敗タスクの再試行、タスク依存関係、低優先度 VM によるコスト削減を行います。",
+    "prompt": "推奨すべきサービスはどれですか。",
     "options": [
       {
         "text": "Azure Batch",
-        "why": "大規模並列/HPCジョブのプール管理、スケジュール、再試行を提供します。"
+        "why": "大規模並列ジョブ、プール管理、自動スケール、再試行、タスク スケジューリングに特化しています。"
       },
       {
-        "text": "Azure App Configuration",
-        "why": "構成管理サービスです。"
+        "text": "Azure Functions",
+        "why": "多数の短いイベント処理には適しますが、GPU/CPU プールと科学計算ジョブ制御は Batch が適します。"
       },
       {
-        "text": "Azure Front Door",
-        "why": "グローバルHTTP配信サービスです。"
+        "text": "Azure Container Apps",
+        "why": "マイクロサービスやイベント駆動コンテナーには適しますが、HPC バッチ プール管理は Batch が直接的です。"
       },
       {
-        "text": "Microsoft Entra ID",
-        "why": "ID管理サービスです。"
+        "text": "Azure Logic Apps",
+        "why": "ワークフロー連携用で大規模計算スケジューラーではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "多数の独立タスクをコンピューティング プールへ分散するにはAzure Batchが適します。",
+    "explanation": "大規模並列計算と VM プール ライフサイクル管理には Azure Batch を使用します。",
     "sourceKeys": [
       "compute"
-    ],
-    "scenario": "【背景】Northwindの映像制作部門は、1つの作品につき数万個の独立したレンダリング タスクを実行します。タスクは同じアプリケーションを使用しますが、入力ファイルが異なります。\n【要件】\n• 大量の並列タスクをVMプールへ分散すること\n• ジョブとタスクのキューを管理すること\n• 待機タスク数に応じてプールを自動スケールすること\n• 失敗タスクの再試行と実行状態を管理すること\n• 独自のHPCスケジューラーを開発しないこと"
+    ]
   },
   {
     "id": 52,
     "domain": "インフラストラクチャ",
     "objective": "メッセージング",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "業務コマンドの非同期メッセージング基盤を選定する必要があります。どのサービスを推奨すべきですか。",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "注文処理では、同じ顧客のメッセージ順序を維持し、重複送信を検出し、処理失敗をデッドレターへ隔離します。1つの注文イベントを請求、在庫、通知の3サービスへ配信し、各サービスは独立して再試行します。",
+    "prompt": "Azure Service Bus で選ぶべき構成を3つ選んでください。",
     "options": [
       {
-        "text": "Azure Service Busキュー",
-        "why": "エンタープライズ メッセージング機能と信頼性の高いキューイングを提供します。"
+        "text": "トピックと3つのサブスクリプションを使用する",
+        "why": "1メッセージを複数独立コンシューマーへファンアウトできます。"
       },
       {
-        "text": "Azure Event Grid",
-        "why": "イベント通知のプッシュ配信向けで、トランザクション キュー機能は中心ではありません。"
+        "text": "顧客 ID を SessionId としてセッションを有効にする",
+        "why": "同一セッション内の順序付き処理を実現できます。"
       },
       {
-        "text": "Azure Event Hubs",
-        "why": "高スループットのイベント ストリーム取り込み向けです。"
+        "text": "重複検出とデッドレター キューを使用する",
+        "why": "重複抑止と失敗メッセージ隔離を提供します。"
       },
       {
-        "text": "Azure DNS",
-        "why": "名前解決サービスです。"
+        "text": "Event Grid の単一サブスクリプションだけを使用する",
+        "why": "軽量イベント通知には適しますが、セッション、重複検出、DLQ を含む業務メッセージ要件は Service Bus が適します。"
+      },
+      {
+        "text": "Storage Queue を3つ作成し、送信側が全キューへ直接書く",
+        "why": "可能ですが、トピックのファンアウトと豊富なブローカー機能を自作することになります。"
       }
     ],
     "answer": [
-      0
+      0,
+      1,
+      2
     ],
-    "explanation": "業務コマンドやワーク キューにはService Busキューが適します。",
+    "explanation": "Service Bus トピック、セッション、重複検出、DLQ の組み合わせが要件を満たします。",
     "sourceKeys": [
       "app"
     ],
-    "scenario": "【背景】Contosoの注文APIは、決済サービスへ処理コマンドを非同期送信します。決済サービスは保守のため一時停止することがあり、処理失敗時には調査用にメッセージを分離する必要があります。\n【要件】\n• コンシューマー停止中もメッセージを保持すること\n• 少なくとも1回の確実な配信を実現すること\n• 重複検出、デッドレター キュー、トランザクションを利用すること\n• テレメトリの高速ストリーム取り込みではなく業務コマンドを扱うこと\n• 送信側と受信側を疎結合にすること"
+    "selectCount": 3
   },
   {
     "id": 53,
     "domain": "インフラストラクチャ",
     "objective": "イベントとストリーム",
     "type": "multi",
-    "difficulty": "標準",
-    "prompt": "シナリオAとシナリオBに最適なサービスを1つずつ選択してください。選ぶべきサービスを2つ選んでください。",
+    "difficulty": "本番強化",
+    "scenario": "要件A: Storage アカウントで Blob が作成されたら、数秒以内に複数の Azure Functions へ通知する。イベント本文は小さく、永続的な大量テレメトリではない。\n要件B: 50万デバイスの連続テレメトリを高スループットで取り込み、複数のコンシューマー グループが独立して読み取る。",
+    "prompt": "要件AとBに使用すべきサービスを2つ選んでください。",
     "options": [
       {
-        "text": "AにはAzure Event Grid",
-        "why": "離散イベントを低遅延で複数ハンドラーへプッシュする用途に適します。"
+        "text": "要件A: Azure Event Grid",
+        "why": "離散的なリソース イベントのプッシュ配信と複数ハンドラーに適します。"
       },
       {
-        "text": "BにはAzure Event Hubs",
-        "why": "高スループットのストリーミング取り込みとコンシューマー グループを提供します。"
+        "text": "要件B: Azure Event Hubs",
+        "why": "高スループット ストリーム取り込み、パーティション、コンシューマー グループを提供します。"
       },
       {
-        "text": "AにはAzure Batch",
-        "why": "バッチ計算サービスで、イベント配信サービスではありません。"
+        "text": "要件A: Azure Service Bus セッション",
+        "why": "順序付き業務メッセージ向けで、Blob 作成通知には Event Grid が直接的です。"
       },
       {
-        "text": "BにはAzure Policy",
-        "why": "ガバナンス サービスで、イベント ストリーム取り込みは行いません。"
+        "text": "要件B: Azure Event Grid",
+        "why": "連続大量ストリームの保持・再読み取りには Event Hubs が適します。"
       }
     ],
     "answer": [
       0,
       1
     ],
-    "explanation": "離散的な状態変化の通知はEvent Grid、大量の連続テレメトリはEvent Hubsを選びます。",
+    "explanation": "離散イベントは Event Grid、連続テレメトリ ストリームは Event Hubs を選びます。",
     "sourceKeys": [
       "app"
     ],
-    "selectCount": 2,
-    "scenario": "【背景】Fabrikamは2種類のイベント処理をAzureで設計します。\n【シナリオA】Blobが作成されたとき、画像処理、監査、通知の複数サーバーレス ハンドラーへイベントをプッシュ配信します。イベントは軽量で、購読先ごとにフィルターします。\n【シナリオB】IoTデバイスから毎秒数百万件のテレメトリを取り込みます。複数の分析アプリが、それぞれ独立した位置から同じストリームを読み取ります。\n【要件】各シナリオに最適なサービスを1つずつ選択します。"
+    "selectCount": 2
   },
   {
     "id": 54,
     "domain": "インフラストラクチャ",
     "objective": "API統合",
     "type": "single",
-    "difficulty": "標準",
-    "prompt": "API公開とポリシー適用を一元化する必要があります。どのサービスを推奨すべきですか。",
+    "difficulty": "本番強化",
+    "scenario": "社内外の API を一元公開します。JWT 検証、レート制限、IP フィルター、要求/応答変換、バージョン、開発者ポータル、サブスクリプション キーを管理します。一部バックエンドはオンプレミスで、API ゲートウェイをその近くにも配置します。",
+    "prompt": "推奨すべきソリューションはどれですか。",
     "options": [
       {
-        "text": "Azure API Management",
-        "why": "APIゲートウェイ、ポリシー、認証、レート制限、変換、開発者ポータルを提供します。"
+        "text": "Azure API Management と必要に応じてセルフホステッド ゲートウェイ",
+        "why": "API ポリシー、製品、開発者ポータルを中央管理し、オンプレミス近傍にもゲートウェイを配置できます。"
       },
       {
-        "text": "Azure Load Balancer",
-        "why": "L4トラフィック分散で、APIポリシーや開発者ポータルは提供しません。"
+        "text": "Azure Application Gateway WAF",
+        "why": "L7 負荷分散と WAF は提供しますが、API 製品、サブスクリプション、変換、開発者ポータルを提供しません。"
       },
       {
-        "text": "Azure Files",
-        "why": "ファイル共有サービスです。"
+        "text": "Azure Front Door Premium",
+        "why": "グローバル配信と WAF には適しますが、API ライフサイクル管理の代替ではありません。"
       },
       {
-        "text": "Azure Backup",
-        "why": "データ保護サービスです。"
+        "text": "Azure Service Bus",
+        "why": "非同期メッセージングであり、HTTP API ゲートウェイではありません。"
       }
     ],
     "answer": [
       0
     ],
-    "explanation": "APIの公開・保護・変換・ライフサイクル管理にはAPI Managementを使用します。",
+    "explanation": "API 管理ポリシーとハイブリッド ゲートウェイには API Management が適します。",
     "sourceKeys": [
       "app"
-    ],
-    "scenario": "【背景】Northwindは部門ごとに開発された複数のREST APIを、取引先とモバイル アプリへ公開します。バックエンドAPIのURLや認証方式は統一されていません。\n【要件】\n• 単一の管理された公開エンドポイントを提供すること\n• JWT検証とサブスクリプション キーを適用すること\n• 呼び出し回数制限、要求・応答変換、キャッシュ ポリシーを設定できること\n• 開発者向けドキュメントとテスト ポータルを提供すること\n• バックエンド コードをすべて書き換えないこと"
+    ]
   },
   {
     "id": 55,
     "domain": "インフラストラクチャ",
     "objective": "アプリ構成",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "設定値と機能フラグを集中管理する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure App Configuration",
-        "why": "構成キー、ラベル、機能フラグを一元管理できます。"
-      },
-      {
-        "text": "Azure Key Vaultだけ",
-        "why": "秘密情報には適しますが、一般設定と機能フラグの専用管理にはApp Configurationが適します。"
-      },
-      {
-        "text": "Azure Monitor",
-        "why": "監視サービスです。"
-      },
-      {
-        "text": "Azure Bastion",
-        "why": "VM管理接続サービスです。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "非シークレット設定と機能フラグにはApp Configurationを使用し、秘密はKey Vaultと分離します。",
-    "sourceKeys": [
-      "app"
-    ],
-    "scenario": "【背景】Contosoは、開発、テスト、本番の各環境で同じマイクロサービスを多数実行しています。現在は設定値と機能フラグが各アプリの設定ファイルに分散し、変更時に再デプロイが必要です。\n【要件】\n• アプリケーション設定をコードとデプロイ成果物から分離すること\n• 環境別ラベルを使用して集中管理すること\n• 機能フラグを段階的に有効化できること\n• 複数インスタンスが一貫した設定を参照できること\n• シークレット本体は必要に応じてKey Vault参照を使用すること"
-  },
-  {
-    "id": 56,
-    "domain": "インフラストラクチャ",
-    "objective": "キャッシュ",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "2026年時点の新規設計としてRedis互換キャッシュを選定する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure Managed Redis",
-        "why": "Azure Cache for Redisの後継として推奨されるマネージドRedisサービスです。"
-      },
-      {
-        "text": "Azure Cache for Redisを新規標準として固定する",
-        "why": "全SKUの廃止予定が公表されており、新規設計ではAzure Managed Redisを優先すべきです。"
-      },
-      {
-        "text": "Azure Queue Storage",
-        "why": "キューであり、インメモリ キャッシュではありません。"
-      },
-      {
-        "text": "Azure Data Box",
-        "why": "オフライン データ転送用です。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "Azure Cache for Redisは廃止予定です。2026年の新規アーキテクチャではAzure Managed Redisを選択します。",
-    "sourceKeys": [
-      "app",
-      "redis"
-    ],
-    "scenario": "【背景】Fabrikamは2026年に新しいECプラットフォームを設計します。商品カタログとセッション データの読み取り遅延を下げ、Azure SQL Databaseへの負荷を削減するため、Redis互換の分散キャッシュを採用します。\n【要件】\n• 新規作成が推奨される現行サービスを選ぶこと\n• 高スループットかつ低遅延のインメモリ処理を提供すること\n• 高可用性とスケール機能をマネージドで利用すること\n• 廃止が公表されている旧サービスを新規設計の前提にしないこと"
-  },
-  {
-    "id": 57,
-    "domain": "インフラストラクチャ",
-    "objective": "自動デプロイ",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "安全なリリースと迅速なロールバックを実装する必要があります。どのApp Service機能を推奨すべきですか。",
-    "options": [
-      {
-        "text": "デプロイ スロットとスロット スワップ",
-        "why": "ステージング環境で検証後、ほぼ無停止で本番へ切り替え、再スワップで戻せます。"
-      },
-      {
-        "text": "本番スロットへ直接上書きする",
-        "why": "切り戻しと事前検証が難しくなります。"
-      },
-      {
-        "text": "VMの可用性セット",
-        "why": "App Serviceのリリース切り替え機能ではありません。"
-      },
-      {
-        "text": "BlobのArchive層",
-        "why": "ストレージ コスト機能です。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "App Serviceのブルーグリーンに近いデプロイにはデプロイ スロットを使用します。",
-    "sourceKeys": [
-      "app",
-      "compute"
-    ],
-    "scenario": "【背景】NorthwindはApp Serviceへ週数回リリースします。直接本番へデプロイした際に、JITコンパイルや依存接続の初期化で応答が遅くなったことがあります。\n【要件】\n• 新バージョンを本番トラフィックから分離して展開すること\n• ウォームアップとスモーク テストを実施すること\n• 検証後に短時間で本番へ切り替えること\n• 問題発生時に以前のバージョンへ即座に戻せること\n• DNS変更や新しいApp Service作成を毎回行わないこと"
-  },
-  {
-    "id": 58,
-    "domain": "インフラストラクチャ",
-    "objective": "移行評価",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "移行前の検出、評価、コスト見積もりを実施する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure Migrate",
-        "why": "検出、依存関係分析、評価、サイズ推奨、移行の統合ハブを提供します。"
-      },
-      {
-        "text": "Azure Advisor",
-        "why": "Azure上の既存リソースへの推奨事項が中心で、オンプレミス検出・評価の主サービスではありません。"
-      },
-      {
-        "text": "Azure Monitor Application Insights",
-        "why": "アプリ監視サービスです。"
-      },
-      {
-        "text": "Microsoft Sentinel",
-        "why": "SIEM/SOARサービスです。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "オンプレミス サーバーの検出・評価・移行にはAzure Migrateを使用します。",
-    "sourceKeys": [
-      "migration"
-    ],
-    "scenario": "【背景】ContosoはオンプレミスのVMware環境に600台のサーバーを持ち、18か月以内にAzureへ移行します。移行ウェーブを作る前に、技術的適合性とコストを把握する必要があります。\n【要件】\n• エージェントレスまたはアプライアンスでサーバーを検出すること\n• サーバー間の依存関係を可視化すること\n• Azure VMへの適合性と推奨サイズを評価すること\n• 実使用率に基づく月額コストを見積もること\n• 評価結果を移行計画へ利用できること"
-  },
-  {
-    "id": 59,
-    "domain": "インフラストラクチャ",
-    "objective": "データベース移行",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "停止時間を最小化したデータベース移行を実装する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure Database Migration Service",
-        "why": "対応するソース・ターゲット間でオンライン/オフライン移行をオーケストレーションできます。"
-      },
-      {
-        "text": "Azure Data Box",
-        "why": "大量データの物理転送用で、データベース継続同期の中心ではありません。"
-      },
-      {
-        "text": "Azure Front Door",
-        "why": "Webトラフィック配信サービスです。"
-      },
-      {
-        "text": "Azure Policy",
-        "why": "ガバナンス サービスです。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "停止時間を抑えたデータベース移行にはAzure Database Migration Serviceを使用します。",
-    "sourceKeys": [
-      "migration"
-    ],
-    "scenario": "【背景】FabrikamはオンプレミスSQL Server 2019の業務データベースをAzure SQL Managed Instanceへ移行します。24時間運用のため、最終切り替え時の停止時間を最小化する必要があります。\n【要件】\n• 移行前に互換性とブロッキング問題を評価すること\n• ソース変更を継続的に同期するオンライン移行を使用すること\n• 最終カットオーバーまでオンプレミスを稼働させること\n• データベース移行に特化したマネージド サービスを利用すること\n• 手作業によるバックアップ転送だけに依存しないこと"
-  },
-  {
-    "id": 60,
-    "domain": "インフラストラクチャ",
-    "objective": "オンライン ストレージ移行",
-    "type": "single",
-    "difficulty": "難",
-    "prompt": "大規模なオンライン ファイル移行を管理する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure Storage Mover",
-        "why": "オンプレミス ファイルをAzure Storageへ移すマネージド移行サービスで、ジョブとエージェントを管理できます。"
-      },
-      {
-        "text": "AzCopyだけ",
-        "why": "高速コピーには適しますが、大規模な継続ジョブの集中管理要件にはStorage Moverが適します。"
-      },
-      {
-        "text": "Azure Site Recovery",
-        "why": "VM/サーバーのDR向けです。"
-      },
-      {
-        "text": "Azure Logic Apps",
-        "why": "業務ワークフロー向けで、大規模ファイル移行専用ではありません。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "組織的・大規模なオンライン ファイル移行にはAzure Storage Moverが適します。",
-    "sourceKeys": [
-      "migration"
-    ],
-    "scenario": "【背景】Northwindは複数拠点に合計800TBのNFSおよびSMBファイル共有を持ちます。Azure Blob StorageとAzure Filesへ段階的に移行し、移行期間中もオンプレミス データは更新されます。\n【要件】\n• 複数の移行エージェントを一元管理すること\n• ジョブのスケジュール、帯域制御、再実行を管理すること\n• 差分を繰り返し転送して最終切り替え時間を短縮すること\n• NFS、SMB、オブジェクト ストレージの大規模移行に対応すること\n• 物理デバイス輸送ではなくオンライン転送を使用すること"
-  },
-  {
-    "id": 61,
-    "domain": "インフラストラクチャ",
-    "objective": "オフライン データ移行",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "大容量データをオフラインでAzureへ移行する必要があります。どの方法を推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure Data Box",
-        "why": "暗号化された物理アプライアンスを使って大容量データをオフライン転送できます。"
-      },
-      {
-        "text": "ExpressRouteを一時的に1日だけ利用する",
-        "why": "500TBを短期間に転送できる保証はなく、回線調達も必要です。"
-      },
-      {
-        "text": "Azure Event Hubs",
-        "why": "イベント ストリーム取り込み用です。"
-      },
-      {
-        "text": "Azure DNS",
-        "why": "名前解決サービスです。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "帯域が制約される数百TB規模の一括移行にはAzure Data Boxが適します。",
-    "sourceKeys": [
-      "migration"
-    ],
-    "scenario": "【背景】Contosoはデータセンター閉鎖に伴い、500TBの画像アーカイブを一度だけAzureへ移行します。利用可能なWAN帯域は200Mbpsで、通常業務でも使用されているため全帯域を移行に使えません。\n【要件】\n• 数か月に及ぶネットワーク転送を避けること\n• Microsoft提供の暗号化された物理デバイスを使用すること\n• データをローカルでコピーし、デバイスを返送してAzureへ取り込むこと\n• 一回限りの大容量オフライン移行に適した方法を選ぶこと\n• 移行後の継続同期は不要であること"
-  },
-  {
-    "id": 62,
-    "domain": "インフラストラクチャ",
-    "objective": "ハイブリッド接続",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "専用のハイブリッド接続を設計する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure ExpressRoute",
-        "why": "接続プロバイダー経由の専用プライベート接続と予測可能なネットワーク特性を提供します。"
-      },
-      {
-        "text": "Site-to-Site VPNのみ",
-        "why": "暗号化接続ですが、通常はパブリック インターネットを経由します。"
-      },
-      {
-        "text": "Azure Front Door",
-        "why": "インターネット向けL7グローバル配信サービスです。"
-      },
-      {
-        "text": "Azure Bastion",
-        "why": "VM管理用接続サービスです。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "専用プライベート接続にはExpressRouteを使用します。",
-    "sourceKeys": [
-      "network"
-    ],
-    "scenario": "【背景】Fabrikamは東京と大阪のデータセンターをAzureの東日本および西日本リージョンへ接続します。基幹SAP通信のため、インターネットVPNより安定した帯域と予測可能な遅延が必要です。\n【要件】\n• パブリック インターネットを経由しない専用接続を利用すること\n• オンプレミスとAzure VNet間でプライベートIP通信を行うこと\n• プライベート ピアリングを使用すること\n• 通信事業者または接続プロバイダー経由で冗長回線を構成できること\n• 大規模ハイブリッド環境に対応すること"
-  },
-  {
-    "id": 63,
-    "domain": "インフラストラクチャ",
-    "objective": "グローバル負荷分散",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "グローバルなHTTPS配信とWAFを実装する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure Front Door",
-        "why": "グローバルL7ロード バランシング、WAF、エッジTLS、ヘルス プローブ、アクセラレーションを提供します。"
-      },
-      {
-        "text": "Azure Load Balancer",
-        "why": "リージョン内L4負荷分散が中心で、グローバルWAFやURLルーティングは提供しません。"
-      },
-      {
-        "text": "Traffic Managerのみ",
-        "why": "DNSベースのグローバル ルーティングはできますが、エッジTLS終端やWAFは提供しません。"
-      },
-      {
-        "text": "Azure VPN Gateway",
-        "why": "ハイブリッド接続用です。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "グローバルなHTTP/S配信、WAF、アプリケーション層ルーティングにはAzure Front Doorが適します。",
-    "sourceKeys": [
-      "network"
-    ],
-    "scenario": "【背景】Northwindは東日本と西ヨーロッパの2リージョンで同じHTTPSアプリを運用し、世界中の顧客へ提供します。アプリケーション層はリージョンごとに独立しています。\n【要件】\n• Microsoftのグローバル エッジでTLSを終端すること\n• Web Application Firewallを適用すること\n• URLパスに基づいてルーティングできること\n• ユーザーに近い正常なリージョンへ要求を送ること\n• リージョン障害時に自動フェールオーバーすること\n• HTTP/HTTPSレイヤーで動作すること"
-  },
-  {
-    "id": 64,
-    "domain": "インフラストラクチャ",
-    "objective": "リージョン内アプリ配信",
-    "type": "single",
-    "difficulty": "標準",
-    "prompt": "リージョン内のレイヤー7負荷分散とWAFを実装する必要があります。どのサービスを推奨すべきですか。",
-    "options": [
-      {
-        "text": "Azure Application Gateway WAF",
-        "why": "リージョン内のL7ロード バランシング、TLS終端、パスベース ルーティング、WAFを提供します。"
-      },
-      {
-        "text": "Azure Load Balancer",
-        "why": "L4負荷分散で、URLパスを認識しません。"
-      },
-      {
-        "text": "Azure NAT Gateway",
-        "why": "アウトバウンド接続用で、受信L7ルーティングは行いません。"
-      },
-      {
-        "text": "Network Security Groupのみ",
-        "why": "L3/L4の許可・拒否で、HTTPパス ルーティングやWAFは提供しません。"
-      }
-    ],
-    "answer": [
-      0
-    ],
-    "explanation": "リージョン内のL7配信とWAFにはApplication Gatewayを使用します。",
-    "sourceKeys": [
-      "network"
-    ],
-    "scenario": "【背景】Contosoは東日本リージョン内で、Web、API、静的画像の3種類のバックエンドを運用します。すべての外部通信は1つの公開IPとHTTPSエンドポイントから受信します。\n【要件】\n• `/api` と `/images` のURLパスに応じて異なるバックエンドへ転送すること\n• TLS終端と証明書管理を行うこと\n• Web Application Firewallを適用すること\n• リージョン内のレイヤー7負荷分散を行うこと\n• グローバル マルチリージョン ルーティングは今回不要であること"
-  },
-  {
-    "id": 65,
-    "domain": "インフラストラクチャ",
-    "objective": "ネットワーク セキュリティ",
     "type": "multi",
-    "difficulty": "難",
-    "prompt": "プライベートなPaaS接続と固定アウトバウンドIPを実装する必要があります。選ぶべきサービスを2つ選んでください。",
+    "difficulty": "本番強化",
+    "scenario": "50個のマイクロサービスで、非機密の設定値と機能フラグを中央管理します。環境別ラベル、段階的な機能公開、動的更新が必要です。データベース パスワードは別途安全に保管し、アプリは設定ストアから秘密そのものを取得しない設計にします。",
+    "prompt": "選択すべき構成を2つ選んでください。",
     "options": [
       {
-        "text": "Azure Private Link / Private Endpoint",
-        "why": "PaaSサービスをVNet内のプライベートIPで公開し、パブリック アクセスを無効化できます。"
+        "text": "Azure App Configuration で設定、ラベル、機能フラグを管理する",
+        "why": "非機密構成と Feature Manager を中央管理できます。"
       },
       {
-        "text": "Azure NAT Gateway",
-        "why": "サブネットのアウトバウンド接続に固定パブリックIPと高スケールSNATを提供します。"
+        "text": "秘密は Key Vault に保存し、App Configuration の Key Vault 参照を使用する",
+        "why": "設定から秘密を分離し、アプリはマネージド ID で Key Vault へ解決できます。"
       },
       {
-        "text": "Azure Front Door",
-        "why": "受信グローバルHTTP配信向けで、PaaSのプライベートIP化やサブネット送信元固定の直接解決ではありません。"
+        "text": "すべての秘密と設定を App Configuration のプレーン値へ保存する",
+        "why": "App Configuration は秘密保管庫ではありません。"
       },
       {
-        "text": "Azure DDoS Protectionだけ",
-        "why": "DDoS耐性を向上しますが、Private Endpointや固定アウトバウンドIPの代替ではありません。"
+        "text": "各サービスのコンテナー イメージへ設定を焼き込む",
+        "why": "動的更新と中央管理を満たしません。"
       }
     ],
     "answer": [
       0,
       1
     ],
-    "explanation": "PaaSへのプライベート接続はPrivate Endpoint、サブネットの予測可能なアウトバウンドIPはNAT Gatewayで実現します。",
+    "explanation": "非機密設定は App Configuration、秘密は Key Vault に分離し、参照で連携します。",
+    "sourceKeys": [
+      "app"
+    ],
+    "selectCount": 2
+  },
+  {
+    "id": 56,
+    "domain": "インフラストラクチャ",
+    "objective": "キャッシュ",
+    "type": "single",
+    "difficulty": "本番強化",
+    "scenario": "新規のグローバル EC サイトで Redis 互換のマネージド キャッシュを採用します。高可用性、クラスタリング、Private Link、Microsoft Entra 認証、将来のサービス継続性を重視します。既存 Azure Cache for Redis からの互換移行も考慮します。",
+    "prompt": "2026年の新規設計で推奨すべきサービスはどれですか。",
+    "options": [
+      {
+        "text": "Azure Managed Redis",
+        "why": "新規 Redis ワークロード向けの後継マネージド サービスで、Azure Cache for Redis からの移行先として推奨されます。"
+      },
+      {
+        "text": "Azure Cache for Redis Basic を新規標準とする",
+        "why": "Azure Cache for Redis は廃止予定であり、新規標準として固定すべきではありません。"
+      },
+      {
+        "text": "Azure Cosmos DB for NoSQL",
+        "why": "永続 NoSQL DB であり Redis 互換キャッシュの置き換えではありません。"
+      },
+      {
+        "text": "Azure App Configuration",
+        "why": "構成管理であり、低遅延データ キャッシュではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "新規 Redis 互換キャッシュは Azure Managed Redis を選びます。",
+    "sourceKeys": [
+      "redis"
+    ]
+  },
+  {
+    "id": 57,
+    "domain": "インフラストラクチャ",
+    "objective": "自動デプロイ",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "App Service の新バージョンを無停止で展開します。新バージョンを本番同等環境でウォームアップし、少量のトラフィックで確認後に切り替えます。問題時は数分以内に旧版へ戻します。接続文字列のうち本番 DB 値は切り替え先に固定します。",
+    "prompt": "選択すべき構成を2つ選んでください。",
+    "options": [
+      {
+        "text": "ステージング デプロイ スロットへ展開し、検証後にスワップする",
+        "why": "本番同等環境でウォームアップし、迅速な切り替えとロールバックができます。"
+      },
+      {
+        "text": "本番固有の接続文字列を deployment slot setting として固定する",
+        "why": "スワップ時に本番固有値が別スロットへ移動するのを防げます。"
+      },
+      {
+        "text": "本番スロットへ直接上書きし、失敗時は再デプロイする",
+        "why": "無停止検証と迅速ロールバックの要件に劣ります。"
+      },
+      {
+        "text": "Azure Backup から App Service を復元してロールバックする",
+        "why": "リリース切り戻し手段としてスロット スワップより遅く複雑です。"
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "デプロイ スロットとスロット固定設定で安全な切り替えを実現します。",
+    "sourceKeys": [
+      "app"
+    ],
+    "selectCount": 2
+  },
+  {
+    "id": 58,
+    "domain": "インフラストラクチャ",
+    "objective": "移行評価",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "オンプレミス VMware の 900 VM を Azure へ移行します。エージェントレス検出、依存関係分析、実測使用率に基づく適正サイズ、Azure での月額見積もり、移行グループ化が必要です。移行前にアプリ所有者へ評価レポートを提示します。",
+    "prompt": "Azure Migrate で実施すべきものを2つ選んでください。",
+    "options": [
+      {
+        "text": "Azure Migrate appliance で検出を行う",
+        "why": "VMware 環境から構成・性能データを収集できます。"
+      },
+      {
+        "text": "評価と依存関係分析を使用して移行グループと適正サイズを決める",
+        "why": "実測データに基づく推奨サイズ、コスト、依存関係を確認できます。"
+      },
+      {
+        "text": "Azure Site Recovery だけでコスト評価を作成する",
+        "why": "ASR は DR/レプリケーション中心で、包括的な移行評価の代替ではありません。"
+      },
+      {
+        "text": "Azure Advisor をオンプレミス vCenter に接続する",
+        "why": "Advisor は主に Azure リソースの推奨事項で、オンプレミス VMware 検出の中心ではありません。"
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Azure Migrate appliance と評価/依存関係分析を使って、移行計画とコストを作成します。",
+    "sourceKeys": [
+      "migration"
+    ],
+    "selectCount": 2
+  },
+  {
+    "id": 59,
+    "domain": "インフラストラクチャ",
+    "objective": "データベース移行",
+    "type": "single",
+    "difficulty": "本番強化",
+    "scenario": "オンプレミス SQL Server から Azure SQL Managed Instance へ 8 TB の本番 DB を移行します。業務停止は最終切り替えの20分以内に抑え、移行中もソースで更新を継続します。互換性評価後、継続的な変更同期と制御されたカットオーバーが必要です。",
+    "prompt": "推奨すべき移行サービスはどれですか。",
+    "options": [
+      {
+        "text": "Azure Database Migration Service のオンライン移行",
+        "why": "継続同期を行い、最終カットオーバーまでソース稼働を維持できます。"
+      },
+      {
+        "text": "BACPAC のエクスポート/インポート",
+        "why": "一般にオフライン時間と大容量処理が増え、継続変更同期を提供しません。"
+      },
+      {
+        "text": "Azure Data Box だけ",
+        "why": "物理データ転送用で、SQL トランザクション継続同期とカットオーバーを管理しません。"
+      },
+      {
+        "text": "Azure Storage Mover",
+        "why": "ファイル/オブジェクト移行用でデータベース エンジン移行ではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "低停止時間の SQL 移行には DMS のオンライン移行を使用します。",
+    "sourceKeys": [
+      "migration"
+    ]
+  },
+  {
+    "id": 60,
+    "domain": "インフラストラクチャ",
+    "objective": "オンラインストレージ移行",
+    "type": "single",
+    "difficulty": "本番強化",
+    "scenario": "複数拠点の NAS に 300 TB のファイルがあります。WAN 経由で段階的に Azure Files または Blob へ移し、ジョブの進捗、再試行、複数ソース、増分キャッチアップを中央管理します。物理デバイスは使用せず、単発コマンドの手作業を避けます。",
+    "prompt": "推奨すべきサービスはどれですか。",
+    "options": [
+      {
+        "text": "Azure Storage Mover",
+        "why": "大規模オンライン ストレージ移行をジョブとして管理し、複数ソースと繰り返し実行を扱えます。"
+      },
+      {
+        "text": "AzCopy スクリプトだけ",
+        "why": "高速コピーは可能ですが、複数拠点の移行プロジェクト管理と中央オーケストレーションが不足します。"
+      },
+      {
+        "text": "Azure Data Box",
+        "why": "オフライン物理移行であり、WAN 経由・物理デバイス不使用に反します。"
+      },
+      {
+        "text": "Azure File Sync",
+        "why": "継続的なキャッシュ/同期には適しますが、異種 NAS からの一括移行管理では Storage Mover が直接的です。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "管理された大規模オンライン ファイル移行には Azure Storage Mover が適します。",
+    "sourceKeys": [
+      "migration"
+    ]
+  },
+  {
+    "id": 61,
+    "domain": "インフラストラクチャ",
+    "objective": "オフラインデータ移行",
+    "type": "single",
+    "difficulty": "本番強化",
+    "scenario": "研究所には 1.5 PB のデータがあり、利用可能な回線では転送に1年以上かかります。データを暗号化された Microsoft 提供デバイスへコピーし、配送して Azure Storage へ取り込みます。1台あたりの容量を大きくし、複数ラック級データを扱います。",
+    "prompt": "推奨すべき方法はどれですか。",
+    "options": [
+      {
+        "text": "Azure Data Box Heavy",
+        "why": "ペタバイト規模のオフライン転送向け大容量デバイスです。"
+      },
+      {
+        "text": "Azure Data Box Disk 1セットだけ",
+        "why": "より小規模向けで、1.5 PB には多数セットと運用が必要です。"
+      },
+      {
+        "text": "ExpressRoute Local を短期間だけ使用する",
+        "why": "物理回線敷設と帯域確保が必要で、回線では現実的でない要件に合いません。"
+      },
+      {
+        "text": "Azure Import/Export で任意の NAS 本体を送付する",
+        "why": "サポートされたディスク ワークフローであり、NAS 本体配送のサービスではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "ペタバイト規模のオフライン移行には Data Box Heavy が適します。",
+    "sourceKeys": [
+      "migration"
+    ]
+  },
+  {
+    "id": 62,
+    "domain": "インフラストラクチャ",
+    "objective": "ハイブリッド接続",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "本社と Azure 間に、インターネットを経由しない予測可能な接続を構築します。通常は ExpressRoute を使用し、回線またはプロバイダー障害時には暗号化 VPN へ自動的に迂回します。オンプレミスと Azure の経路は動的に交換します。",
+    "prompt": "選択すべき構成を3つ選んでください。",
+    "options": [
+      {
+        "text": "ExpressRoute 回線と ExpressRoute Gateway",
+        "why": "プライベートな専用接続を提供します。"
+      },
+      {
+        "text": "Site-to-Site VPN と VPN Gateway",
+        "why": "ExpressRoute 障害時の暗号化バックアップ パスになります。"
+      },
+      {
+        "text": "BGP と適切な経路優先度を構成する",
+        "why": "動的経路交換とプライマリ/バックアップの切り替えに使用します。"
+      },
+      {
+        "text": "Azure Front Door",
+        "why": "HTTP グローバル配信であり、オンプレミス VNet 間のハイブリッド経路ではありません。"
+      },
+      {
+        "text": "NAT Gateway",
+        "why": "サブネットのアウトバウンド SNAT 用でハイブリッド回線ではありません。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "ExpressRoute を主経路、S2S VPN をバックアップとし、BGP で経路制御します。",
     "sourceKeys": [
       "network"
     ],
-    "selectCount": 2,
-    "scenario": "【背景】Adventure Worksはゼロトラスト方針により、App ServiceからPaaSデータベースへ接続する3層アプリを設計します。取引先の外部APIは送信元パブリックIPの許可リスト方式です。\n【要件】\n• データベースへプライベートIPで接続すること\n• データベースのパブリック ネットワーク アクセスを無効化すること\n• DNS名は通常のPaaS FQDNを利用しつつプライベートIPへ解決すること\n• アプリ統合サブネットからインターネットへの送信元IPを固定すること\n• 高スケール時のSNATポート枯渇リスクを抑えること\n• 受信トラフィック用のグローバル負荷分散は必須ではないこと"
+    "selectCount": 3
+  },
+  {
+    "id": 63,
+    "domain": "インフラストラクチャ",
+    "objective": "グローバルアプリ配信",
+    "type": "single",
+    "difficulty": "本番強化",
+    "scenario": "東日本と西ヨーロッパの App Service へグローバル HTTPS を配信します。エッジ WAF、TLS 終端、URL パス ルーティング、キャッシュ、Anycast、正常性プローブが必要です。オリジンはパブリック公開せず、サービスからのプライベート接続だけを許可します。",
+    "prompt": "推奨すべきサービスはどれですか。",
+    "options": [
+      {
+        "text": "Azure Front Door Premium と Private Link 対応オリジン",
+        "why": "グローバル L7 配信、WAF、キャッシュ、Anycast、正常性プローブ、プライベート オリジン接続を提供できます。"
+      },
+      {
+        "text": "Traffic Manager と各リージョンのパブリック App Service",
+        "why": "DNS ルーティングはできますが、エッジ WAF、TLS 終端、キャッシュ、Private Link オリジンを単独では提供しません。"
+      },
+      {
+        "text": "Azure Application Gateway を1リージョンに配置する",
+        "why": "リージョン L7 配信であり、グローバル Anycast/エッジ キャッシュには Front Door が適します。"
+      },
+      {
+        "text": "Standard Load Balancer",
+        "why": "L4 リージョン負荷分散で HTTP パス、WAF、キャッシュを提供しません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "グローバル L7、WAF、キャッシュ、プライベート オリジンには Front Door Premium が適します。",
+    "sourceKeys": [
+      "network"
+    ]
+  },
+  {
+    "id": 64,
+    "domain": "インフラストラクチャ",
+    "objective": "リージョン内アプリ配信",
+    "type": "single",
+    "difficulty": "本番強化",
+    "scenario": "1リージョン内の複数 AKS クラスターへ HTTPS を配信します。URL パスとホスト名でルーティングし、TLS 終端、Cookie ベース アフィニティ、Web Application Firewall を提供します。グローバル Anycast や CDN キャッシュは不要です。",
+    "prompt": "推奨すべきサービスはどれですか。",
+    "options": [
+      {
+        "text": "Azure Application Gateway WAF v2",
+        "why": "リージョン内 L7 ルーティング、TLS、アフィニティ、WAF を提供します。"
+      },
+      {
+        "text": "Azure Front Door Premium",
+        "why": "要件を満たせますが、グローバル エッジ機能が不要なリージョン内設計では Application Gateway がより直接的です。"
+      },
+      {
+        "text": "Standard Load Balancer",
+        "why": "L4 分散で HTTP パス/ホスト ルーティングと WAF を提供しません。"
+      },
+      {
+        "text": "Azure Traffic Manager",
+        "why": "DNS ベースで TLS 終端、WAF、Cookie アフィニティを提供しません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "explanation": "単一リージョン内の L7/WAF 要件には Application Gateway WAF v2 が適します。",
+    "sourceKeys": [
+      "network"
+    ]
+  },
+  {
+    "id": 65,
+    "domain": "インフラストラクチャ",
+    "objective": "ネットワークセキュリティ",
+    "type": "multi",
+    "difficulty": "本番強化",
+    "scenario": "App Service から Azure SQL Database と Storage へ接続します。両 PaaS のパブリック ネットワーク アクセスを無効化し、通常の FQDN はプライベート IP へ解決します。App Service から取引先 API への送信元パブリック IP は固定し、高スケール時の SNAT 枯渇も抑えます。",
+    "prompt": "必要なネットワーク コンポーネントを3つ選んでください。",
+    "options": [
+      {
+        "text": "SQL Database と Storage 用の Private Endpoint",
+        "why": "PaaS サービスへプライベート IP で接続できます。"
+      },
+      {
+        "text": "対応する Private DNS ゾーンと VNet リンク",
+        "why": "通常のサービス FQDN を Private Endpoint の IP へ解決できます。"
+      },
+      {
+        "text": "App Service の VNet 統合サブネットに関連付けた NAT Gateway",
+        "why": "固定アウトバウンド IP と大規模 SNAT を提供できます。"
+      },
+      {
+        "text": "Azure Front Door",
+        "why": "受信グローバル HTTP 配信であり、PaaS のプライベート接続と App Service 送信元固定には不要です。"
+      },
+      {
+        "text": "Service Endpoint だけ",
+        "why": "PaaS への仮想ネットワーク制限には使えますが、プライベート IP 化とパブリック アクセス無効化の設計では Private Endpoint が要件に合います。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "explanation": "Private Endpoint、Private DNS、VNet 統合サブネットの NAT Gateway を組み合わせます。",
+    "sourceKeys": [
+      "network"
+    ],
+    "selectCount": 3
   }
 ];
 
@@ -3100,7 +3169,7 @@ window.AZ305_QUESTIONS = [
 
   const QUESTIONS = window.AZ305_QUESTIONS || [];
   const SOURCES = window.AZ305_SOURCES || {};
-  const STORAGE_KEY = "az305-exam-lab-long-scenario-state-v2";
+  const STORAGE_KEY = "az305-exam-lab-expert-state-v1";
   const FULL_DURATION = 120 * 60;
 
   const $ = (id) => document.getElementById(id);
