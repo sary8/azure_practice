@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AZ-305の2026年4月17日版シラバスに準拠し、要件の優先順位・トレードオフ・競合案比較を重視した65問の上級模擬試験アプリ">
-  <title>AZ-305 Exam Lab</title>
+  <meta name="description" content="AZ-305の2026年4月17日版シラバスと直近実試験メモを反映した105問の上級模擬試験アプリ">
+  <title>AZ-305 Exam Lab - Recent Trends v7</title>
   <style>
 
 :root {
@@ -763,6 +763,11 @@ footer {
   background: var(--surface-soft);
 }
 
+
+.hero-actions { align-items: stretch; }
+.hero-actions .btn { min-width: 210px; }
+@media (max-width:680px){ .hero-actions{display:grid;width:100%;}.hero-actions .btn{width:100%;min-width:0;} }
+
 </style>
 </head>
 <body>
@@ -775,7 +780,7 @@ footer {
       </span>
     </a>
     <div class="top-stats" id="top-stats" hidden>
-      <div><span>進捗</span><strong id="header-progress">0 / 65</strong></div>
+      <div><span>進捗</span><strong id="header-progress">0 / 40</strong></div>
       <div><span>正解</span><strong id="header-correct">0</strong></div>
       <div class="timer-wrap"><span>残り時間</span><strong id="timer">02:00:00</strong></div>
     </div>
@@ -785,14 +790,16 @@ footer {
     <section id="start-screen" class="screen start-screen">
       <div class="hero">
         <div class="hero-copy">
-          <span class="eyebrow">Microsoft Learn準拠・2026年4月17日版</span>
-          <h1>暗記では解けない、<br><em>設計比較型</em>の65問。</h1>
-          <p>各問を「必須要件が3つ以上」「誤答も主要要件の大半を満たす」「最後は運用責任・障害単位・コスト・互換性で決まる」という基準で再設計しました。4つの共通ケーススタディと7種類以上の操作形式を収録し、解答後は前提、制約の優先順位、導出、最も近い誤答、条件変更時の別解まで表示します。</p>
+          <span class="eyebrow">Microsoft Learn準拠・2026年4月17日版・実試験トレンド反映版 v7</span>
+          <h1>直近論点を刺しにいく、<br><em>実戦トレンド</em>40問。</h1>
+          <p>実試験直後に回収した Purview、Azure Monitor workspace、SCIM/ECMA、Virtual Kubelet、Gateway Transit、最新バックアップ、VMSS Flexible などを中心に40問を追加しました。設問本文の転載ではなく、同じ判断軸を要求する独自シナリオです。既存65問との全105問モードも選べます。</p>
           <div class="hero-actions">
-            <button class="btn primary large" id="start-button">65問を開始する</button>
+            <button class="btn primary large" id="start-button">実戦トレンド40問を開始</button>
+            <button class="btn secondary large" id="start-all-button">全105問を開始</button>
+            <button class="btn secondary large" id="start-legacy-button">既存65問を開始</button>
             <button class="btn secondary large" id="resume-button" hidden>前回の続きから</button>
           </div>
-          <p class="fineprint">模試換算 1000点満点／700点合格。公式試験のスケールド スコア計算を再現するものではありません。</p>
+          <p class="fineprint">模試換算 1000点満点／700点合格。ダンプ本文は収録せず、記憶した論点と公式仕様から独自問題へ再構成しています。</p>
         </div>
         <div class="score-card" aria-label="模擬試験概要">
           <div class="score-ring">
@@ -801,8 +808,8 @@ footer {
             <small>/ 1000</small>
           </div>
           <div class="score-card-grid">
-            <div><strong>65</strong><span>問題</span></div>
-            <div><strong>120</strong><span>分</span></div>
+            <div><strong>40</strong><span>直近論点</span></div>
+            <div><strong>105</strong><span>全問題</span></div>
             <div><strong>7+</strong><span>出題形式</span></div>
             <div><strong>即時</strong><span>詳細解説</span></div>
           </div>
@@ -826,24 +833,24 @@ footer {
 
       <div class="section-heading">
         <span>EXAM BLUEPRINT</span>
-        <h2>シラバス配分を65問へ反映</h2>
+        <h2>既存65問＋直近論点40問</h2>
       </div>
       <div class="blueprint-grid">
         <article class="blueprint-card">
           <div class="domain-icon">ID</div>
-          <div><strong>18問</strong><h3>ID・ガバナンス・監視</h3><p>Azure Monitor、Microsoft Entra、RBAC、Policy、ランディング ゾーン</p></div>
+          <div><strong>34問</strong><h3>ID・ガバナンス・監視</h3><p>Azure Monitor、Microsoft Entra、RBAC、Policy、ランディング ゾーン</p></div>
         </article>
         <article class="blueprint-card">
           <div class="domain-icon">DB</div>
-          <div><strong>15問</strong><h3>データ ストレージ</h3><p>Azure SQL、Cosmos DB、Storage、Data Factory、分析基盤</p></div>
+          <div><strong>19問</strong><h3>データ ストレージ</h3><p>Azure SQL、Cosmos DB、Storage、Data Factory、分析基盤</p></div>
         </article>
         <article class="blueprint-card">
           <div class="domain-icon">DR</div>
-          <div><strong>11問</strong><h3>事業継続性</h3><p>高可用性、RPO/RTO、Azure Backup、Site Recovery、geo冗長</p></div>
+          <div><strong>16問</strong><h3>事業継続性</h3><p>高可用性、RPO/RTO、Azure Backup、Site Recovery、geo冗長</p></div>
         </article>
         <article class="blueprint-card">
           <div class="domain-icon">AZ</div>
-          <div><strong>21問</strong><h3>インフラストラクチャ</h3><p>Compute、アプリ統合、移行、ハイブリッド接続、負荷分散</p></div>
+          <div><strong>36問</strong><h3>インフラストラクチャ</h3><p>Compute、アプリ統合、移行、ハイブリッド接続、負荷分散</p></div>
         </article>
       </div>
 
@@ -938,7 +945,7 @@ footer {
       <div class="result-actions">
         <button class="btn primary large" id="review-button">解説を見直す</button>
         <button class="btn secondary large" id="retry-wrong-button">不正解だけ再挑戦</button>
-        <button class="btn ghost large" id="reset-button">全65問をリセット</button>
+        <button class="btn ghost large" id="reset-button">解答履歴をリセット</button>
       </div>
     </section>
   </main>
@@ -1028,6 +1035,138 @@ window.AZ305_SOURCES = {
   "landingIdentity": {
     "title": "Azure ランディング ゾーンの ID とアクセス管理",
     "url": "https://learn.microsoft.com/ja-jp/azure/cloud-adoption-framework/ready/landing-zone/design-area/identity-access-landing-zones"
+  },
+  "purviewScan": {
+    "title": "Microsoft Purview のスキャンと接続ランタイム",
+    "url": "https://learn.microsoft.com/purview/register-scan-azure-sql-database"
+  },
+  "monitorWorkspace": {
+    "title": "Azure Monitor workspace の概要",
+    "url": "https://learn.microsoft.com/azure/azure-monitor/metrics/azure-monitor-workspace-overview"
+  },
+  "monitorPrivate": {
+    "title": "Azure Monitor Private Link による VM と Kubernetes の監視",
+    "url": "https://learn.microsoft.com/azure/azure-monitor/fundamentals/private-link-vm-kubernetes"
+  },
+  "containerInsights": {
+    "title": "Container Insights の概要",
+    "url": "https://learn.microsoft.com/azure/azure-monitor/containers/container-insights-overview"
+  },
+  "scim": {
+    "title": "Microsoft Entra の SCIM プロビジョニング",
+    "url": "https://learn.microsoft.com/entra/identity/app-provisioning/use-scim-to-provision-users-and-groups"
+  },
+  "ecma": {
+    "title": "オンプレミス アプリケーション プロビジョニングのアーキテクチャ",
+    "url": "https://learn.microsoft.com/entra/identity/app-provisioning/on-premises-application-provisioning-architecture"
+  },
+  "apiInbound": {
+    "title": "API-driven inbound provisioning",
+    "url": "https://learn.microsoft.com/entra/identity/app-provisioning/inbound-provisioning-api-concepts"
+  },
+  "cloudSync": {
+    "title": "Microsoft Entra Cloud Sync",
+    "url": "https://learn.microsoft.com/entra/identity/hybrid/cloud-sync/what-is-cloud-sync"
+  },
+  "accessReviews": {
+    "title": "Microsoft Entra access reviews",
+    "url": "https://learn.microsoft.com/entra/id-governance/access-reviews-overview"
+  },
+  "appPermissions": {
+    "title": "Microsoft identity platform のアクセス許可と同意",
+    "url": "https://learn.microsoft.com/entra/identity-platform/permissions-consent-overview"
+  },
+  "appConfigExperiment": {
+    "title": "Azure App Configuration のバリアント機能フラグ",
+    "url": "https://learn.microsoft.com/azure/azure-app-configuration/howto-variant-feature-flags"
+  },
+  "appServiceSlots": {
+    "title": "App Service デプロイ スロットとトラフィック ルーティング",
+    "url": "https://learn.microsoft.com/azure/app-service/deploy-staging-slots"
+  },
+  "webJobs": {
+    "title": "Azure App Service WebJobs",
+    "url": "https://learn.microsoft.com/azure/app-service/overview-webjobs"
+  },
+  "tableCompare": {
+    "title": "Azure Table Storage と Azure Cosmos DB for Table の比較",
+    "url": "https://learn.microsoft.com/azure/cosmos-db/table/support"
+  },
+  "alwaysEncrypted": {
+    "title": "Always Encrypted",
+    "url": "https://learn.microsoft.com/sql/relational-databases/security/encryption/always-encrypted-database-engine"
+  },
+  "elasticPool": {
+    "title": "Azure SQL Database エラスティック プール",
+    "url": "https://learn.microsoft.com/azure/azure-sql/database/elastic-pool-overview"
+  },
+  "miPool": {
+    "title": "Azure SQL Managed Instance pools",
+    "url": "https://learn.microsoft.com/azure/azure-sql/managed-instance/instance-pools-overview"
+  },
+  "sqlFailoverGroup": {
+    "title": "Azure SQL Database フェールオーバー グループ",
+    "url": "https://learn.microsoft.com/azure/azure-sql/database/failover-group-sql-db"
+  },
+  "alwaysOn": {
+    "title": "SQL Server Always On 可用性グループ",
+    "url": "https://learn.microsoft.com/sql/database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server"
+  },
+  "blobBackup": {
+    "title": "Azure Blob backup の概要",
+    "url": "https://learn.microsoft.com/azure/backup/blob-backup-overview"
+  },
+  "vmEnhancedBackup": {
+    "title": "Azure VM の Enhanced backup policy",
+    "url": "https://learn.microsoft.com/azure/backup/backup-azure-vms-enhanced-policy"
+  },
+  "diskBackup": {
+    "title": "Azure Disk Backup",
+    "url": "https://learn.microsoft.com/azure/backup/disk-backup-overview"
+  },
+  "mars": {
+    "title": "Azure Backup のスケジュール制限",
+    "url": "https://learn.microsoft.com/azure/backup/backup-azure-backup-faq"
+  },
+  "tags": {
+    "title": "Azure タグによるリソース分類",
+    "url": "https://learn.microsoft.com/azure/azure-resource-manager/management/tag-resources"
+  },
+  "managementGroups": {
+    "title": "Azure management groups",
+    "url": "https://learn.microsoft.com/azure/governance/management-groups/overview"
+  },
+  "migrateCost": {
+    "title": "Azure Migrate のコスト見積もり",
+    "url": "https://learn.microsoft.com/azure/migrate/cost-estimation"
+  },
+  "bastion": {
+    "title": "Azure Bastion の設計と SKU",
+    "url": "https://learn.microsoft.com/azure/bastion/bastion-sku-comparison"
+  },
+  "vmssModes": {
+    "title": "Virtual Machine Scale Sets のオーケストレーション モード",
+    "url": "https://learn.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-orchestration-modes"
+  },
+  "vmssSpread": {
+    "title": "VM Scale Sets の障害ドメイン拡散",
+    "url": "https://learn.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-manage-fault-domains"
+  },
+  "gatewayTransit": {
+    "title": "VNet peering の gateway transit",
+    "url": "https://learn.microsoft.com/azure/vpn-gateway/vpn-gateway-peering-gateway-transit"
+  },
+  "virtualNodes": {
+    "title": "AKS Virtual Nodes と Virtual Kubelet",
+    "url": "https://learn.microsoft.com/azure/aks/virtual-nodes"
+  },
+  "aksScale": {
+    "title": "AKS のスケーリング オプション",
+    "url": "https://learn.microsoft.com/azure/aks/concepts-scale"
+  },
+  "frontDoorRouting": {
+    "title": "Azure Front Door のトラフィック ルーティング",
+    "url": "https://learn.microsoft.com/azure/frontdoor/routing-methods"
   }
 };
 
@@ -7291,6 +7430,3479 @@ window.AZ305_QUESTIONS = [
       "正解案は必須条件を最も直接満たしますが、料金、運用権限、リージョン/SKU対応は実環境で確認が必要です。",
       "最も近い代替案は一部の要件では優れますが、本問の優先条件では追加実装または運用責任が残ります。"
     ]
+  },
+  {
+    "id": 66,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "Microsoft Purview スキャン",
+    "type": "matching",
+    "scenario": "Microsoft Purview から複数の SQL データソースをスキャンします。Azure SQL Database はパブリック エンドポイントを許可する環境と Private Endpoint のみを許可する環境があります。さらに、Azure VM 上とオンプレミスに SQL Server があります。",
+    "prompt": "各データソースに適したスキャン実行基盤を割り当ててください。",
+    "prompts": [
+      {
+        "text": "パブリック接続可能な Azure SQL Database"
+      },
+      {
+        "text": "Private Endpoint のみを許可する Azure SQL Database"
+      },
+      {
+        "text": "Azure VM 上の SQL Server"
+      },
+      {
+        "text": "オンプレミスの SQL Server"
+      }
+    ],
+    "targets": [
+      {
+        "text": "Azure Integration Runtime",
+        "why": "Purview から到達可能な Azure PaaS のパブリック エンドポイントをスキャンできます。"
+      },
+      {
+        "text": "Managed VNet Integration Runtime",
+        "why": "Purview 管理 VNet と Managed Private Endpoint を使用して PaaS へプライベート接続できます。"
+      },
+      {
+        "text": "Self-hosted Integration Runtime",
+        "why": "VM ベースまたはオンプレミスのデータソースへ、配置先ネットワークから接続します。"
+      },
+      {
+        "text": "Azure Functions Runtime",
+        "why": "Purview のスキャン ランタイムではありません。"
+      }
+    ],
+    "options": [
+      {
+        "text": "Azure Integration Runtime",
+        "why": "パブリック接続可能な Azure PaaS 向けです。"
+      },
+      {
+        "text": "Managed VNet Integration Runtime",
+        "why": "Managed Private Endpoint を使う PaaS 向けです。"
+      },
+      {
+        "text": "Self-hosted Integration Runtime",
+        "why": "VM ベースとオンプレミス向けです。"
+      },
+      {
+        "text": "Azure Functions Runtime",
+        "why": "スキャン ランタイムではありません。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      2
+    ],
+    "allowReuse": true,
+    "sourceKeys": [
+      "purviewScan"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "VM ベースの SQL Server は配置場所が Azure でも Self-hosted IR が基本で、PaaS の Azure SQL Database とは分けて考えます。 Private Endpoint の Azure SQL Database に Self-hosted IR を使う案も実現可能ですが、Purview 管理 VNetを使う要件なら Managed VNet IR が管理負荷を抑えます。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドラッグ＆ドロップ",
+    "decisionPoints": [
+      "Microsoft Purview から複数の SQL データソースをスキャンします。",
+      "Azure SQL Database はパブリック エンドポイントを許可する環境と Private Endpoint のみを許可する環境があります。",
+      "さらに、Azure VM 上とオンプレミスに SQL Server があります。"
+    ],
+    "decisiveReason": "VM ベースの SQL Server は配置場所が Azure でも Self-hosted IR が基本で、PaaS の Azure SQL Database とは分けて考えます。",
+    "closestDistractor": "Private Endpoint の Azure SQL Database に Self-hosted IR を使う案も実現可能ですが、Purview 管理 VNetを使う要件なら Managed VNet IR が管理負荷を抑えます。",
+    "counterfactual": "既存の共有 Self-hosted IR がすべてのプライベート データソースへ到達し、管理 VNetを使わない方針なら Azure SQL Databaseにも Self-hosted IRを使えます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "VM ベースの SQL Server は配置場所が Azure でも Self-hosted IR が基本で、PaaS の Azure SQL Database とは分けて考えます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 67,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "Azure Monitor workspace 数",
+    "type": "single",
+    "scenario": "東日本と西ヨーロッパに AKS クラスターがあります。Managed Prometheus のメトリックを保存します。データ所在地の制約はなく、両リージョンのメトリックを同じクエリと Grafana ダッシュボードで比較する必要があります。管理対象を最小化します。",
+    "prompt": "Azure Monitor workspace をいくつ作成すべきですか。",
+    "options": [
+      {
+        "text": "1 個",
+        "why": "要件を満たす最小数で、両クラスターを同じ workspace に接続できます。"
+      },
+      {
+        "text": "リージョンごとに 1 個、合計 2 個",
+        "why": "リージョン分離要件がなく、workspace 間を単一クエリで扱えないため不利です。"
+      },
+      {
+        "text": "クラスターごとに 1 個",
+        "why": "不要な管理境界を増やします。"
+      },
+      {
+        "text": "サブスクリプションごとに 1 個",
+        "why": "workspace 数はサブスクリプション数だけでは決まりません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "monitorWorkspace"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Azure Monitor workspace はまず要件を満たす最小数から始め、同一クエリで比較するなら 1 個へ集約します。 リージョンごとの 2 個はデータ所在地や所有境界がある場合に有効ですが、本問では横断クエリ要件に反します。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "東日本と西ヨーロッパに AKS クラスターがあります。",
+      "Managed Prometheus のメトリックを保存します。",
+      "データ所在地の制約はなく、両リージョンのメトリックを同じクエリと Grafana ダッシュボードで比較する必要があります。"
+    ],
+    "decisiveReason": "Azure Monitor workspace はまず要件を満たす最小数から始め、同一クエリで比較するなら 1 個へ集約します。",
+    "closestDistractor": "リージョンごとの 2 個はデータ所在地や所有境界がある場合に有効ですが、本問では横断クエリ要件に反します。",
+    "counterfactual": "地域ごとのデータ保存規制、別テナント、独立した所有者または取り込み上限があれば workspace を分けます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Azure Monitor workspace はまず要件を満たす最小数から始め、同一クエリで比較するなら 1 個へ集約します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 68,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "Container Insights 保存先",
+    "type": "dropdown",
+    "scenario": "AKS で Container Insights と Managed Prometheus を有効にします。コンテナーの標準出力ログと Prometheus メトリックを、それぞれ既定の適切なデータストアへ保存します。",
+    "prompt": "各データ種類の保存先を選択してください。",
+    "options": [
+      {
+        "text": "Log Analytics workspace",
+        "why": "コンテナー ログ、イベント、インベントリの保存先です。"
+      },
+      {
+        "text": "Azure Monitor workspace",
+        "why": "Managed Prometheus メトリックの保存先です。"
+      },
+      {
+        "text": "Application Insights",
+        "why": "アプリケーション APM 向けで、AKS 基盤ログの既定保存先ではありません。"
+      }
+    ],
+    "fields": [
+      {
+        "label": "コンテナーの stdout / stderr と Kubernetes イベント",
+        "context": "Container Insights のログ データ",
+        "choices": [
+          {
+            "text": "Log Analytics workspace",
+            "why": "KQL でコンテナー ログやインベントリを分析します。"
+          },
+          {
+            "text": "Azure Monitor workspace",
+            "why": "主に Prometheus メトリック向けです。"
+          },
+          {
+            "text": "Storage account",
+            "why": "アーカイブには使えますが Container Insights の主要分析ストアではありません。"
+          }
+        ]
+      },
+      {
+        "label": "Managed Prometheus メトリック",
+        "context": "PromQL と Managed Grafana で利用",
+        "choices": [
+          {
+            "text": "Log Analytics workspace",
+            "why": "従来のログベースメトリックとは異なります。"
+          },
+          {
+            "text": "Azure Monitor workspace",
+            "why": "Prometheus メトリックを保存します。"
+          },
+          {
+            "text": "Application Insights",
+            "why": "アプリのトレースや依存関係向けです。"
+          }
+        ]
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "sourceKeys": [
+      "containerInsights",
+      "monitorWorkspace"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Container Insights のログは Log Analytics、Managed Prometheus のメトリックは Azure Monitor workspace に分けます。 すべてを Log Analytics に送る案は従来構成では見かけますが、Managed Prometheus の保存先を誤っています。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドロップダウン穴埋め",
+    "decisionPoints": [
+      "AKS で Container Insights と Managed Prometheus を有効にします。",
+      "コンテナーの標準出力ログと Prometheus メトリックを、それぞれ既定の適切なデータストアへ保存します。"
+    ],
+    "decisiveReason": "Container Insights のログは Log Analytics、Managed Prometheus のメトリックは Azure Monitor workspace に分けます。",
+    "closestDistractor": "すべてを Log Analytics に送る案は従来構成では見かけますが、Managed Prometheus の保存先を誤っています。",
+    "counterfactual": "Prometheus を使わずログ ベースのメトリックだけを利用する構成なら、Log Analytics 側だけで扱う範囲が増えます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Container Insights のログは Log Analytics、Managed Prometheus のメトリックは Azure Monitor workspace に分けます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 69,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "監視データのプライベート送信",
+    "type": "multi",
+    "scenario": "プライベート AKS クラスターから Log Analytics workspace と Azure Monitor workspace へログと Prometheus メトリックを送信します。インターネットへの監視通信は禁止です。監視用 Private Endpoint は共有ハブ VNet にあります。",
+    "prompt": "必要な構成を3つ選んでください。",
+    "options": [
+      {
+        "text": "Azure Monitor Private Link Scope（AMPLS）",
+        "why": "Azure Monitor リソースと Private Endpoint の監視境界を定義します。"
+      },
+      {
+        "text": "AKS VNet とハブ VNet の VNet peering",
+        "why": "クラスターから共有 Private Endpoint への到達経路を提供します。"
+      },
+      {
+        "text": "必要な DCE と workspace を AMPLS に関連付ける",
+        "why": "構成取得、メトリック取り込み、ログ取り込みに必要なリソースを Private Link 境界へ入れます。"
+      },
+      {
+        "text": "Service Endpoint for Microsoft.Monitor",
+        "why": "Azure Monitor のプライベート取り込みを AMPLS の代わりに実現するものではありません。"
+      },
+      {
+        "text": "Public network access を有効にして NSG で送信先を制限する",
+        "why": "インターネットへの監視通信禁止に反します。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "selectCount": 3,
+    "sourceKeys": [
+      "monitorPrivate"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Peering は経路、AMPLS と Private Endpoint は Azure Monitor 側のプライベート接続、DCE/workspace 関連付けは対象リソースの登録という別々の役割です。 VNet peering だけでは Azure Monitor の公開エンドポイントをプライベート化できません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "複数選択",
+    "decisionPoints": [
+      "プライベート AKS クラスターから Log Analytics workspace と Azure Monitor workspace へログと Prometheus メトリックを送信します。",
+      "インターネットへの監視通信は禁止です。",
+      "監視用 Private Endpoint は共有ハブ VNet にあります。"
+    ],
+    "decisiveReason": "Peering は経路、AMPLS と Private Endpoint は Azure Monitor 側のプライベート接続、DCE/workspace 関連付けは対象リソースの登録という別々の役割です。",
+    "closestDistractor": "VNet peering だけでは Azure Monitor の公開エンドポイントをプライベート化できません。",
+    "counterfactual": "Private Endpoint を AKS と同じ VNet に直接配置するなら VNet peering は不要です。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Peering は経路、AMPLS と Private Endpoint は Azure Monitor 側のプライベート接続、DCE/workspace 関連付けは対象リソースの登録という別々の役割です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 70,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "ID プロビジョニング方式",
+    "type": "matching",
+    "scenario": "Contoso は、オンプレミス AD DS、外部 HR システム、SCIM 非対応のオンプレミス業務アプリ、SCIM 2.0 対応 SaaS を Microsoft Entra と連携します。",
+    "prompt": "各要件に適した機能を割り当ててください。",
+    "prompts": [
+      {
+        "text": "オンプレミス AD DS のユーザーを軽量エージェントで Microsoft Entra ID へ同期する"
+      },
+      {
+        "text": "HR システムが API で人事レコードを送り、Entra ID または AD DS にユーザーを作成する"
+      },
+      {
+        "text": "SQL/LDAP/REST で操作できるが SCIM 非対応のオンプレミス アプリへプロビジョニングする"
+      },
+      {
+        "text": "SCIM 2.0 対応 SaaS へユーザーとグループを作成・更新・無効化する"
+      }
+    ],
+    "targets": [
+      {
+        "text": "Microsoft Entra Cloud Sync",
+        "why": "軽量 provisioning agent を使用したハイブリッド ID 同期です。"
+      },
+      {
+        "text": "API-driven inbound provisioning",
+        "why": "任意のソースから API で受信したレコードをプロビジョニング サービスへ渡します。"
+      },
+      {
+        "text": "ECMA Connector Host",
+        "why": "SCIM 要求を SQL、LDAP、REST、PowerShell などへ変換します。"
+      },
+      {
+        "text": "SCIM provisioning",
+        "why": "標準化されたユーザー・グループのライフサイクル管理です。"
+      },
+      {
+        "text": "SAML federation",
+        "why": "SSO 認証用であり、アカウント作成・無効化の標準ではありません。"
+      }
+    ],
+    "options": [
+      {
+        "text": "Cloud Sync",
+        "why": "AD DS から Entra への同期。"
+      },
+      {
+        "text": "API-driven inbound provisioning",
+        "why": "API 受信型。"
+      },
+      {
+        "text": "ECMA Connector Host",
+        "why": "SCIM 非対応オンプレアプリの変換。"
+      },
+      {
+        "text": "SCIM provisioning",
+        "why": "SCIM 対応 SaaS。"
+      },
+      {
+        "text": "SAML federation",
+        "why": "認証。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sourceKeys": [
+      "cloudSync",
+      "apiInbound",
+      "ecma",
+      "scim"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "認証プロトコルとプロビジョニング方式を分け、対象システムが SCIM を実装しているかで ECMA の必要性を判断します。 SAML はサインインには使えますが、ユーザー作成・更新・削除のライフサイクル要件を満たしません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドラッグ＆ドロップ",
+    "decisionPoints": [
+      "Contoso は、オンプレミス AD DS、外部 HR システム、SCIM 非対応のオンプレミス業務アプリ、SCIM 2.0 対応 SaaS を Microsoft Entra と連携します。"
+    ],
+    "decisiveReason": "認証プロトコルとプロビジョニング方式を分け、対象システムが SCIM を実装しているかで ECMA の必要性を判断します。",
+    "closestDistractor": "SAML はサインインには使えますが、ユーザー作成・更新・削除のライフサイクル要件を満たしません。",
+    "counterfactual": "対象アプリが後から SCIM 2.0 を実装すれば ECMA Connector Host を外し、直接 SCIM 連携できます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "認証プロトコルとプロビジョニング方式を分け、対象システムが SCIM を実装しているかで ECMA の必要性を判断します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 71,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "Access reviews のポータル位置",
+    "type": "dropdown",
+    "scenario": "管理者は、Enterprise Application へのユーザー割り当てと、Azure サブスクリプションの Owner ロール割り当てを定期的にレビューします。",
+    "prompt": "各レビューの主なポータル経路を選んでください。",
+    "options": [
+      {
+        "text": "ID Governance > Access reviews",
+        "why": "グループや Enterprise Application へのアクセス レビューを管理します。"
+      },
+      {
+        "text": "ID Governance > Privileged Identity Management > Azure resources > Access reviews",
+        "why": "Azure リソース ロールのレビューを管理します。"
+      },
+      {
+        "text": "Enterprise applications > Conditional Access",
+        "why": "サインイン制御であり、継続アクセスの再認定ではありません。"
+      }
+    ],
+    "fields": [
+      {
+        "label": "Enterprise Application へのユーザー割り当て",
+        "context": "アプリへの継続アクセスを再認定",
+        "choices": [
+          {
+            "text": "ID Governance > Access reviews",
+            "why": "アプリやグループの access review を作成します。"
+          },
+          {
+            "text": "PIM > Microsoft Entra roles",
+            "why": "ディレクトリ ロール向けです。"
+          },
+          {
+            "text": "Access control (IAM)",
+            "why": "現在の割り当ては表示できますが、Access Review のワークフローではありません。"
+          }
+        ]
+      },
+      {
+        "label": "Azure サブスクリプションの Owner ロール",
+        "context": "Azure resource role の継続アクセスを再認定",
+        "choices": [
+          {
+            "text": "Enterprise applications > Users and groups",
+            "why": "アプリ割り当て向けです。"
+          },
+          {
+            "text": "ID Governance > PIM > Azure resources > Access reviews",
+            "why": "Azure resource role のレビュー経路です。"
+          },
+          {
+            "text": "Defender for Cloud > Recommendations",
+            "why": "アクセス再認定の場所ではありません。"
+          }
+        ]
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "sourceKeys": [
+      "accessReviews"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "一般のアプリ/グループ review と、PIM の Microsoft Entra/Azure resource role review は入口が異なります。 Access control (IAM) は割り当ての確認や変更はできますが、定期レビューの承認ワークフローを提供しません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドロップダウン穴埋め",
+    "decisionPoints": [
+      "管理者は、Enterprise Application へのユーザー割り当てと、Azure サブスクリプションの Owner ロール割り当てを定期的にレビューします。"
+    ],
+    "decisiveReason": "一般のアプリ/グループ review と、PIM の Microsoft Entra/Azure resource role review は入口が異なります。",
+    "closestDistractor": "Access control (IAM) は割り当ての確認や変更はできますが、定期レビューの承認ワークフローを提供しません。",
+    "counterfactual": "Microsoft Entra 管理ロールをレビューする場合は PIM の Microsoft Entra roles を選びます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "一般のアプリ/グループ review と、PIM の Microsoft Entra/Azure resource role review は入口が異なります。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 72,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "アプリ認証と Microsoft Graph 認可",
+    "type": "dropdown",
+    "scenario": "App1 と App2 は Microsoft Entra テナントのユーザーをサインインさせます。App1 はサインイン ユーザー自身のカレンダーを読み取り、App2 は同じユーザー自身のカレンダーを更新します。最小権限と管理作業の最小化が必要です。",
+    "prompt": "認証方式と認可方式を選択してください。",
+    "options": [
+      {
+        "text": "Microsoft Entra ID のアプリケーション登録",
+        "why": "OpenID Connect/OAuth 2.0 によるユーザー サインインと Graph トークン取得に使用します。"
+      },
+      {
+        "text": "委任されたアクセス許可",
+        "why": "サインイン ユーザーの代理として、そのユーザーがアクセス可能なデータへアクセスします。"
+      },
+      {
+        "text": "アプリケーションのアクセス許可",
+        "why": "ユーザーなしでアプリ自身が組織データへアクセスするため、権限が広くなります。"
+      },
+      {
+        "text": "Azure RBAC",
+        "why": "Azure リソースの管理・データ プレーン向けで、Graph カレンダー スコープの代替ではありません。"
+      }
+    ],
+    "fields": [
+      {
+        "label": "認証",
+        "context": "contoso のユーザーが App1 と App2 にサインインする",
+        "choices": [
+          {
+            "text": "各アプリの Microsoft Entra アプリケーション登録",
+            "why": "ユーザー サインインと OAuth/OIDC 構成を保持します。"
+          },
+          {
+            "text": "VM のシステム割り当てマネージド ID",
+            "why": "ワークロード認証であり、対話型ユーザー サインインのアプリ登録を置き換えません。"
+          },
+          {
+            "text": "Azure RBAC",
+            "why": "ユーザー認証プロトコルではありません。"
+          }
+        ]
+      },
+      {
+        "label": "認可",
+        "context": "サインイン ユーザー自身のカレンダーを Read / ReadWrite",
+        "choices": [
+          {
+            "text": "アプリケーションのアクセス許可",
+            "why": "テナント全体へアクセス可能になり得て過剰です。"
+          },
+          {
+            "text": "Azure RBAC",
+            "why": "Microsoft Graph の Calendars 権限ではありません。"
+          },
+          {
+            "text": "委任されたアクセス許可",
+            "why": "App1 に Calendars.Read、App2 に Calendars.ReadWrite を付与できます。"
+          }
+        ]
+      }
+    ],
+    "answer": [
+      0,
+      2
+    ],
+    "sourceKeys": [
+      "appPermissions"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "対話型ユーザーの代理アクセスなので、各アプリを登録し、Microsoft Graph の委任された Calendars.Read / Calendars.ReadWrite を最小限付与します。 アプリケーションのアクセス許可もカレンダーへ到達できますが、ユーザー本人の範囲を超えるため最小権限に反します。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドロップダウン穴埋め",
+    "decisionPoints": [
+      "App1 と App2 は Microsoft Entra テナントのユーザーをサインインさせます。",
+      "App1 はサインイン ユーザー自身のカレンダーを読み取り、App2 は同じユーザー自身のカレンダーを更新します。",
+      "最小権限と管理作業の最小化が必要です。"
+    ],
+    "decisiveReason": "対話型ユーザーの代理アクセスなので、各アプリを登録し、Microsoft Graph の委任された Calendars.Read / Calendars.ReadWrite を最小限付与します。",
+    "closestDistractor": "アプリケーションのアクセス許可もカレンダーへ到達できますが、ユーザー本人の範囲を超えるため最小権限に反します。",
+    "counterfactual": "夜間バッチがユーザーなしで全社カレンダーを処理する要件なら Application permission と管理者同意を検討します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "対話型ユーザーの代理アクセスなので、各アプリを登録し、Microsoft Graph の委任された Calendars.Read / Calendars.ReadWrite を最小限付与します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 73,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "Delegated / Application permission",
+    "type": "yesNo",
+    "scenario": "独自 Web API を AppA から呼び出す認可設計を評価します。",
+    "prompt": "各記述が正しいか判定してください。",
+    "options": [
+      {
+        "text": "Delegated permissions",
+        "why": "ユーザーの代理。"
+      },
+      {
+        "text": "Application permissions / app roles",
+        "why": "アプリ自身。"
+      },
+      {
+        "text": "Azure RBAC",
+        "why": "Azure resource scope。"
+      }
+    ],
+    "statements": [
+      {
+        "text": "サインイン ユーザーの代理で API を呼ぶ場合、API が公開する scope を AppA の Delegated permission として構成する。",
+        "whyYes": "委任アクセスでは OAuth scope とユーザーの権限の両方が評価されます。",
+        "whyNo": "これは正しい記述です。"
+      },
+      {
+        "text": "ユーザーなしのデーモンが API を呼ぶ場合、API 側で Applications を許可した app role を公開し、AppA に Application permission として付与する。",
+        "whyYes": "App-only アクセスでは app role が roles claim に入ります。",
+        "whyNo": "これは正しい記述です。"
+      },
+      {
+        "text": "独自 Web API のスコープを付与する代わりに、常に Azure RBAC の Reader を AppA に割り当てればよい。",
+        "whyYes": "独自 API の OAuth scope/app role を Azure resource RBAC は置き換えません。",
+        "whyNo": "Azure RBAC は対応する Azure resource の管理・データ プレーン権限です。"
+      },
+      {
+        "text": "Delegated permission を持つアプリは、サインイン ユーザーがアクセスできないデータにも常にアクセスできる。",
+        "whyYes": "委任権限は通常ユーザー自身の権限にも制約されます。",
+        "whyNo": "アプリとユーザーの両方が許可される範囲に制限されます。"
+      }
+    ],
+    "answer": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "sourceKeys": [
+      "appPermissions"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "委任アクセスは scope とユーザー、app-only は app role とアプリ自身というトークンの主体の違いで判断します。 Azure RBAC は名前が似ていますが、独自 API の OAuth permissions を定義する仕組みではありません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "Yes / No 連続判定",
+    "decisionPoints": [
+      "独自 Web API を AppA から呼び出す認可設計を評価します。"
+    ],
+    "decisiveReason": "委任アクセスは scope とユーザー、app-only は app role とアプリ自身というトークンの主体の違いで判断します。",
+    "closestDistractor": "Azure RBAC は名前が似ていますが、独自 API の OAuth permissions を定義する仕組みではありません。",
+    "counterfactual": "呼び出し先が Storage や Key Vault など Azure RBAC 対応リソースなら、マネージド IDへのデータ ロール割り当てが正解になります。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "委任アクセスは scope とユーザー、app-only は app role とアプリ自身というトークンの主体の違いで判断します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 74,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "A/B テスト方式",
+    "type": "matching",
+    "scenario": "Contoso は異なる A/B テストと段階展開を実装します。",
+    "prompt": "各要件に適したサービスまたは機能を割り当ててください。",
+    "prompts": [
+      {
+        "text": "同じアプリ バージョン内で UI バリアントをユーザー ID の割合に基づいて安定して割り当て、テレメトリで比較する"
+      },
+      {
+        "text": "App Service の production と staging にデプロイした異なるバージョンへ 90:10 でトラフィックを送り、ユーザーを cookie で固定する"
+      },
+      {
+        "text": "別リージョンの異なる origin へグローバル HTTP トラフィックを重み付きで分散する"
+      },
+      {
+        "text": "キュー長に応じて Kubernetes Pod 数を 0 から増減する"
+      }
+    ],
+    "targets": [
+      {
+        "text": "Azure App Configuration variant feature flags",
+        "why": "ユーザー、グループ、percentile へバリアントを割り当てます。"
+      },
+      {
+        "text": "App Service deployment slots の Traffic %",
+        "why": "スロット間で割合ルーティングし、x-ms-routing-name cookie で固定します。"
+      },
+      {
+        "text": "Azure Front Door weighted routing",
+        "why": "複数 origin の重みでグローバル トラフィックを分散します。"
+      },
+      {
+        "text": "KEDA",
+        "why": "イベントソースに基づき Pod をスケールします。"
+      },
+      {
+        "text": "Azure Traffic Manager priority routing",
+        "why": "優先フェールオーバー向けで A/B の安定した割合割当とは異なります。"
+      }
+    ],
+    "options": [
+      {
+        "text": "App Configuration variants",
+        "why": "機能バリアント。"
+      },
+      {
+        "text": "Deployment slots Traffic %",
+        "why": "App Service バージョン。"
+      },
+      {
+        "text": "Front Door weighted",
+        "why": "Origin 分散。"
+      },
+      {
+        "text": "KEDA",
+        "why": "Pod スケール。"
+      },
+      {
+        "text": "Traffic Manager priority",
+        "why": "優先。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sourceKeys": [
+      "appConfigExperiment",
+      "appServiceSlots",
+      "frontDoorRouting",
+      "aksScale"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "A/B テストの単位が「機能」「App Service スロット」「グローバル origin」「Pod 数」のどれかを見分けます。 単に割合という語だけで Front Door や deployment slot を選ぶと、バリアントの割り当て単位を誤ります。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドラッグ＆ドロップ",
+    "decisionPoints": [
+      "Contoso は異なる A/B テストと段階展開を実装します。"
+    ],
+    "decisiveReason": "A/B テストの単位が「機能」「App Service スロット」「グローバル origin」「Pod 数」のどれかを見分けます。",
+    "closestDistractor": "単に割合という語だけで Front Door や deployment slot を選ぶと、バリアントの割り当て単位を誤ります。",
+    "counterfactual": "統計的な実験ではなく新バージョンのカナリア公開だけなら deployment slot または Front Door の割合分散が適します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "A/B テストの単位が「機能」「App Service スロット」「グローバル origin」「Pod 数」のどれかを見分けます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 75,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "部署別分類",
+    "type": "single",
+    "scenario": "1つのサブスクリプション内に複数部署のリソースがあります。既存のリソース配置を変更せず、Cost Management で部署別にグループ化し、検索や自動化にも同じ分類を使います。",
+    "prompt": "各リソースに何を設定すべきですか。",
+    "options": [
+      {
+        "text": "Department キーを持つ Azure tag",
+        "why": "リソースへ任意のビジネス メタデータを付け、コスト分類や検索に利用できます。"
+      },
+      {
+        "text": "部署ごとの Management Group",
+        "why": "Management Group はサブスクリプションをまとめる階層で、個々のリソースを直接分類しません。"
+      },
+      {
+        "text": "部署ごとの Microsoft Entra administrative unit",
+        "why": "ID オブジェクトの管理スコープであり Azure resource のコスト分類ではありません。"
+      },
+      {
+        "text": "Resource Lock",
+        "why": "削除・変更保護であり分類ではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "tags"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "既存の Azure リソースへ横断的な部署メタデータを付ける要件なので Azure tag を使用します。 Management Group は強力なガバナンス境界ですが、サブスクリプション単位でありリソース単位の分類には粒度が粗すぎます。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "1つのサブスクリプション内に複数部署のリソースがあります。",
+      "既存のリソース配置を変更せず、Cost Management で部署別にグループ化し、検索や自動化にも同じ分類を使います。"
+    ],
+    "decisiveReason": "既存の Azure リソースへ横断的な部署メタデータを付ける要件なので Azure tag を使用します。",
+    "closestDistractor": "Management Group は強力なガバナンス境界ですが、サブスクリプション単位でありリソース単位の分類には粒度が粗すぎます。",
+    "counterfactual": "部署ごとに課金、クォータ、Policy、RBAC を完全分離するなら、部署別 subscription と management group を検討します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "既存の Azure リソースへ横断的な部署メタデータを付ける要件なので Azure tag を使用します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 76,
+    "domain": "インフラストラクチャ",
+    "objective": "移行コスト試算",
+    "type": "single",
+    "scenario": "オンプレミスの VMware 仮想マシンを検出済みです。実測 CPU、メモリ、稼働時間を使用して Azure での適正 VM サイズ、Azure Hybrid Benefit、予約または Savings Plan を考慮した移行後コストを試算します。",
+    "prompt": "主に使用すべきツールはどれですか。",
+    "options": [
+      {
+        "text": "Azure Migrate assessment / business case",
+        "why": "検出した実環境の利用率に基づく適正化と Azure コスト見積もりを提供します。"
+      },
+      {
+        "text": "Azure Pricing Calculator",
+        "why": "設計済み SKU を手入力する見積もりには適しますが、オンプレ実測の検出・適正化は行いません。"
+      },
+      {
+        "text": "Microsoft Cost Management",
+        "why": "移行後の実コスト管理が中心です。"
+      },
+      {
+        "text": "Azure Advisor",
+        "why": "既存 Azure リソースの最適化推奨が中心です。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "migrateCost"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "検出済みオンプレ環境の利用率から移行先を right-size するため、Azure Migrate assessment を使用します。 Pricing Calculator は有用ですが、ユーザーが SKU と使用量を入力する前提で、移行元の性能データを自動評価しません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "オンプレミスの VMware 仮想マシンを検出済みです。",
+      "実測 CPU、メモリ、稼働時間を使用して Azure での適正 VM サイズ、Azure Hybrid Benefit、予約または Savings Plan を考慮した移行後コストを試算します。"
+    ],
+    "decisiveReason": "検出済みオンプレ環境の利用率から移行先を right-size するため、Azure Migrate assessment を使用します。",
+    "closestDistractor": "Pricing Calculator は有用ですが、ユーザーが SKU と使用量を入力する前提で、移行元の性能データを自動評価しません。",
+    "counterfactual": "新規アーキテクチャで移行元データがなく、採用 SKU が決まっている場合は Pricing Calculator が主役になります。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "検出済みオンプレ環境の利用率から移行先を right-size するため、Azure Migrate assessment を使用します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 77,
+    "domain": "データ ストレージ",
+    "objective": "列単位暗号化",
+    "type": "single",
+    "scenario": "Azure SQL Database の Employee テーブルで、SSN 列と Salary 列だけを暗号化します。データベース管理者やデータベース エンジンが平文キーへアクセスできないようにし、アプリケーション ドライバー側で透過的に暗号化・復号します。",
+    "prompt": "どの機能を使用すべきですか。",
+    "options": [
+      {
+        "text": "Always Encrypted",
+        "why": "列暗号化キーと列マスター キーを使用し、クライアント ドライバー側で機密列を保護します。"
+      },
+      {
+        "text": "Transparent Data Encryption",
+        "why": "データファイルとバックアップ全体の保存時暗号化で、選択列を DB 管理者から隠す目的ではありません。"
+      },
+      {
+        "text": "Dynamic Data Masking",
+        "why": "表示をマスクしますが暗号化ではなく、権限のあるクエリから元データを取得できます。"
+      },
+      {
+        "text": "Storage Service Encryption",
+        "why": "Azure Storage の保存時暗号化で SQL 列機能ではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "alwaysEncrypted"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "特定列をクライアント側で保護し、DB エンジンに平文キーを渡さない要件は Always Encrypted です。 TDE は必須の基盤暗号化として重要ですが、データベース エンジンがクエリ処理で平文を扱う点が異なります。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "Azure SQL Database の Employee テーブルで、SSN 列と Salary 列だけを暗号化します。",
+      "データベース管理者やデータベース エンジンが平文キーへアクセスできないようにし、アプリケーション ドライバー側で透過的に暗号化・復号します。"
+    ],
+    "decisiveReason": "特定列をクライアント側で保護し、DB エンジンに平文キーを渡さない要件は Always Encrypted です。",
+    "closestDistractor": "TDE は必須の基盤暗号化として重要ですが、データベース エンジンがクエリ処理で平文を扱う点が異なります。",
+    "counterfactual": "保存メディアの盗難対策だけで、DB 管理者から列を隠す必要がなければ TDE で十分な場合があります。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "特定列をクライアント側で保護し、DB エンジンに平文キーを渡さない要件は Always Encrypted です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 78,
+    "domain": "インフラストラクチャ",
+    "objective": "Azure Bastion ハブ設計",
+    "type": "hotArea",
+    "scenario": "Hub-and-spoke ネットワークがあります。運用担当者はインターネットへ RDP/SSH ポートを公開せず、ハブから3つの peered spoke の VM を管理します。VM に public IP は付けません。Bastion を重複配置せずコストを抑えます。",
+    "prompt": "必要な構成を3つ選んでください。",
+    "options": [
+      {
+        "text": "Hub VNet の AzureBastionSubnet (/26 以上)",
+        "why": "Dedicated Bastion の配置に必要です。"
+      },
+      {
+        "text": "Hub VNet の Azure Bastion Basic 以上",
+        "why": "Basic 以上は peered VNet の VM へ接続できます。"
+      },
+      {
+        "text": "Hub と各 spoke の VNet peering",
+        "why": "Bastion から spoke VM の private IP へ到達させます。"
+      },
+      {
+        "text": "各 VM の Standard public IP",
+        "why": "Bastion 接続では不要で、公開面を増やします。"
+      },
+      {
+        "text": "各 spoke に Bastion Developer",
+        "why": "Developer は peering 非対応で重複コスト/制限が生じます。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "selectCount": 3,
+    "sourceKeys": [
+      "bastion"
+    ],
+    "diagramTitle": "Hub Bastion から peered spokes への管理接続",
+    "diagramSubtitle": "Bastion はハブに1つ、VM は private IP のみ。",
+    "hotspots": [
+      {
+        "label": "Hub\nAzureBastionSubnet /26",
+        "detail": "Dedicated subnet",
+        "why": "Basic 以上の Bastion 用サブネットです。"
+      },
+      {
+        "label": "Hub\nAzure Bastion Basic+",
+        "detail": "RDP/SSH broker",
+        "why": "Peered VNet の VM へ接続できます。"
+      },
+      {
+        "label": "VNet Peering\nHub ↔ Spokes",
+        "detail": "Private reachability",
+        "why": "ハブから spoke の private IP への経路です。"
+      },
+      {
+        "label": "VM public IP",
+        "detail": "Direct Internet exposure",
+        "why": "不要です。"
+      },
+      {
+        "label": "Bastion Developer in each spoke",
+        "detail": "No peering",
+        "why": "Developer SKU は peering をサポートしません。"
+      }
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Bastion Basic 以上をハブに1つ配置し、VNet peering 経由で spoke VM の private IP へ接続します。 各 spoke へ Bastion を配置する案も動作しますが、重複コストと管理が増えます。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ホットエリア",
+    "decisionPoints": [
+      "Hub-and-spoke ネットワークがあります。",
+      "運用担当者はインターネットへ RDP/SSH ポートを公開せず、ハブから3つの peered spoke の VM を管理します。",
+      "VM に public IP は付けません。"
+    ],
+    "decisiveReason": "Bastion Basic 以上をハブに1つ配置し、VNet peering 経由で spoke VM の private IP へ接続します。",
+    "closestDistractor": "各 spoke へ Bastion を配置する案も動作しますが、重複コストと管理が増えます。",
+    "counterfactual": "ハブと spoke が peering されていない、または分離要件で共有管理経路を禁止する場合は個別 Bastion が必要です。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Bastion Basic 以上をハブに1つ配置し、VNet peering 経由で spoke VM の private IP へ接続します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 79,
+    "domain": "インフラストラクチャ",
+    "objective": "Azure Bastion SKU",
+    "type": "single",
+    "scenario": "本番 VM への RDP/SSH セッションを監査のため録画します。Bastion 自体にも public IP を付与せず、完全な private-only deployment にします。",
+    "prompt": "最小の対応 SKU はどれですか。",
+    "options": [
+      {
+        "text": "Developer",
+        "why": "無料ですが共有基盤、1接続、peering 非対応で private-only/session recording 要件を満たしません。"
+      },
+      {
+        "text": "Basic",
+        "why": "Dedicated deployment ですが session recording と private-only はありません。"
+      },
+      {
+        "text": "Standard",
+        "why": "Native client や host scaling はありますが private-only/session recording はありません。"
+      },
+      {
+        "text": "Premium",
+        "why": "Session recording と public IP を持たない private-only deployment を提供します。"
+      }
+    ],
+    "answer": [
+      3
+    ],
+    "sourceKeys": [
+      "bastion"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "セッション録画と private-only の組み合わせは Azure Bastion Premium の決定条件です。 Standard は多くの高度機能を持つため近い誤答ですが、監査録画と private-only が不足します。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "本番 VM への RDP/SSH セッションを監査のため録画します。",
+      "Bastion 自体にも public IP を付与せず、完全な private-only deployment にします。"
+    ],
+    "decisiveReason": "セッション録画と private-only の組み合わせは Azure Bastion Premium の決定条件です。",
+    "closestDistractor": "Standard は多くの高度機能を持つため近い誤答ですが、監査録画と private-only が不足します。",
+    "counterfactual": "public IP を許可し、セッション録画も不要なら Standard または Basic へ下げられます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "セッション録画と private-only の組み合わせは Azure Bastion Premium の決定条件です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 80,
+    "domain": "インフラストラクチャ",
+    "objective": "App Service 定期メンテナンス",
+    "type": "single",
+    "scenario": "既存の Windows App Service で稼働する Web アプリがあります。同じ App Service Plan と同じデプロイ成果物の一部として、ローカル一時ファイルの削除スクリプトを毎時1回実行します。独立したスケールや別リソースは不要で、追加コストと管理を最小化します。",
+    "prompt": "どの機能を使用すべきですか。",
+    "options": [
+      {
+        "text": "スケジュールされた Triggered WebJob",
+        "why": "App Service と同じ環境でスクリプトを CRON 実行でき、別のコンピュート リソースが不要です。"
+      },
+      {
+        "text": "Azure Functions の Timer trigger",
+        "why": "独立スケールが必要な場合に有効ですが、本問では別 Function App の管理が増えます。"
+      },
+      {
+        "text": "Logic Apps の Recurrence trigger",
+        "why": "コネクタ中心のワークフロー向けで、同じ App Service ファイル システム上の処理には遠回りです。"
+      },
+      {
+        "text": "Azure Automation Update Management",
+        "why": "OS 更新管理でありアプリのファイル削除ジョブではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "webJobs"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "既存 App Service と同じライフサイクル・同じ環境で基本的なスケジュール処理を行うため、Triggered WebJob が最小管理です。 Functions Timer でも実装できますが、独立リソースとデプロイを増やすため本問の優先条件で負けます。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "既存の Windows App Service で稼働する Web アプリがあります。",
+      "同じ App Service Plan と同じデプロイ成果物の一部として、ローカル一時ファイルの削除スクリプトを毎時1回実行します。",
+      "独立したスケールや別リソースは不要で、追加コストと管理を最小化します。"
+    ],
+    "decisiveReason": "既存 App Service と同じライフサイクル・同じ環境で基本的なスケジュール処理を行うため、Triggered WebJob が最小管理です。",
+    "closestDistractor": "Functions Timer でも実装できますが、独立リソースとデプロイを増やすため本問の優先条件で負けます。",
+    "counterfactual": "独立したスケール、イベント バインディング、複数アプリからの再利用が必要なら Azure Functions を選びます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "既存 App Service と同じライフサイクル・同じ環境で基本的なスケジュール処理を行うため、Triggered WebJob が最小管理です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 81,
+    "domain": "インフラストラクチャ",
+    "objective": "定期処理サービス選択",
+    "type": "matching",
+    "scenario": "複数の定期処理を最小実装で設計します。",
+    "prompt": "各要件に適した実行方式を割り当ててください。",
+    "prompts": [
+      {
+        "text": "既存 App Service と同じデプロイで毎時スクリプトを実行し、同じファイル システムへアクセスする"
+      },
+      {
+        "text": "コードで実装した処理をサーバーレスに毎時実行し、App Service とは独立してスケールする"
+      },
+      {
+        "text": "毎朝 SaaS コネクタを順番に呼び、承認、条件分岐、再試行をローコードで構成する"
+      },
+      {
+        "text": "Azure VM の OS 管理タスクを中央の Runbook でスケジュールし、PowerShell 資産を再利用する"
+      }
+    ],
+    "targets": [
+      {
+        "text": "Scheduled WebJob",
+        "why": "App Service と同じ環境とデプロイ ライフサイクル。"
+      },
+      {
+        "text": "Azure Functions Timer trigger",
+        "why": "コードのサーバーレス定期実行。"
+      },
+      {
+        "text": "Logic Apps Recurrence trigger",
+        "why": "コネクタとワークフローの定期実行。"
+      },
+      {
+        "text": "Azure Automation Runbook schedule",
+        "why": "運用スクリプトと Azure/Hybrid worker の自動化。"
+      },
+      {
+        "text": "Event Grid subscription",
+        "why": "イベント通知であり時刻スケジュールではありません。"
+      }
+    ],
+    "options": [
+      {
+        "text": "WebJob",
+        "why": "同一 App Service。"
+      },
+      {
+        "text": "Functions Timer",
+        "why": "サーバーレス コード。"
+      },
+      {
+        "text": "Logic Apps",
+        "why": "ローコード連携。"
+      },
+      {
+        "text": "Automation Runbook",
+        "why": "運用スクリプト。"
+      },
+      {
+        "text": "Event Grid",
+        "why": "イベント。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sourceKeys": [
+      "webJobs",
+      "compute"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "スケジュール頻度ではなく、処理のライフサイクル、実装モデル、接続先、スケール境界で選びます。 すべてを Functions に統一することは可能でも、既存 App Service 同居やローコード承認の管理要件を無視します。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドラッグ＆ドロップ",
+    "decisionPoints": [
+      "複数の定期処理を最小実装で設計します。"
+    ],
+    "decisiveReason": "スケジュール頻度ではなく、処理のライフサイクル、実装モデル、接続先、スケール境界で選びます。",
+    "closestDistractor": "すべてを Functions に統一することは可能でも、既存 App Service 同居やローコード承認の管理要件を無視します。",
+    "counterfactual": "単純な HTTP 呼び出しだけなら Logic Apps と Functions のどちらも候補になり、開発言語と運用所有者で決まります。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "スケジュール頻度ではなく、処理のライフサイクル、実装モデル、接続先、スケール境界で選びます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 82,
+    "domain": "データ ストレージ",
+    "objective": "Table Storage と Cosmos DB for Table",
+    "type": "dropdown",
+    "scenario": "既存アプリは Azure Tables SDK と Table API モデルを使用します。ワークロード A は低コストを最優先し PartitionKey と RowKey の単純検索だけを行います。ワークロード B は世界複数リージョン、予測可能な低遅延 SLA、任意プロパティのインデックスを必要とします。",
+    "prompt": "各ワークロードのデータストアを選択してください。",
+    "options": [
+      {
+        "text": "Azure Table Storage",
+        "why": "低コストの key-value/NoSQL テーブルで単純な PartitionKey/RowKey アクセスに適します。"
+      },
+      {
+        "text": "Azure Cosmos DB for Table",
+        "why": "Table API 互換性に加え、グローバル分散、SLA、全プロパティの自動インデックスを提供します。"
+      }
+    ],
+    "fields": [
+      {
+        "label": "ワークロード A",
+        "context": "低コスト、単一リージョン、単純キー検索",
+        "choices": [
+          {
+            "text": "Azure Table Storage",
+            "why": "最小コストと単純アクセスに適します。"
+          },
+          {
+            "text": "Azure Cosmos DB for Table",
+            "why": "要件に対して機能とコストが過剰です。"
+          },
+          {
+            "text": "Azure SQL Database",
+            "why": "既存 Table API モデルの移行が必要です。"
+          }
+        ]
+      },
+      {
+        "label": "ワークロード B",
+        "context": "複数リージョン、低遅延 SLA、任意プロパティ検索",
+        "choices": [
+          {
+            "text": "Azure Table Storage",
+            "why": "セカンダリ インデックスとグローバル分散 SLA が不足します。"
+          },
+          {
+            "text": "Azure Cosmos DB for Table",
+            "why": "Table API を維持しながら要件を満たします。"
+          },
+          {
+            "text": "Azure Files",
+            "why": "ファイル共有でありテーブル データストアではありません。"
+          }
+        ]
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "sourceKeys": [
+      "tableCompare"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Table API を使うという共通点だけで決めず、グローバル分散、インデックス、SLA、コストの要求で分けます。 Cosmos DB for Table は高機能ですが、単純で低頻度のワークロードでは Table Storage の方が経済的です。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドロップダウン穴埋め",
+    "decisionPoints": [
+      "既存アプリは Azure Tables SDK と Table API モデルを使用します。",
+      "ワークロード A は低コストを最優先し PartitionKey と RowKey の単純検索だけを行います。",
+      "ワークロード B は世界複数リージョン、予測可能な低遅延 SLA、任意プロパティのインデックスを必要とします。"
+    ],
+    "decisiveReason": "Table API を使うという共通点だけで決めず、グローバル分散、インデックス、SLA、コストの要求で分けます。",
+    "closestDistractor": "Cosmos DB for Table は高機能ですが、単純で低頻度のワークロードでは Table Storage の方が経済的です。",
+    "counterfactual": "将来ワークロード A に低遅延 SLAや任意プロパティ検索が追加されたら Cosmos DB for Table へ移行します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Table API を使うという共通点だけで決めず、グローバル分散、インデックス、SLA、コストの要求で分けます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 83,
+    "domain": "データ ストレージ",
+    "objective": "Cosmos DB for Table スループット",
+    "type": "single",
+    "scenario": "Table API を維持したまま、重要なテーブルが他テーブルのトラフィックに影響されないよう、そのテーブル専用の予約済み RU/s を割り当てます。グローバル分散も必要です。",
+    "prompt": "どのサービスと課金構成を選ぶべきですか。",
+    "options": [
+      {
+        "text": "Azure Table Storage のプロビジョニング済み IOPS",
+        "why": "Table Storage は RU/s の専用予約モデルを提供しません。"
+      },
+      {
+        "text": "Azure Cosmos DB for Table のテーブル専用プロビジョニング スループット",
+        "why": "テーブル単位で専用 RU/s を割り当て、他テーブルから性能を分離できます。"
+      },
+      {
+        "text": "Azure Files Premium の provisioned v2",
+        "why": "ファイル共有の IOPS/throughput で Table API ではありません。"
+      },
+      {
+        "text": "Cosmos DB dedicated gateway のみ",
+        "why": "接続・キャッシュ層であり、テーブル専用 RU/s の代替ではありません。"
+      }
+    ],
+    "answer": [
+      1
+    ],
+    "sourceKeys": [
+      "tableCompare"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Table API とテーブル専用の予約スループットという組み合わせから Cosmos DB for Table の dedicated throughput を選びます。 Dedicated gateway は名称が近いですが、要求されているのはデータベース/テーブルの RU/s 分離です。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "Table API を維持したまま、重要なテーブルが他テーブルのトラフィックに影響されないよう、そのテーブル専用の予約済み RU/s を割り当てます。",
+      "グローバル分散も必要です。"
+    ],
+    "decisiveReason": "Table API とテーブル専用の予約スループットという組み合わせから Cosmos DB for Table の dedicated throughput を選びます。",
+    "closestDistractor": "Dedicated gateway は名称が近いですが、要求されているのはデータベース/テーブルの RU/s 分離です。",
+    "counterfactual": "複数テーブルの負荷ピークがずれ、共有容量でコスト最適化するなら database-level shared throughput を検討します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Table API とテーブル専用の予約スループットという組み合わせから Cosmos DB for Table の dedicated throughput を選びます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 84,
+    "domain": "データ ストレージ",
+    "objective": "Azure SQL コンピュート共有方式",
+    "type": "matching",
+    "scenario": "複数の SQL ワークロードに適した共有・分離モデルを選択します。",
+    "prompt": "各要件に適したサービスを割り当ててください。",
+    "prompts": [
+      {
+        "text": "多数の Azure SQL Database がピーク時間を共有し、プール全体の vCore を共有しながら DB ごとに最小/最大を設定する"
+      },
+      {
+        "text": "小規模な複数 Azure SQL Managed Instance を共有仮想クラスターへ配置して、インスタンスごとの分離を維持しながらコストを下げる"
+      },
+      {
+        "text": "単一 Azure SQL Database が断続的に使われ、アイドル時に自動一時停止して秒単位課金する"
+      },
+      {
+        "text": "SQL Server Agent、OS アクセス、サードパーティ エージェントを含む完全な SQL Server インスタンスを保持する"
+      }
+    ],
+    "targets": [
+      {
+        "text": "Azure SQL Database elastic pool",
+        "why": "複数データベースがプール リソースを共有します。"
+      },
+      {
+        "text": "Azure SQL Managed Instance pool",
+        "why": "複数の Managed Instance を共有仮想クラスターへ配置します。"
+      },
+      {
+        "text": "Azure SQL Database serverless compute",
+        "why": "単一 DB が自動スケール/自動一時停止します。"
+      },
+      {
+        "text": "SQL Server on Azure VM",
+        "why": "OS と SQL Server インスタンスを完全に制御します。"
+      },
+      {
+        "text": "Azure Synapse serverless SQL pool",
+        "why": "データレイク クエリ向けで OLTP SQL Database の自動一時停止モデルではありません。"
+      }
+    ],
+    "options": [
+      {
+        "text": "Elastic pool",
+        "why": "DB 共有。"
+      },
+      {
+        "text": "MI pool",
+        "why": "MI 共有基盤。"
+      },
+      {
+        "text": "Serverless DB",
+        "why": "断続単一DB。"
+      },
+      {
+        "text": "SQL VM",
+        "why": "完全制御。"
+      },
+      {
+        "text": "Synapse serverless",
+        "why": "分析。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sourceKeys": [
+      "elasticPool",
+      "miPool",
+      "relational"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "「各データベース」「各 Managed Instance」「単一 DB」「OS を含むインスタンス」のどの単位で分離するかが決定条件です。 Elastic pool と MI pool は名前が似ていますが、共有する対象が database か managed instance かで異なります。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドラッグ＆ドロップ",
+    "decisionPoints": [
+      "複数の SQL ワークロードに適した共有・分離モデルを選択します。"
+    ],
+    "decisiveReason": "「各データベース」「各 Managed Instance」「単一 DB」「OS を含むインスタンス」のどの単位で分離するかが決定条件です。",
+    "closestDistractor": "Elastic pool と MI pool は名前が似ていますが、共有する対象が database か managed instance かで異なります。",
+    "counterfactual": "インスタンス レベル機能を不要にできるなら MI pool から SQL Database elastic pool へ下げてコストを削減できます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "「各データベース」「各 Managed Instance」「単一 DB」「OS を含むインスタンス」のどの単位で分離するかが決定条件です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 85,
+    "domain": "事業継続性",
+    "objective": "SQL 高可用性と DR",
+    "type": "matching",
+    "scenario": "SQL ワークロードの可用性要件に適した機能を選択します。",
+    "prompt": "各要件に適した機能を割り当ててください。",
+    "prompts": [
+      {
+        "text": "Azure SQL Database の複数 DB を別リージョンへまとめて複製し、接続文字列を変えない read-write listener でグループ単位にフェールオーバーする"
+      },
+      {
+        "text": "SQL Server on Azure VM で複数 DB を一緒にフェールオーバーし、同期コミットと readable secondary を制御する"
+      },
+      {
+        "text": "Azure SQL Database の単一 DB に最大4つの readable geo-secondary を作成し、個別にフェールオーバーする"
+      },
+      {
+        "text": "Azure SQL Database のリージョン内のゾーン障害に対し、アプリ変更なしでサービス内高可用性を強化する"
+      }
+    ],
+    "targets": [
+      {
+        "text": "Azure SQL failover group",
+        "why": "複数 DB、別リージョン、安定した listener endpoint。"
+      },
+      {
+        "text": "SQL Server Always On availability group",
+        "why": "VM/SQL Server の database-level AG。"
+      },
+      {
+        "text": "Active geo-replication",
+        "why": "単一 DB と複数 readable geo-secondary。"
+      },
+      {
+        "text": "Zone redundancy",
+        "why": "同一リージョンの可用性ゾーン障害対策。"
+      },
+      {
+        "text": "Failover cluster instance",
+        "why": "SQL instance 単位の共有ストレージ フェールオーバー。"
+      }
+    ],
+    "options": [
+      {
+        "text": "Failover group",
+        "why": "PaaS 複数DB。"
+      },
+      {
+        "text": "Always On AG",
+        "why": "SQL VM。"
+      },
+      {
+        "text": "Active geo-replication",
+        "why": "単一DB。"
+      },
+      {
+        "text": "Zone redundancy",
+        "why": "リージョン内。"
+      },
+      {
+        "text": "FCI",
+        "why": "instance。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sourceKeys": [
+      "sqlFailoverGroup",
+      "alwaysOn"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "PaaS か SQL Server、フェールオーバー単位が複数 DB/単一 DB/instance、障害範囲が region/zone のどれかで判断します。 Always On という総称だけで Azure SQL failover group と混同しないことが重要です。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドラッグ＆ドロップ",
+    "decisionPoints": [
+      "SQL ワークロードの可用性要件に適した機能を選択します。"
+    ],
+    "decisiveReason": "PaaS か SQL Server、フェールオーバー単位が複数 DB/単一 DB/instance、障害範囲が region/zone のどれかで判断します。",
+    "closestDistractor": "Always On という総称だけで Azure SQL failover group と混同しないことが重要です。",
+    "counterfactual": "SQL Managed Instance のリージョン DR なら Managed Instance failover group が対応します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "PaaS か SQL Server、フェールオーバー単位が複数 DB/単一 DB/instance、障害範囲が region/zone のどれかで判断します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 86,
+    "domain": "インフラストラクチャ",
+    "objective": "VMSS Flexible orchestration",
+    "type": "single",
+    "scenario": "1つの Virtual Machine Scale Set で、異なる VM サイズを混在させ、Spot と通常優先度の VM を組み合わせます。各 VM は標準 Azure VM API、タグ、RBAC、Backup で個別管理する必要があります。",
+    "prompt": "どのオーケストレーション モードを使用すべきですか。",
+    "options": [
+      {
+        "text": "Uniform orchestration",
+        "why": "同一 VM プロファイルを大規模に展開するモデルで、個別標準 VM 管理と混在要件に不向きです。"
+      },
+      {
+        "text": "Flexible orchestration",
+        "why": "標準 IaaS VM をグループ化し、混在 VM タイプや Spot/通常の組み合わせ、個別管理をサポートします。"
+      },
+      {
+        "text": "Availability set",
+        "why": "異なる VM は配置できますが、Scale Set の自動スケールと統合管理を提供しません。"
+      },
+      {
+        "text": "Dedicated Host group",
+        "why": "物理ホスト分離であり Scale Set の混在管理要件ではありません。"
+      }
+    ],
+    "answer": [
+      1
+    ],
+    "sourceKeys": [
+      "vmssModes"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "異なる VM タイプと標準 VM API による個別ライフサイクル管理が Flexible orchestration の決定条件です。 Availability set も異種 VM を配置できますが、Scale Set としての autoscale と大規模オーケストレーションが不足します。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "1つの Virtual Machine Scale Set で、異なる VM サイズを混在させ、Spot と通常優先度の VM を組み合わせます。",
+      "各 VM は標準 Azure VM API、タグ、RBAC、Backup で個別管理する必要があります。"
+    ],
+    "decisiveReason": "異なる VM タイプと標準 VM API による個別ライフサイクル管理が Flexible orchestration の決定条件です。",
+    "closestDistractor": "Availability set も異種 VM を配置できますが、Scale Set としての autoscale と大規模オーケストレーションが不足します。",
+    "counterfactual": "すべてのインスタンスを同一イメージ・同一サイズで最大限単純に管理するなら Uniform が適します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "異なる VM タイプと標準 VM API による個別ライフサイクル管理が Flexible orchestration の決定条件です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 87,
+    "domain": "インフラストラクチャ",
+    "objective": "VMSS 障害ドメイン拡散",
+    "type": "dropdown",
+    "scenario": "VM Scale Set の障害ドメイン配置を設計します。ワークロード A は可能な限り多くの障害ドメインへ best-effort で分散し、割り当て成功率を優先します。ワークロード B は正確に3つの障害ドメインへ均等配置し、3つを確保できなければデプロイを失敗させます。",
+    "prompt": "各ワークロードの spreading 設定を選んでください。",
+    "options": [
+      {
+        "text": "Max spreading",
+        "why": "platformFaultDomainCount=1 で Azure が可能な限り分散します。"
+      },
+      {
+        "text": "Fixed spreading",
+        "why": "platformFaultDomainCount>1 で指定数の障害ドメインを要求します。"
+      }
+    ],
+    "fields": [
+      {
+        "label": "ワークロード A",
+        "context": "最大限分散、割り当て成功率を優先",
+        "choices": [
+          {
+            "text": "Max spreading（platformFaultDomainCount = 1）",
+            "why": "暗黙的に可能な限り多くの障害ドメインへ分散します。"
+          },
+          {
+            "text": "Fixed spreading = 3",
+            "why": "3 FD を確保できない場合は割り当て失敗の可能性があります。"
+          },
+          {
+            "text": "Single placement group = true",
+            "why": "placement group は spreading の代替ではありません。"
+          }
+        ]
+      },
+      {
+        "label": "ワークロード B",
+        "context": "正確に3 FD、満たせなければ失敗",
+        "choices": [
+          {
+            "text": "Max spreading",
+            "why": "FD 数を正確に保証しません。"
+          },
+          {
+            "text": "Fixed spreading（platformFaultDomainCount = 3）",
+            "why": "指定した FD 数へ配置する要件です。"
+          },
+          {
+            "text": "Availability zone = 1",
+            "why": "ゾーン指定だけでは FD 数を3に固定しません。"
+          }
+        ]
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "sourceKeys": [
+      "vmssSpread"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Max は best-effort と割り当て柔軟性、Fixed は指定 FD 数のハード制約です。 「1」という値から単一障害ドメインと誤解しやすいですが、Max spreading の platformFaultDomainCount=1 は暗黙的分散を意味します。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドロップダウン穴埋め",
+    "decisionPoints": [
+      "VM Scale Set の障害ドメイン配置を設計します。",
+      "ワークロード A は可能な限り多くの障害ドメインへ best-effort で分散し、割り当て成功率を優先します。",
+      "ワークロード B は正確に3つの障害ドメインへ均等配置し、3つを確保できなければデプロイを失敗させます。"
+    ],
+    "decisiveReason": "Max は best-effort と割り当て柔軟性、Fixed は指定 FD 数のハード制約です。",
+    "closestDistractor": "「1」という値から単一障害ドメインと誤解しやすいですが、Max spreading の platformFaultDomainCount=1 は暗黙的分散を意味します。",
+    "counterfactual": "各レプリカを特定のハードウェア分離単位へ明示配置する必要があれば Flexible で FD を指定する設計も検討します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Max は best-effort と割り当て柔軟性、Fixed は指定 FD 数のハード制約です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 88,
+    "domain": "インフラストラクチャ",
+    "objective": "VMSS Flexible 特性",
+    "type": "yesNo",
+    "scenario": "Virtual Machine Scale Sets の Flexible orchestration を評価します。",
+    "prompt": "各記述が正しいか判定してください。",
+    "options": [
+      {
+        "text": "Flexible",
+        "why": "標準 VM ベース。"
+      },
+      {
+        "text": "Uniform",
+        "why": "同一プロファイル。"
+      }
+    ],
+    "statements": [
+      {
+        "text": "Flexible の VM は標準 Azure IaaS VM API で管理できる。",
+        "whyYes": "Flexible は標準 VM を scale set に所属させます。",
+        "whyNo": "これは正しい記述です。"
+      },
+      {
+        "text": "Flexible では同一 Scale Set 内のすべての VM が必ず同じサイズでなければならない。",
+        "whyYes": "Flexible は条件に応じて異なる VM タイプを混在できます。",
+        "whyNo": "同一プロファイル強制は Uniform の特徴です。"
+      },
+      {
+        "text": "オーケストレーション モードは Scale Set 作成後に Flexible と Uniform の間で変更できる。",
+        "whyYes": "モードは作成時に決まり変更できません。",
+        "whyNo": "作り直しまたは移行設計が必要です。"
+      },
+      {
+        "text": "Flexible は Azure Backup や Azure Site Recovery など標準 VM 管理機能との互換性が高い。",
+        "whyYes": "標準 VM リソースとして管理されます。",
+        "whyNo": "これは正しい記述です。"
+      }
+    ],
+    "answer": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "sourceKeys": [
+      "vmssModes"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Flexible は標準 VM の個別性と Scale Set の可用性/スケールを組み合わせるモードです。 Uniform の知識をそのまま当てはめると、同一サイズ強制や標準 VM API 非対応を誤って判断します。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "Yes / No 連続判定",
+    "decisionPoints": [
+      "Virtual Machine Scale Sets の Flexible orchestration を評価します。"
+    ],
+    "decisiveReason": "Flexible は標準 VM の個別性と Scale Set の可用性/スケールを組み合わせるモードです。",
+    "closestDistractor": "Uniform の知識をそのまま当てはめると、同一サイズ強制や標準 VM API 非対応を誤って判断します。",
+    "counterfactual": "InfiniBand や Uniform 固有機能など、ワークロード要件によっては Uniform が必要な場合があります。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Flexible は標準 VM の個別性と Scale Set の可用性/スケールを組み合わせるモードです。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 89,
+    "domain": "インフラストラクチャ",
+    "objective": "AKS serverless burst",
+    "type": "single",
+    "scenario": "AKS の通常ノードは平均負荷分だけ維持します。急激なピーク時は VM ノードの起動を待たずに Pod を数秒で追加し、追加 Pod の実行時間に対して秒単位で課金します。Kubernetes のマニフェストとスケジューラを維持します。",
+    "prompt": "何を有効にすべきですか。",
+    "options": [
+      {
+        "text": "AKS Virtual Nodes（Virtual Kubelet）による Azure Container Instances へのバースト",
+        "why": "ACI を仮想 Kubernetes ノードとして公開し、Pod 実行時間分だけ課金できます。"
+      },
+      {
+        "text": "Cluster Autoscaler のみ",
+        "why": "VMSS ノードを追加するため起動に時間がかかり、VM 単位課金です。"
+      },
+      {
+        "text": "Horizontal Pod Autoscaler のみ",
+        "why": "Pod 数は増やしますが、配置可能なノード容量をサーバーレスに追加しません。"
+      },
+      {
+        "text": "Azure Functions Premium",
+        "why": "Kubernetes Pod を AKS スケジューラで実行する機能ではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "virtualNodes"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "「Virtual Kubelet」「ACI」「秒単位課金」「VM ノードを待たない」という条件から AKS Virtual Nodes を選びます。 KEDA は Pod 数をイベント駆動で決めますが、その Pod を従量課金 ACI で実行する基盤そのものではありません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "AKS の通常ノードは平均負荷分だけ維持します。",
+      "急激なピーク時は VM ノードの起動を待たずに Pod を数秒で追加し、追加 Pod の実行時間に対して秒単位で課金します。",
+      "Kubernetes のマニフェストとスケジューラを維持します。"
+    ],
+    "decisiveReason": "「Virtual Kubelet」「ACI」「秒単位課金」「VM ノードを待たない」という条件から AKS Virtual Nodes を選びます。",
+    "closestDistractor": "KEDA は Pod 数をイベント駆動で決めますが、その Pod を従量課金 ACI で実行する基盤そのものではありません。",
+    "counterfactual": "長時間安定して動く Pod は通常ノードの方が安価な場合があり、Virtual Nodes はバースト部分に限定します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "「Virtual Kubelet」「ACI」「秒単位課金」「VM ノードを待たない」という条件から AKS Virtual Nodes を選びます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 90,
+    "domain": "インフラストラクチャ",
+    "objective": "AKS スケーラー比較",
+    "type": "matching",
+    "scenario": "AKS で異なるスケール課題を解決します。",
+    "prompt": "各課題に適した機能を割り当ててください。",
+    "prompts": [
+      {
+        "text": "CPU 使用率に応じて Deployment の Pod レプリカ数を増減する"
+      },
+      {
+        "text": "Service Bus キュー長に応じて Pod を 0 から N へイベント駆動で増減する"
+      },
+      {
+        "text": "Pending Pod を配置できないとき、VMSS node pool の VM 数を増やす"
+      },
+      {
+        "text": "VM ノードを増やさず、追加 Pod を ACI の従量課金基盤へ即時配置する"
+      }
+    ],
+    "targets": [
+      {
+        "text": "Horizontal Pod Autoscaler",
+        "why": "CPU/メモリ/カスタム メトリックで Pod 数を調整します。"
+      },
+      {
+        "text": "KEDA",
+        "why": "外部イベント ソースを使い scale-to-zero を実現します。"
+      },
+      {
+        "text": "Cluster Autoscaler",
+        "why": "node pool の VM 数を調整します。"
+      },
+      {
+        "text": "Virtual Nodes / Virtual Kubelet",
+        "why": "ACI を仮想ノードとして Pod 容量を追加します。"
+      },
+      {
+        "text": "Vertical Pod Autoscaler",
+        "why": "Pod の resource requests/limits を調整します。"
+      }
+    ],
+    "options": [
+      {
+        "text": "HPA",
+        "why": "Pod CPU。"
+      },
+      {
+        "text": "KEDA",
+        "why": "イベント。"
+      },
+      {
+        "text": "Cluster Autoscaler",
+        "why": "VM node。"
+      },
+      {
+        "text": "Virtual Nodes",
+        "why": "ACI。"
+      },
+      {
+        "text": "VPA",
+        "why": "Pod size。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sourceKeys": [
+      "aksScale",
+      "virtualNodes"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Pod 数、ノード数、外部イベント、実行基盤の4つを分離します。 HPA と Cluster Autoscaler は連携しますが、同じ対象をスケールするわけではありません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドラッグ＆ドロップ",
+    "decisionPoints": [
+      "AKS で異なるスケール課題を解決します。"
+    ],
+    "decisiveReason": "Pod 数、ノード数、外部イベント、実行基盤の4つを分離します。",
+    "closestDistractor": "HPA と Cluster Autoscaler は連携しますが、同じ対象をスケールするわけではありません。",
+    "counterfactual": "AKS Automatic では複数スケーラーが既定有効でも、設問では個々の役割を答えます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Pod 数、ノード数、外部イベント、実行基盤の4つを分離します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 91,
+    "domain": "インフラストラクチャ",
+    "objective": "VNet Gateway 数",
+    "type": "single",
+    "scenario": "1つの Hub VNet と4つの Spoke VNet があります。オンプレミスとは Site-to-Site VPN で接続します。すべての Spoke は Hub と peering 済みで、Spoke ごとに独立したオンプレ接続や異なる VPN ポリシーは不要です。コストを最小化します。",
+    "prompt": "必要な Azure VPN Gateway は最小いくつですか。",
+    "options": [
+      {
+        "text": "1 個",
+        "why": "Hub に gateway を配置し、gateway transit で全 Spoke が共有できます。"
+      },
+      {
+        "text": "4 個",
+        "why": "各 Spoke に置く必要はありません。"
+      },
+      {
+        "text": "5 個",
+        "why": "Hub と全 Spoke に配置すると重複します。"
+      },
+      {
+        "text": "0 個",
+        "why": "オンプレミスとの S2S VPN 終端には gateway が必要です。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "gatewayTransit"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Hub の1 Gatewayを Allow gateway transit / Use remote gateways で共有できるため最小1個です。 VNet peering が非推移的という知識から Spoke ごとに Gateway が必要と誤解しやすいですが、gateway transit は専用機能です。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "1つの Hub VNet と4つの Spoke VNet があります。",
+      "オンプレミスとは Site-to-Site VPN で接続します。",
+      "すべての Spoke は Hub と peering 済みで、Spoke ごとに独立したオンプレ接続や異なる VPN ポリシーは不要です。"
+    ],
+    "decisiveReason": "Hub の1 Gatewayを Allow gateway transit / Use remote gateways で共有できるため最小1個です。",
+    "closestDistractor": "VNet peering が非推移的という知識から Spoke ごとに Gateway が必要と誤解しやすいですが、gateway transit は専用機能です。",
+    "counterfactual": "Spoke ごとに異なるオンプレ拠点、独立障害境界、異なる Gateway SKU/ポリシーが必要なら複数 Gateway を検討します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Hub の1 Gatewayを Allow gateway transit / Use remote gateways で共有できるため最小1個です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 92,
+    "domain": "インフラストラクチャ",
+    "objective": "Gateway Transit 構成",
+    "type": "buildList",
+    "scenario": "Hub VNet の既存 VPN Gateway を Spoke VNet から共有します。Hub と Spoke はまだ peering されていません。",
+    "prompt": "構成手順を正しい順序に並べてください。",
+    "items": [
+      {
+        "text": "Hub VNet に VPN Gateway とオンプレミス接続を構成する",
+        "why": "共有元 Gateway を準備します。"
+      },
+      {
+        "text": "Hub から Spoke への peering を作成し、Allow gateway transit を有効にする",
+        "why": "Hub 側で Gateway の共有を許可します。"
+      },
+      {
+        "text": "Spoke から Hub への peering を作成し、Use remote gateways を有効にする",
+        "why": "Spoke 側で Hub Gateway を使用します。"
+      },
+      {
+        "text": "Spoke のルート伝播とオンプレミス到達性を検証する",
+        "why": "BGP/UDR/NSG を含めて確認します。"
+      },
+      {
+        "text": "Spoke に2つ目の VPN Gateway を作成する",
+        "why": "Remote Gateway と自前 Gateway の同時利用は不要です。"
+      },
+      {
+        "text": "VNet peering を削除する",
+        "why": "Gateway transit には peering が必要です。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "requiredCount": 4,
+    "options": [
+      {
+        "text": "Gateway transit",
+        "why": "Hub gateway共有。"
+      }
+    ],
+    "sourceKeys": [
+      "gatewayTransit"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "共有元 Gateway、Hub peering の許可、Spoke peering の利用、疎通検証の順です。 Spoke に Gateway を作成すると Use remote gateways と競合し、コスト最小化にも反します。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "リストの作成",
+    "decisionPoints": [
+      "Hub VNet の既存 VPN Gateway を Spoke VNet から共有します。",
+      "Hub と Spoke はまだ peering されていません。"
+    ],
+    "decisiveReason": "共有元 Gateway、Hub peering の許可、Spoke peering の利用、疎通検証の順です。",
+    "closestDistractor": "Spoke に Gateway を作成すると Use remote gateways と競合し、コスト最小化にも反します。",
+    "counterfactual": "Virtual WAN hub を採用する場合は VNet connection と hub route table を使う別設計になります。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "共有元 Gateway、Hub peering の許可、Spoke peering の利用、疎通検証の順です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 93,
+    "domain": "事業継続性",
+    "objective": "Azure VM 4時間バックアップ",
+    "type": "dropdown",
+    "scenario": "Azure VM 全体を4時間ごとにバックアップし、OS ディスクと複数データ ディスクから VM を復元します。バックアップは Azure Backup のポリシーで管理します。",
+    "prompt": "Vault とポリシーを選択してください。",
+    "options": [
+      {
+        "text": "Recovery Services vault",
+        "why": "Azure VM backup の保護管理に使用します。"
+      },
+      {
+        "text": "Enhanced backup policy",
+        "why": "Azure VM を最短4時間ごとに複数回/日バックアップできます。"
+      },
+      {
+        "text": "Standard backup policy",
+        "why": "通常1日1回です。"
+      },
+      {
+        "text": "Backup vault + Azure Disk Backup",
+        "why": "ディスク単体の operational snapshot で、VM 全体復元の主目的とは異なります。"
+      }
+    ],
+    "fields": [
+      {
+        "label": "保護対象と Vault",
+        "context": "Azure VM 全体を復元",
+        "choices": [
+          {
+            "text": "Recovery Services vault の Azure VM backup",
+            "why": "VM 構成とディスクの保護に使用します。"
+          },
+          {
+            "text": "Backup vault の Azure Blob backup",
+            "why": "Blob データ向けです。"
+          },
+          {
+            "text": "Storage account snapshot",
+            "why": "ポリシー管理された VM backup ではありません。"
+          }
+        ]
+      },
+      {
+        "label": "ポリシー",
+        "context": "4時間ごとの複数回/日",
+        "choices": [
+          {
+            "text": "Standard policy",
+            "why": "1日1回が基本です。"
+          },
+          {
+            "text": "Enhanced policy",
+            "why": "4、6、8、12、24時間など複数回/日を構成できます。"
+          },
+          {
+            "text": "MARS daily policy",
+            "why": "VM 内ファイル/フォルダー向けで VM 全体バックアップではありません。"
+          }
+        ]
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "sourceKeys": [
+      "vmEnhancedBackup"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "VM 全体と4時間間隔の組み合わせは Recovery Services vault の Enhanced policy です。 Azure Disk Backup も4時間間隔を構成できますが、ディスク スナップショット単位で VM 構成・アプリ整合性の要件が異なります。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドロップダウン穴埋め",
+    "decisionPoints": [
+      "Azure VM 全体を4時間ごとにバックアップし、OS ディスクと複数データ ディスクから VM を復元します。",
+      "バックアップは Azure Backup のポリシーで管理します。"
+    ],
+    "decisiveReason": "VM 全体と4時間間隔の組み合わせは Recovery Services vault の Enhanced policy です。",
+    "closestDistractor": "Azure Disk Backup も4時間間隔を構成できますが、ディスク スナップショット単位で VM 構成・アプリ整合性の要件が異なります。",
+    "counterfactual": "ディスクだけを高頻度に保護し、Vault tier の長期保管や VM 全体復元が不要なら Azure Disk Backup が候補です。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "VM 全体と4時間間隔の組み合わせは Recovery Services vault の Enhanced policy です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 94,
+    "domain": "事業継続性",
+    "objective": "バックアップ頻度と対象",
+    "type": "matching",
+    "scenario": "異なるバックアップ要件に適切な Azure Backup 機能を選択します。",
+    "prompt": "各要件に適した機能を割り当ててください。",
+    "prompts": [
+      {
+        "text": "Azure VM 全体を最短4時間ごとに保護し、Vault tier と VM 復元を使用する"
+      },
+      {
+        "text": "Standard/Premium managed disk 単体を最短1時間ごとの incremental snapshot で保護する"
+      },
+      {
+        "text": "オンプレミス Windows Server のファイルとフォルダーを1日最大3回 Azure へバックアップする"
+      },
+      {
+        "text": "Block blob のすべての変更を継続的に保持し、選択した時点へ復元する"
+      }
+    ],
+    "targets": [
+      {
+        "text": "Azure VM Enhanced backup policy",
+        "why": "VM 全体、最短4時間。"
+      },
+      {
+        "text": "Azure Disk Backup",
+        "why": "Managed disk 単体、SKUにより最短1時間。"
+      },
+      {
+        "text": "MARS agent",
+        "why": "Windows ファイル/フォルダー、1日最大3回。"
+      },
+      {
+        "text": "Azure Blob operational backup",
+        "why": "連続保護と point-in-time restore。"
+      },
+      {
+        "text": "Azure Site Recovery",
+        "why": "レプリケーションと DR オーケストレーションで、定期バックアップの代替ではありません。"
+      }
+    ],
+    "options": [
+      {
+        "text": "VM Enhanced",
+        "why": "4h VM。"
+      },
+      {
+        "text": "Disk Backup",
+        "why": "1h disk。"
+      },
+      {
+        "text": "MARS",
+        "why": "3/day files。"
+      },
+      {
+        "text": "Blob operational",
+        "why": "continuous。"
+      },
+      {
+        "text": "ASR",
+        "why": "DR。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sourceKeys": [
+      "vmEnhancedBackup",
+      "diskBackup",
+      "mars",
+      "blobBackup"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "「1時間に3回」ではなく MARS は「1日に最大3回」である点と、VM/ディスク/ファイル/Blob の保護単位を区別します。 時間数だけを見ると Azure Disk Backup と VM Enhanced を混同しやすいですが、復元単位が異なります。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドラッグ＆ドロップ",
+    "decisionPoints": [
+      "異なるバックアップ要件に適切な Azure Backup 機能を選択します。"
+    ],
+    "decisiveReason": "「1時間に3回」ではなく MARS は「1日に最大3回」である点と、VM/ディスク/ファイル/Blob の保護単位を区別します。",
+    "closestDistractor": "時間数だけを見ると Azure Disk Backup と VM Enhanced を混同しやすいですが、復元単位が異なります。",
+    "counterfactual": "SQL Server のログ バックアップなどワークロード ネイティブな高頻度保護は別の Azure Backup workload policy を使用します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "「1時間に3回」ではなく MARS は「1日に最大3回」である点と、VM/ディスク/ファイル/Blob の保護単位を区別します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 95,
+    "domain": "事業継続性",
+    "objective": "Azure Blob backup",
+    "type": "yesNo",
+    "scenario": "Azure Blob Storage の operational backup と vaulted backup を比較します。",
+    "prompt": "各記述が正しいか判定してください。",
+    "options": [
+      {
+        "text": "Operational backup",
+        "why": "同一アカウント内の連続保護。"
+      },
+      {
+        "text": "Vaulted backup",
+        "why": "Backup vaultへの定期オフサイト保護。"
+      }
+    ],
+    "statements": [
+      {
+        "text": "Operational backup はスケジュールを定義せず、変更履歴を使用して選択時点へ復元する。",
+        "whyYes": "継続保護として構成されます。",
+        "whyNo": "これは正しい記述です。"
+      },
+      {
+        "text": "Operational backup の保護データは必ず Backup vault へコピーされる。",
+        "whyYes": "Operational backup はソース storage account 内のローカル保護です。",
+        "whyNo": "Vaulted backup がオフサイト vault copy を提供します。"
+      },
+      {
+        "text": "Vaulted backup は日次または週次のスケジュールと保持期間を定義できる。",
+        "whyYes": "Backup vault に定期 recovery point を作成します。",
+        "whyNo": "これは正しい記述です。"
+      },
+      {
+        "text": "ストレージ アカウント自体の悪意ある削除に対するオフサイト保護を重視するなら vaulted backup が適している。",
+        "whyYes": "保護コピーを Backup vault に分離できます。",
+        "whyNo": "同一アカウント内だけの operational protection より分離性があります。"
+      }
+    ],
+    "answer": [
+      true,
+      false,
+      true,
+      true
+    ],
+    "sourceKeys": [
+      "blobBackup"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "Operational はソース内の連続保護、Vaulted は Backup vault への定期オフサイト コピーです。 どちらも「Azure Backup for Blobs」なので保存場所とスケジュールを混同しやすい点が狙いです。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "Yes / No 連続判定",
+    "decisionPoints": [
+      "Azure Blob Storage の operational backup と vaulted backup を比較します。"
+    ],
+    "decisiveReason": "Operational はソース内の連続保護、Vaulted は Backup vault への定期オフサイト コピーです。",
+    "closestDistractor": "どちらも「Azure Backup for Blobs」なので保存場所とスケジュールを混同しやすい点が狙いです。",
+    "counterfactual": "高速な誤削除復元とアカウント削除耐性の両方が必要なら、Operational と Vaulted を併用します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "Operational はソース内の連続保護、Vaulted は Backup vault への定期オフサイト コピーです。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 96,
+    "domain": "事業継続性",
+    "objective": "Blob point-in-time restore",
+    "type": "single",
+    "scenario": "Block blob がランサムウェアで大量変更される可能性があります。バックアップ ジョブの時刻ではなく、保持期間内の任意の時点を選択して同じストレージ アカウント内で迅速に復元します。",
+    "prompt": "どの保護方式を選ぶべきですか。",
+    "options": [
+      {
+        "text": "Azure Blob operational backup",
+        "why": "継続的な変更保持と point-in-time restore を提供します。"
+      },
+      {
+        "text": "Azure Blob vaulted backup の週次スケジュールのみ",
+        "why": "オフサイト保護はできますが、任意時点の連続復元粒度ではありません。"
+      },
+      {
+        "text": "GRS の手動フェールオーバー",
+        "why": "地域障害対策であり論理破損はセカンダリへ複製されます。"
+      },
+      {
+        "text": "Archive tier",
+        "why": "アクセス階層でありバックアップ履歴ではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "blobBackup"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "任意時点へ継続的に戻すという要件は Blob operational backup / point-in-time restore です。 GRS は可用性を高めますが、誤削除や暗号化された変更も複製するためバックアップの代替になりません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "Block blob がランサムウェアで大量変更される可能性があります。",
+      "バックアップ ジョブの時刻ではなく、保持期間内の任意の時点を選択して同じストレージ アカウント内で迅速に復元します。"
+    ],
+    "decisiveReason": "任意時点へ継続的に戻すという要件は Blob operational backup / point-in-time restore です。",
+    "closestDistractor": "GRS は可用性を高めますが、誤削除や暗号化された変更も複製するためバックアップの代替になりません。",
+    "counterfactual": "ストレージ アカウント削除や長期オフサイト保持が主要要件なら vaulted backup も併用します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "任意時点へ継続的に戻すという要件は Blob operational backup / point-in-time restore です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 97,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "Container Insights Private Link",
+    "type": "multi",
+    "scenario": "AKS の Container Insights ログと Managed Prometheus メトリックを Private Link 経由で送信します。Log Analytics workspace と Azure Monitor workspace は既にあります。",
+    "prompt": "正しい設計上の記述を3つ選んでください。",
+    "options": [
+      {
+        "text": "Log Analytics workspace を AMPLS に追加する",
+        "why": "ログ取り込みを Private Link 境界へ含めます。"
+      },
+      {
+        "text": "Prometheus 取り込み用 DCE を AMPLS に追加する",
+        "why": "Azure Monitor workspace への private ingestion に必要です。"
+      },
+      {
+        "text": "クラスターが構成を取得する DCE はクラスターと同じリージョンに配置する",
+        "why": "構成取得用 DCE は対象 VM/cluster と同じリージョンが必要です。"
+      },
+      {
+        "text": "Log Analytics へのログ取り込みには必ず別の DCE が必要である",
+        "why": "Log Analytics workspace を AMPLS に直接追加するため、ログ取り込み用 DCE は必須ではありません。"
+      },
+      {
+        "text": "Azure Monitor workspace をクエリする private endpoint は AMPLS の private endpoint と常に同一である",
+        "why": "Prometheus query 用には追加 private endpoint が必要な構成があります。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "selectCount": 3,
+    "sourceKeys": [
+      "monitorPrivate"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "ログ、Prometheus ingestion、agent configuration、query はそれぞれ必要な private link resource が異なります。 「すべて DCE 経由」と単純化すると Log Analytics ingestion の扱いを誤ります。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "複数選択",
+    "decisionPoints": [
+      "AKS の Container Insights ログと Managed Prometheus メトリックを Private Link 経由で送信します。",
+      "Log Analytics workspace と Azure Monitor workspace は既にあります。"
+    ],
+    "decisiveReason": "ログ、Prometheus ingestion、agent configuration、query はそれぞれ必要な private link resource が異なります。",
+    "closestDistractor": "「すべて DCE 経由」と単純化すると Log Analytics ingestion の扱いを誤ります。",
+    "counterfactual": "ログだけを収集し Prometheus を使わない場合は Azure Monitor workspace と Prometheus DCE 関連の構成を省けます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "ログ、Prometheus ingestion、agent configuration、query はそれぞれ必要な private link resource が異なります。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 98,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "Azure Monitor workspace 分割条件",
+    "type": "single",
+    "scenario": "2つの Microsoft Entra テナントがそれぞれ AKS を所有しています。各テナントの運用者だけが自分のメトリックを管理し、データとアクセスを完全に分離します。",
+    "prompt": "Azure Monitor workspace の最小数はいくつですか。",
+    "options": [
+      {
+        "text": "1 個",
+        "why": "単一 workspace を複数テナントの所有境界として共有する設計は要件に合いません。"
+      },
+      {
+        "text": "2 個",
+        "why": "テナントと所有境界ごとに workspace を分けます。"
+      },
+      {
+        "text": "クラスター数にかかわらず3個",
+        "why": "追加の共有 workspace 要件はありません。"
+      },
+      {
+        "text": "Azure Monitor workspace は不要",
+        "why": "Managed Prometheus の保存先が必要です。"
+      }
+    ],
+    "answer": [
+      1
+    ],
+    "sourceKeys": [
+      "monitorWorkspace"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "異なる Entra テナントと完全な所有分離が明示されているため、少なくともテナントごとに1 workspace が必要です。 通常は1 workspaceから始める原則がありますが、テナント境界は分割の強い決定条件です。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "2つの Microsoft Entra テナントがそれぞれ AKS を所有しています。",
+      "各テナントの運用者だけが自分のメトリックを管理し、データとアクセスを完全に分離します。"
+    ],
+    "decisiveReason": "異なる Entra テナントと完全な所有分離が明示されているため、少なくともテナントごとに1 workspace が必要です。",
+    "closestDistractor": "通常は1 workspaceから始める原則がありますが、テナント境界は分割の強い決定条件です。",
+    "counterfactual": "両 AKS が同一テナントへ統合され、共通運用と横断クエリを許可するなら1個にまとめられます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "異なる Entra テナントと完全な所有分離が明示されているため、少なくともテナントごとに1 workspace が必要です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 99,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "Azure Monitor と Log Analytics workspace",
+    "type": "dropdown",
+    "scenario": "監視基盤で、Windows VM のイベント ログ、AKS のコンテナー ログ、Managed Prometheus メトリックを保存します。",
+    "prompt": "各データの主な保存先を選択してください。",
+    "options": [
+      {
+        "text": "Log Analytics workspace",
+        "why": "ログ レコードを KQL で保存・検索します。"
+      },
+      {
+        "text": "Azure Monitor workspace",
+        "why": "Prometheus メトリックを保存します。"
+      }
+    ],
+    "fields": [
+      {
+        "label": "Windows Event Log と Syslog",
+        "context": "Azure Monitor Agent + DCR",
+        "choices": [
+          {
+            "text": "Log Analytics workspace",
+            "why": "ログ データの宛先です。"
+          },
+          {
+            "text": "Azure Monitor workspace",
+            "why": "Prometheus メトリック用です。"
+          },
+          {
+            "text": "Application Gateway",
+            "why": "監視ストアではありません。"
+          }
+        ]
+      },
+      {
+        "label": "AKS stdout / stderr",
+        "context": "Container Insights",
+        "choices": [
+          {
+            "text": "Log Analytics workspace",
+            "why": "ContainerLogV2 などへ格納します。"
+          },
+          {
+            "text": "Azure Monitor workspace",
+            "why": "stdout ログの主保存先ではありません。"
+          },
+          {
+            "text": "Azure Files",
+            "why": "共有ファイルで監視ストアではありません。"
+          }
+        ]
+      },
+      {
+        "label": "Managed Prometheus samples",
+        "context": "PromQL / Grafana",
+        "choices": [
+          {
+            "text": "Log Analytics workspace",
+            "why": "Prometheus native storeではありません。"
+          },
+          {
+            "text": "Azure Monitor workspace",
+            "why": "Managed Prometheus の保存先です。"
+          },
+          {
+            "text": "Activity Log",
+            "why": "管理プレーン イベントです。"
+          }
+        ]
+      }
+    ],
+    "answer": [
+      0,
+      0,
+      1
+    ],
+    "sourceKeys": [
+      "containerInsights",
+      "monitorWorkspace"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "workspace という共通語に惑わされず、ログ レコードか Prometheus 時系列かで分けます。 Log Analytics にメトリック由来データが存在する場合もありますが、Managed Prometheus のネイティブ保存先は Azure Monitor workspace です。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ドロップダウン穴埋め",
+    "decisionPoints": [
+      "監視基盤で、Windows VM のイベント ログ、AKS のコンテナー ログ、Managed Prometheus メトリックを保存します。"
+    ],
+    "decisiveReason": "workspace という共通語に惑わされず、ログ レコードか Prometheus 時系列かで分けます。",
+    "closestDistractor": "Log Analytics にメトリック由来データが存在する場合もありますが、Managed Prometheus のネイティブ保存先は Azure Monitor workspace です。",
+    "counterfactual": "Application Insights の workspace-based 構成ではアプリ テレメトリも Log Analytics workspace へ格納されます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "workspace という共通語に惑わされず、ログ レコードか Prometheus 時系列かで分けます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 100,
+    "domain": "インフラストラクチャ",
+    "objective": "App Service A/B テスト",
+    "type": "hotArea",
+    "scenario": "App Service の production と staging スロットに異なるアプリ バージョンがあります。新バージョンをランダムに10%の利用者へ公開し、一度 staging に割り当てられたブラウザーは1時間同じスロットへ固定します。アプリ コードは変更しません。",
+    "prompt": "構成する項目を2つ選んでください。",
+    "options": [
+      {
+        "text": "staging slot の Traffic % を 10 に設定",
+        "why": "App Service の組み込み割合ルーティングを有効にします。"
+      },
+      {
+        "text": "x-ms-routing-name cookie",
+        "why": "自動ルーティング後にクライアントを同じ slot へ固定します。"
+      },
+      {
+        "text": "Swap with preview",
+        "why": "デプロイ検証であり継続的な90:10分割ではありません。"
+      },
+      {
+        "text": "Azure Front Door health probe",
+        "why": "スロット内の組み込み A/B には不要です。"
+      }
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "selectCount": 2,
+    "sourceKeys": [
+      "appServiceSlots"
+    ],
+    "diagramTitle": "App Service deployment slot の割合ルーティング",
+    "diagramSubtitle": "production 90% / staging 10%、ブラウザーは cookie で固定。",
+    "hotspots": [
+      {
+        "label": "Production slot\n90%",
+        "detail": "Default route",
+        "why": "残りのトラフィックです。"
+      },
+      {
+        "label": "Staging slot\nTraffic % = 10",
+        "detail": "A/B allocation",
+        "why": "10%を stagingへ送ります。"
+      },
+      {
+        "label": "x-ms-routing-name\ncookie",
+        "detail": "Session pinning",
+        "why": "同じブラウザーを同じ slot に固定します。"
+      },
+      {
+        "label": "Swap with preview",
+        "detail": "Deployment validation",
+        "why": "A/B割合ルーティングではありません。"
+      },
+      {
+        "label": "Front Door probe",
+        "detail": "Origin health",
+        "why": "本問では不要です。"
+      }
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "App Service deployment slot の Traffic % と組み込み cookie pinning でアプリ変更なしに実現できます。 Swap with preview は本番切り替え前の検証機能で、同時に2バージョンへ割合配信し続ける機能ではありません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "ホットエリア",
+    "decisionPoints": [
+      "App Service の production と staging スロットに異なるアプリ バージョンがあります。",
+      "新バージョンをランダムに10%の利用者へ公開し、一度 staging に割り当てられたブラウザーは1時間同じスロットへ固定します。",
+      "アプリ コードは変更しません。"
+    ],
+    "decisiveReason": "App Service deployment slot の Traffic % と組み込み cookie pinning でアプリ変更なしに実現できます。",
+    "closestDistractor": "Swap with preview は本番切り替え前の検証機能で、同時に2バージョンへ割合配信し続ける機能ではありません。",
+    "counterfactual": "別 App Service、別リージョン、別 origin 間で分配するなら Front Door weighted routing を使用します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "App Service deployment slot の Traffic % と組み込み cookie pinning でアプリ変更なしに実現できます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 101,
+    "domain": "インフラストラクチャ",
+    "objective": "機能バリアント実験",
+    "type": "single",
+    "scenario": "同じアプリ バイナリで、検索画面 A、B、C をユーザー ID に基づいて25%、25%、50%へ安定割り当てします。割合を再デプロイなしで変更し、Application Insights のイベントでバリアント別コンバージョンを比較します。",
+    "prompt": "何を使用すべきですか。",
+    "options": [
+      {
+        "text": "Azure App Configuration の Experiment / variant feature flag",
+        "why": "複数バリアント、percentile allocation、ユーザー/グループ override、テレメトリ連携を提供します。"
+      },
+      {
+        "text": "App Service deployment slots",
+        "why": "アプリ デプロイ単位のトラフィック分割で、同じバイナリ内の機能設定には粒度が大きすぎます。"
+      },
+      {
+        "text": "Traffic Manager performance routing",
+        "why": "DNS ベースの地理/性能ルーティングでユーザー機能実験ではありません。"
+      },
+      {
+        "text": "Azure Policy initiative",
+        "why": "リソース構成のガバナンスでアプリ機能フラグではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "appConfigExperiment"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "同じバイナリ内の複数機能バリアントをユーザー単位で安定割り当てするため App Configuration Experiment を選びます。 Deployment slots も A/B に使えますが、別デプロイへ HTTP トラフィックを振る方式です。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "同じアプリ バイナリで、検索画面 A、B、C をユーザー ID に基づいて25%、25%、50%へ安定割り当てします。",
+      "割合を再デプロイなしで変更し、Application Insights のイベントでバリアント別コンバージョンを比較します。"
+    ],
+    "decisiveReason": "同じバイナリ内の複数機能バリアントをユーザー単位で安定割り当てするため App Configuration Experiment を選びます。",
+    "closestDistractor": "Deployment slots も A/B に使えますが、別デプロイへ HTTP トラフィックを振る方式です。",
+    "counterfactual": "新旧アプリ バージョンそのものを分けるなら deployment slots が適します。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "同じバイナリ内の複数機能バリアントをユーザー単位で安定割り当てするため App Configuration Experiment を選びます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 102,
+    "domain": "インフラストラクチャ",
+    "objective": "グローバル A/B ルーティング",
+    "type": "single",
+    "scenario": "異なる2つの Azure リージョンに別々の Web origin があります。グローバル Anycast エンドポイント、WAF、TLS 終端を維持しながら、新 origin へ5%を送ります。",
+    "prompt": "どのルーティング方式を使用すべきですか。",
+    "options": [
+      {
+        "text": "Azure Front Door の weighted origin routing",
+        "why": "Origin weight に基づいてグローバル HTTP トラフィックを分配できます。"
+      },
+      {
+        "text": "App Service slot Traffic %",
+        "why": "同じ App Service 内のスロット向けで別リージョン origin 全体のエッジ制御ではありません。"
+      },
+      {
+        "text": "Traffic Manager priority routing",
+        "why": "優先フェールオーバーで5%の重み分散ではありません。"
+      },
+      {
+        "text": "Azure Load Balancer HA Ports",
+        "why": "リージョン内 L4 でグローバル WAF/TLS を提供しません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "frontDoorRouting"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "グローバル Anycast/WAF/TLS と別 origin の重み付き分散から Front Door を選びます。 Traffic Manager に weighted routing もありますが、設問のエッジ WAF と HTTP/TLS 機能を一体で満たすのは Front Door です。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "異なる2つの Azure リージョンに別々の Web origin があります。",
+      "グローバル Anycast エンドポイント、WAF、TLS 終端を維持しながら、新 origin へ5%を送ります。"
+    ],
+    "decisiveReason": "グローバル Anycast/WAF/TLS と別 origin の重み付き分散から Front Door を選びます。",
+    "closestDistractor": "Traffic Manager に weighted routing もありますが、設問のエッジ WAF と HTTP/TLS 機能を一体で満たすのは Front Door です。",
+    "counterfactual": "DNS ベースだけで十分で、WAFやエッジ リバースプロキシが不要なら Traffic Manager weighted も候補です。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "グローバル Anycast/WAF/TLS と別 origin の重み付き分散から Front Door を選びます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 103,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "ECMA provisioning architecture",
+    "type": "buildList",
+    "scenario": "Microsoft Entra provisioning service から、SCIM 非対応のオンプレミス SQL ベース人事アプリへユーザーをプロビジョニングします。Provisioning agent と ECMA Connector Host をオンプレミスに配置します。",
+    "prompt": "要求が処理される順序を並べてください。",
+    "items": [
+      {
+        "text": "Microsoft Entra provisioning service がユーザー変更を評価する",
+        "why": "クラウド側で対象変更を決定します。"
+      },
+      {
+        "text": "Provisioning agent が Entra からプロビジョニング要求を受け取る",
+        "why": "オンプレミスへの安全な接続を仲介します。"
+      },
+      {
+        "text": "ECMA Connector Host が要求をコネクタ操作へ変換する",
+        "why": "SCIM 相当の操作を SQL/LDAP/REST/PowerShell へ変換します。"
+      },
+      {
+        "text": "SQL コネクタがオンプレミス アプリのユーザー レコードを作成または更新する",
+        "why": "ターゲット システムへ変更を適用します。"
+      },
+      {
+        "text": "SAML assertion をブラウザーへ返す",
+        "why": "SSO の流れであり provisioning ではありません。"
+      },
+      {
+        "text": "Azure RBAC role assignment を作成する",
+        "why": "Azure resource access の処理であり対象外です。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "requiredCount": 4,
+    "options": [
+      {
+        "text": "ECMA architecture",
+        "why": "Entra → agent → host → target。"
+      }
+    ],
+    "sourceKeys": [
+      "ecma",
+      "scim"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "クラウド provisioning service、agent、ECMA 変換、ターゲット コネクタという順序です。 SAML は認証フローなので、ユーザー ライフサイクルのプロビジョニング経路には入りません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "リストの作成",
+    "decisionPoints": [
+      "Microsoft Entra provisioning service から、SCIM 非対応のオンプレミス SQL ベース人事アプリへユーザーをプロビジョニングします。",
+      "Provisioning agent と ECMA Connector Host をオンプレミスに配置します。"
+    ],
+    "decisiveReason": "クラウド provisioning service、agent、ECMA 変換、ターゲット コネクタという順序です。",
+    "closestDistractor": "SAML は認証フローなので、ユーザー ライフサイクルのプロビジョニング経路には入りません。",
+    "counterfactual": "ターゲットが SCIM 2.0 を直接公開すれば ECMA Connector Host と個別コネクタを省略できます。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "クラウド provisioning service、agent、ECMA 変換、ターゲット コネクタという順序です。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 104,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "アプリ間 app-only access",
+    "type": "multi",
+    "scenario": "ユーザーがサインインしないバックグラウンド サービス AppA が、独自 Web API AppB を自分自身の ID で呼び出します。共有シークレットを VM に配布せず、AppB は承認済みクライアントだけへトークンを発行します。",
+    "prompt": "推奨構成を3つ選んでください。",
+    "options": [
+      {
+        "text": "AppB で Allowed member types が Applications の app role を公開する",
+        "why": "App-only permission を定義します。"
+      },
+      {
+        "text": "AppA に AppB の Application permission を割り当て、管理者同意する",
+        "why": "AppA の service principal へ app role assignment を作成します。"
+      },
+      {
+        "text": "AppA のマネージド ID または workload identity federation を認証主体に使用する",
+        "why": "長期クライアント シークレットを配布せずトークンを取得できます。"
+      },
+      {
+        "text": "AppB で Delegated scope だけを公開する",
+        "why": "ユーザーなしの client credentials flow には不適切です。"
+      },
+      {
+        "text": "AppA に Azure subscription の Owner を割り当てる",
+        "why": "独自 API の app role とは無関係で過剰です。"
+      }
+    ],
+    "answer": [
+      0,
+      1,
+      2
+    ],
+    "selectCount": 3,
+    "sourceKeys": [
+      "appPermissions",
+      "auth"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "ユーザーなしの app-only 呼び出しなので、AppB の app role、AppA への Application permission、秘密不要のワークロード IDを組み合わせます。 Delegated scope はサインイン ユーザーの代理アクセス用で client credentials flow に使いません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "複数選択",
+    "decisionPoints": [
+      "ユーザーがサインインしないバックグラウンド サービス AppA が、独自 Web API AppB を自分自身の ID で呼び出します。",
+      "共有シークレットを VM に配布せず、AppB は承認済みクライアントだけへトークンを発行します。"
+    ],
+    "decisiveReason": "ユーザーなしの app-only 呼び出しなので、AppB の app role、AppA への Application permission、秘密不要のワークロード IDを組み合わせます。",
+    "closestDistractor": "Delegated scope はサインイン ユーザーの代理アクセス用で client credentials flow に使いません。",
+    "counterfactual": "ユーザーが AppA にサインインし、その本人の権限で AppB を呼ぶ設計なら Delegated scope と on-behalf-of flow を使います。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "ユーザーなしの app-only 呼び出しなので、AppB の app role、AppA への Application permission、秘密不要のワークロード IDを組み合わせます。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
+  },
+  {
+    "id": 105,
+    "domain": "ID・ガバナンス・監視",
+    "objective": "部署別ガバナンス階層",
+    "type": "single",
+    "scenario": "Finance、Sales、Engineering はそれぞれ複数の Azure subscription を所有します。部署ごとに異なる Azure Policy と RBAC をすべての配下 subscription へ継承させ、部署単位のコスト集計も行います。",
+    "prompt": "最上位の部署別グループ化に何を使用すべきですか。",
+    "options": [
+      {
+        "text": "Management group",
+        "why": "複数 subscription を階層化し、Policy と RBAC を継承できます。"
+      },
+      {
+        "text": "Azure tag",
+        "why": "リソース分類には有効ですが、Policy/RBAC の階層継承スコープではありません。"
+      },
+      {
+        "text": "Resource group",
+        "why": "単一 subscription 内のリソース コンテナーで、複数 subscription を束ねません。"
+      },
+      {
+        "text": "Microsoft Entra group",
+        "why": "ユーザー/サービス プリンシパルの集合で、subscription 階層ではありません。"
+      }
+    ],
+    "answer": [
+      0
+    ],
+    "sourceKeys": [
+      "managementGroups"
+    ],
+    "origin": "2026-recent-trend",
+    "explanation": "複数 subscription への Policy/RBAC 継承境界が必要なので部署ごとの Management Group を使用します。 Tag は部署分類とコスト分析に併用できますが、強制的な階層ガバナンス境界にはなりません。",
+    "difficulty": "実試験トレンド",
+    "formatLabel": "単一選択",
+    "decisionPoints": [
+      "Finance、Sales、Engineering はそれぞれ複数の Azure subscription を所有します。",
+      "部署ごとに異なる Azure Policy と RBAC をすべての配下 subscription へ継承させ、部署単位のコスト集計も行います。"
+    ],
+    "decisiveReason": "複数 subscription への Policy/RBAC 継承境界が必要なので部署ごとの Management Group を使用します。",
+    "closestDistractor": "Tag は部署分類とコスト分析に併用できますが、強制的な階層ガバナンス境界にはなりません。",
+    "counterfactual": "すべての部署が1 subscription 内で、単にコスト分類だけなら Department tag がより適切です。",
+    "prerequisites": [
+      "サービス名ではなく、認証主体、データ経路、障害単位、課金単位を分けて判断する。",
+      "設問の「最小権限」「管理作業を最小化」「公開経路を禁止」などの優先条件を先に固定する。"
+    ],
+    "answerPoints": [
+      "複数 subscription への Policy/RBAC 継承境界が必要なので部署ごとの Management Group を使用します。",
+      "最も近い誤答が満たせない条件を明示して比較する。"
+    ],
+    "derivationSteps": [
+      "1. 設問から変更できない条件と優先条件を抽出する。",
+      "2. 各候補の管理境界、データ経路、スケール単位を対応付ける。",
+      "3. 一部の要件だけを満たす候補を除外する。",
+      "4. 追加運用が最も少ない候補を選ぶ。"
+    ],
+    "constraintRanking": [
+      "必須条件を満たすこと",
+      "最小権限または最小管理負荷",
+      "コストと将来の変更容易性"
+    ],
+    "tradeoffs": [
+      "正解案にも SKU、リージョン、ライセンス、ネットワーク要件があるため実環境では確認が必要です。",
+      "別の要件が追加されると最適解が変わるため、機能名だけで暗記しないことが重要です。"
+    ],
+    "examTip": "選択肢の製品名より、誰が呼ぶか、どこに保存されるか、何単位でスケール・フェールオーバーするかを確認します。"
   }
 ];
 
@@ -7301,13 +10913,16 @@ window.AZ305_QUESTIONS = [
   "use strict";
 
   const QUESTIONS = window.AZ305_QUESTIONS || [];
-  [5, 19].forEach(id => {
+  [5, 19, 66].forEach(id => {
     const reusableMatching = QUESTIONS.find(question => question.id === id);
     if (reusableMatching) reusableMatching.allowReuse = true;
   });
   const SOURCES = window.AZ305_SOURCES || {};
-  const STORAGE_KEY = "az305-exam-lab-quality-v6-state-v1";
-  const FULL_DURATION = 120 * 60;
+  const STORAGE_KEY = "az305-exam-lab-recent-v7-state-v1";
+  const FULL_DURATION = 200 * 60;
+  const LEGACY_IDS = QUESTIONS.filter(q => q.id <= 65).map(q => q.id);
+  const TREND_IDS = QUESTIONS.filter(q => q.origin === "2026-recent-trend").map(q => q.id);
+  const ALL_IDS = QUESTIONS.map(q => q.id);
   const FORMAT_NAMES = {
     single: "単一選択",
     multi: "複数選択",
@@ -7321,7 +10936,7 @@ window.AZ305_QUESTIONS = [
   const $ = (id) => document.getElementById(id);
   const els = {
     start: $("start-screen"), exam: $("exam-screen"), result: $("result-screen"),
-    topStats: $("top-stats"), startButton: $("start-button"), resumeButton: $("resume-button"),
+    topStats: $("top-stats"), startButton: $("start-button"), startAllButton: $("start-all-button"), startLegacyButton: $("start-legacy-button"), resumeButton: $("resume-button"),
     brandHome: $("brand-home"), questionMap: $("question-map"), questionNumber: $("question-number"),
     domainBadge: $("domain-badge"), difficultyBadge: $("difficulty-badge"), formatBadge: $("format-badge"),
     scenarioBox: $("scenario-box"), scenarioLabel: $("scenario-label"), scenarioText: $("scenario-text"),
@@ -7346,7 +10961,7 @@ window.AZ305_QUESTIONS = [
       startedAt: null, deadline: null, durationSeconds, finished: false, elapsedAtFinish: null };
   }
 
-  let state = loadState() || freshState();
+  let state = loadState() || freshState(TREND_IDS, 80 * 60);
   let timerHandle = null;
 
   function loadState() {
@@ -7448,8 +11063,8 @@ window.AZ305_QUESTIONS = [
     window.scrollTo({top:0, behavior:"smooth"});
   }
 
-  function startNewExam() {
-    state = freshState();
+  function startNewExam(activeIds = TREND_IDS, durationSeconds = 80 * 60) {
+    state = freshState(activeIds, durationSeconds);
     state.startedAt = Date.now();
     state.deadline = Date.now() + state.durationSeconds * 1000;
     saveState(); showScreen("exam"); startTimer(); renderQuestion();
@@ -7941,12 +11556,14 @@ window.AZ305_QUESTIONS = [
     showScreen("exam");startTimer();renderQuestion();
   }
   function resetAll(){
-    if(!confirm("解答履歴を削除し、65問を最初からやり直しますか？"))return;
-    state=freshState();try{localStorage.removeItem(STORAGE_KEY);}catch{}
+    if(!confirm("解答履歴を削除し、選択中の問題セットを最初からやり直しますか？"))return;
+    state=freshState(TREND_IDS,80*60);try{localStorage.removeItem(STORAGE_KEY);}catch{}
     stopTimer();updateResumeButton();showScreen("start");
   }
 
-  els.startButton.addEventListener("click",startNewExam);
+  els.startButton.addEventListener("click",()=>startNewExam(TREND_IDS,80*60));
+  els.startAllButton.addEventListener("click",()=>startNewExam(ALL_IDS,200*60));
+  els.startLegacyButton.addEventListener("click",()=>startNewExam(LEGACY_IDS,120*60));
   els.resumeButton.addEventListener("click",resumeExam);
   els.submitMulti.addEventListener("click",()=>{
     const question=currentQuestion(); if(!question||question.type==="single")return;
